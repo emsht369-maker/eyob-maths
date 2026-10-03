@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Math Master – Beginner to Machine Learning</title>
+<meta name="description" content="Learn all maths from beginner to machine learning with the 80/20 rule.">
+<link rel="stylesheet" href="css/style.css">
+</head><body>
+<nav class="site-menu" aria-label="Main menu">
+  <a href="index.html" aria-current="page">Math Master</a>
+  <a href="gcse.html">GCSE Topics</a>
+  <a href="questions.html">Question Bank</a>
+  <a href="gcse-formulas.html">Formulas</a>
+  <a href="gcse-exam-words.html">Exam Words</a>
+  <a href="gcse-mock.html">Mock Paper</a>
+  <a href="https://www.w3schools.com/ai/default.asp" target="_blank" rel="noopener">W3Schools AI</a>
+</nav>
+<header class="hero">
+  <div class="hero-shell">
+    <div class="hero-copy">
+      <span class="eyebrow">Study smarter</span>
+      <h1>Math Master</h1>
+      <p>25 topics. Beginner to Machine Learning. Learn the <b>20%</b> that gives <b>80%</b> of the result.</p>
+      <div class="hero-actions">
+        <a class="gcse-entry" href="gcse.html">GCSE Exam Mode</a>
+        <a class="secondary-link" href="#video-picks">Watch video picks</a>
+      </div>
+      <div class="stats">
+        <div><b id="pct">0/25</b><small>topics done</small></div>
+        <div><b id="streak">0</b><small>day streak 🔥</small></div>
+        <button id="today">I studied today</button>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="mini-card"><span>🎯</span><strong>80/20 rule</strong><small>Start with the core maths that powers ML.</small></div>
+      <div class="mini-card"><span>📘</span><strong>Daily plan</strong><small>Study, practice, explain, repeat.</small></div>
+      <div class="mini-card"><span>▶️</span><strong>Video help</strong><small>Search guided lessons right from the app.</small></div>
+    </div>
+  </div>
+  <div class="bar"><div id="fill"></div></div>
+</header>
+<main>
+  <section class="feature-grid">
+    <article class="feature-card">
+      <span class="icon">🎯</span>
+      <h3>Study in the right order</h3>
+      <p>Follow the core path before the extras. This keeps your learning efficient and makes harder topics easier to absorb.</p>
+    </article>
+    <article class="feature-card">
+      <span class="icon">🧠</span>
+      <h3>Practice without guessing</h3>
+      <p>Use the answer checker, hints and worked solutions to catch weak spots early and build confidence.</p>
+    </article>
+    <article class="feature-card">
+      <span class="icon">📺</span>
+      <h3>Watch and learn</h3>
+      <p>Open the best video explanations by topic so you can learn the same idea in a second way.</p>
+    </article>
+  </section>
+  <section>
+    <h2>Topics</h2>
+    <div class="tools">
+      <input id="search" type="search" placeholder="Search a topic…" aria-label="Search">
+      <div id="chips">
+        <button class="chip on" data-f="all">All</button>
+        <button class="chip" data-f="core">⭐ ML core</button>
+        <button class="chip" data-f="useful">Useful</button>
+        <button class="chip" data-f="later">Later</button>
+      </div>
+    </div>
+    <p class="mut">Start with ⭐ ML core topics in order. Do the rest later.</p>
+    <div id="grid"></div>
+  </section>
+  <section>
+    <h2>Quick practice</h2>
+    <p class="mut">One random question. Try it on paper first.</p>
+    <button id="rnd">New question</button>
+    <div id="rq" class="box"></div>
+  </section>
+  <section id="video-picks" class="video-section">
+    <h2>Video picks</h2>
+    <div class="video-grid">
+      <a href="https://www.youtube.com/results?search_query=Khan+Academy+algebra+full+course" target="_blank" rel="noopener">
+        <span>🎓</span>
+        <strong>Khan Academy</strong>
+        <small>Best for clear step-by-step explanations.</small>
+      </a>
+      <a href="https://www.youtube.com/results?search_query=3Blue1Brown+linear+algebra" target="_blank" rel="noopener">
+        <span>🧮</span>
+        <strong>3Blue1Brown</strong>
+        <small>Excellent for intuition in algebra and geometry.</small>
+      </a>
+      <a href="https://www.youtube.com/results?search_query=StatQuest+statistics+for+beginners" target="_blank" rel="noopener">
+        <span>📊</span>
+        <strong>StatQuest</strong>
+        <small>Simple and practical statistics and probability.</small>
+      </a>
+      <a href="https://www.youtube.com/results?search_query=MIT+OpenCourseWare+single+variable+calculus" target="_blank" rel="noopener">
+        <span>∫</span>
+        <strong>MIT OCW</strong>
+        <small>Strong for deeper ideas in calculus and analysis.</small>
+      </a>
+    </div>
+  </section>
+  <section>
+    <h2>Constants & symbols</h2>
+    <div id="consts" class="syms"></div>
+    <div id="syms" class="syms"></div>
+  </section>
+  <section>
+    <h2>Daily plan (1 hour)</h2>
+    <p>20 min: read the topic and watch a video (Khan Academy, 3Blue1Brown, StatQuest). 30 min: do practice questions on paper. 10 min: explain the idea out loud in your own words.</p>
+  </section>
+</main>
+<dialog id="dlg"></dialog>
+<footer>Made for daily learning. Progress is saved in your browser.</footer>
+<script src="js/data.js"></script>
+<script src="js/more-questions.js"></script>
+<script src="js/app.js"></script>
+</body></html>
