@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "sourceRoot": "assets/mit-linear-algebra",
+  "generatedAt": "2026-10-07",
+  "notes": "All 23 unique source files are classified. Quiz 1, Quiz 2, Quiz 3, and Final Exam question and answer files are processed; seven learn items from four licensed note PDFs are staged. Problem Sets 1\u201310 are held where their question sheets are absent; individual exam answer issues are listed in data/needs-review.md. ZoomNotes for Linear Algebra is local-only because it is copyrighted with no reuse licence stated. Five duplicate copies are skipped.",
+  "counts": {
+    "totalFiles": 28,
+    "uniqueFiles": 23,
+    "duplicatesSkipped": 5,
+    "pending": 0,
+    "done": 12,
+    "needsReview": 10,
+    "localOnly": 1
+  },
+  "files": [
+    {
+      "file": "22297c2a6dcf06d82e93ee4af115e91a_MIT18_06S10_pset1_s10_soln.pdf",
+      "pages": 9,
+      "title": "18.06 Linear Algebra, Problem set 1 solutions",
+      "type": "solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "Problem set 1 question sheet (not present in current source set)",
+      "status": "needs-review",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "reviewReason": "Problem set 1 question sheet is absent, so answers cannot be paired against the question partner file by number."
+    },
+    {
+      "file": "2c925bea168888404287bb6b848f79ca_MIT18_06S10_symmbases.pdf",
+      "pages": 2,
+      "title": "Symmetric Matrices",
+      "type": "notes",
+      "subject": "Linear Algebra",
+      "partnerFile": "n/a",
+      "status": "done",
+      "counts": {
+        "questions": 0,
+        "answers": 0,
+        "learn": 1
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "author": "Gilbert Strang",
+      "processedPages": [
+        1,
+        2
+      ]
+    },
+    {
+      "file": "45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers.pdf",
+      "pages": 14,
+      "title": "18.06 Final Exam Answers",
+      "type": "exam-solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "b799045edd80df18879088bcf872b214_MIT18_06S10_Final_Exam.pdf",
+      "status": "done",
+      "counts": {
+        "questions": 0,
+        "answers": 23
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "author": "Prof. Gilbert Strang"
+    },
+    {
+      "file": "45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers (1).pdf",
+      "pages": 14,
+      "title": "18.06 Linear Algebra, Final Exam Solution",
+      "type": "exam-solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "18.06 Linear Algebra, Final Exam",
+      "status": "skip-duplicate",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)"
+    },
+    {
+      "file": "4d1ef28c0836e81caec9122a69c7b931_MIT18_06S10_pset7_s10_soln.pdf",
+      "pages": 5,
+      "title": "18.06 Linear Algebra, Problem set 7 solutions",
+      "type": "solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "Problem set 7 question sheet (not present in current source set)",
+      "status": "needs-review",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "processedPages": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "reviewReason": "Problem Set 7 question sheet is absent. The solutions cannot be paired to the question source by number; page 4 also begins mid-question in this PDF."
+    },
+    {
+      "file": "4d876a9159e32543eb0d73b4d4382f4c_MIT18_06S10ZoomNotes.pdf",
+      "pages": 80,
+      "title": "ZoomNotes for Linear Algebra",
+      "type": "notes",
+      "subject": "Linear Algebra",
+      "partnerFile": "n/a",
+      "status": "local-only",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "Copyright \u00a9 2021 Gilbert Strang, Wellesley\u2013Cambridge Press; no reuse licence stated",
+      "author": "Gilbert Strang",
+      "localOnlyReason": "Copyrighted book; no reuse licence stated in the PDF. Not published or extracted."
+    },
+    {
+      "file": "4ece22f9c707878e1e57b9840469490e_MIT18_06S10_pset4_s10_soln.pdf",
+      "pages": 6,
+      "title": "18.06 Linear Algebra, Problem set 4 solutions",
+      "type": "solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "Problem set 4 question sheet (not present in current source set)",
+      "status": "needs-review",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "processedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "reviewReason": "Problem Set 4 question sheet is absent. Although prompts appear in the solutions PDF, they cannot be checked against and paired with the partner question source by number."
+    },
+    {
+      "file": "58e62cc93e3e8b6cb52e72fa5830fc4e_MIT18_06S10_pset9_s10_soln.pdf",
+      "pages": 10,
+      "title": "18.06 Linear Algebra, Problem set 9 solutions",
+      "type": "solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "Problem set 9 question sheet (not present in current source set)",
+      "status": "needs-review",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "processedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "reviewReason": "Problem Set 9 question sheet is absent, so its solutions cannot be paired with the required partner question source by number."
+    },
+    {
+      "file": "6e0208c1241f197797f2757d680740c0_MIT18_06S10_pset8_s10_soln.pdf",
+      "pages": 6,
+      "title": "18.06 Linear Algebra, Problem set 8 solutions",
+      "type": "solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "Problem set 8 question sheet (not present in current source set)",
+      "status": "needs-review",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "processedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "reviewReason": "Problem Set 8 question sheet is absent, so its solutions cannot be paired with the required partner question source by number."
+    },
+    {
+      "file": "768d6fe735722547c3f5e74824532c53_MIT18_06S10_gramschmidtmat.pdf",
+      "pages": 3,
+      "title": "Gram-Schmidt in MATLAB",
+      "type": "notes",
+      "subject": "Linear Algebra",
+      "partnerFile": "n/a",
+      "status": "done",
+      "counts": {
+        "questions": 0,
+        "answers": 0,
+        "learn": 2
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "processedPages": [
+        1,
+        2,
+        3
+      ],
+      "author": "Gilbert Strang"
+    },
+    {
+      "file": "892238e7e16a658abd5813bea8399170_MIT18_06S10_exam2_s10.pdf",
+      "pages": 4,
+      "title": "18.06 Quiz 2",
+      "type": "exam",
+      "subject": "Linear Algebra",
+      "partnerFile": "d669bf89c103559d51427d0916c5db61_MIT18_06S10_exam2_s10_soln.pdf",
+      "status": "done",
+      "counts": {
+        "questions": 10,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "author": "Prof. Gilbert Strang"
+    },
+    {
+      "file": "99823819ffda7c97ddee8abd68ca8764_MIT18_06S10_pset3_s10_soln.pdf",
+      "pages": 6,
+      "title": "18.06 Linear Algebra, Problem set 3 solutions",
+      "type": "solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "Problem set 3 question sheet (not present in current source set)",
+      "status": "needs-review",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "processedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "reviewReason": "Problem Set 3 question sheet is absent, so its solutions cannot be paired with the required partner question source by number."
+    },
+    {
+      "file": "a7d11b1b00c1c2bd2574c3f896ce4eb3_MIT18_06S10_matlab.pdf",
+      "pages": 8,
+      "title": "MATLAB Tutorial",
+      "type": "notes",
+      "subject": "Linear Algebra",
+      "partnerFile": "n/a",
+      "status": "done",
+      "counts": {
+        "questions": 0,
+        "answers": 0,
+        "learn": 2
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "processedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "author": "Gilbert Strang"
+    },
+    {
+      "file": "ace08d2d5a7b321229f191765c5ff2e3_MIT18_06S10_pset6_s10_soln.pdf",
+      "pages": 11,
+      "title": "18.06 Linear Algebra, Problem set 6 solutions",
+      "type": "solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "Problem set 6 question sheet (not present in current source set)",
+      "status": "needs-review",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "processedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "reviewReason": "Problem Set 6 question sheet is absent, so its solutions cannot be paired with the required partner question source by number."
+    },
+    {
+      "file": "b799045edd80df18879088bcf872b214_MIT18_06S10_Final_Exam.pdf",
+      "pages": 10,
+      "title": "18.06 Final Exam",
+      "type": "exam",
+      "subject": "Linear Algebra",
+      "partnerFile": "45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers.pdf",
+      "status": "done",
+      "counts": {
+        "questions": 28,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "author": "Prof. Gilbert Strang"
+    },
+    {
+      "file": "b7efef974f7a2c8b5c925f5ea8fc9152_MIT18_06S10_exam1_s10_sol.pdf",
+      "pages": 5,
+      "title": "18.06 Quiz 1 Solutions",
+      "type": "exam-solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "e9bbec7a9a25a87715e8edd75e21d7b9_MIT18_06S10_exam1_s10.pdf",
+      "status": "done",
+      "counts": {
+        "questions": 0,
+        "answers": 9
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "author": "Prof. Gilbert Strang"
+    },
+    {
+      "file": "b7efef974f7a2c8b5c925f5ea8fc9152_MIT18_06S10_exam1_s10_sol (1).pdf",
+      "pages": 5,
+      "title": "18.06 Linear Algebra, Exam 1 solutions",
+      "type": "exam-solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "18.06 Linear Algebra, Exam 1",
+      "status": "skip-duplicate",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)"
+    },
+    {
+      "file": "c72789c2ac2ccaf5568a024c662882d2_MIT18_06S10_exam3_s10.pdf",
+      "pages": 4,
+      "title": "18.06 Quiz 3",
+      "type": "exam",
+      "subject": "Linear Algebra",
+      "partnerFile": "edf08929f3b2b435c7d8ca85e8d5118d_MIT18_06S10_exam3_s10_soln.pdf",
+      "status": "done",
+      "counts": {
+        "questions": 10,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "author": "Prof. Gilbert Strang"
+    },
+    {
+      "file": "d039352aaa83a27f11bb2b3778ecfa96_MIT18_06S10_pset2_s10_soln.pdf",
+      "pages": 6,
+      "title": "18.06 Problem Set 2 Solutions",
+      "type": "solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "Problem set 2 question sheet (not present in current source set)",
+      "status": "needs-review",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "author": "Prof. Gilbert Strang",
+      "reviewReason": "The problem set question sheet is absent, so solution prompts and answers cannot be matched against the required partner file."
+    },
+    {
+      "file": "d61af89db7c6303dc024e52d8ff18f96_MIT18_06S10_pascal_work.pdf",
+      "pages": 13,
+      "title": "Pascal Matrices",
+      "type": "notes",
+      "subject": "Linear Algebra",
+      "partnerFile": "n/a",
+      "status": "done",
+      "counts": {
+        "questions": 0,
+        "answers": 0,
+        "learn": 2
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "processedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "author": "Alan Edelman and Gilbert Strang"
+    },
+    {
+      "file": "d669bf89c103559d51427d0916c5db61_MIT18_06S10_exam2_s10_soln.pdf",
+      "pages": 8,
+      "title": "18.06 Quiz 2 Solutions",
+      "type": "exam-solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "892238e7e16a658abd5813bea8399170_MIT18_06S10_exam2_s10.pdf",
+      "status": "done",
+      "counts": {
+        "questions": 0,
+        "answers": 8
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "author": "Prof. Gilbert Strang"
+    },
+    {
+      "file": "d669bf89c103559d51427d0916c5db61_MIT18_06S10_exam2_s10_soln (1).pdf",
+      "pages": 8,
+      "title": "18.06 Linear Algebra, Exam 2 solutions",
+      "type": "exam-solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "18.06 Linear Algebra, Exam 2",
+      "status": "skip-duplicate",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)"
+    },
+    {
+      "file": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+      "pages": 9,
+      "title": "18.06 Linear Algebra, Problem set 10 solutions",
+      "type": "solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "Problem set 10 question sheet (not present in current source set)",
+      "status": "needs-review",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "processedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "reviewReason": "Problem Set 10 question sheet is absent, so its solutions cannot be paired with the required partner question source by number."
+    },
+    {
+      "file": "e9bbec7a9a25a87715e8edd75e21d7b9_MIT18_06S10_exam1_s10.pdf",
+      "pages": 5,
+      "title": "18.06 Quiz 1",
+      "type": "exam",
+      "subject": "Linear Algebra",
+      "partnerFile": "b7efef974f7a2c8b5c925f5ea8fc9152_MIT18_06S10_exam1_s10_sol.pdf",
+      "status": "done",
+      "counts": {
+        "questions": 9,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "author": "Prof. Gilbert Strang"
+    },
+    {
+      "file": "edf08929f3b2b435c7d8ca85e8d5118d_MIT18_06S10_exam3_s10_soln.pdf",
+      "pages": 4,
+      "title": "18.06 Quiz 3 Solutions",
+      "type": "exam-solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "c72789c2ac2ccaf5568a024c662882d2_MIT18_06S10_exam3_s10.pdf",
+      "status": "done",
+      "counts": {
+        "questions": 0,
+        "answers": 10
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "author": "Prof. Gilbert Strang"
+    },
+    {
+      "file": "edf08929f3b2b435c7d8ca85e8d5118d_MIT18_06S10_exam3_s10_soln (1).pdf",
+      "pages": 4,
+      "title": "18.06 Linear Algebra, Exam 3 solutions",
+      "type": "exam-solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "18.06 Linear Algebra, Exam 3",
+      "status": "skip-duplicate",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)"
+    },
+    {
+      "file": "edf08929f3b2b435c7d8ca85e8d5118d_MIT18_06S10_exam3_s10_soln (2).pdf",
+      "pages": 4,
+      "title": "18.06 Linear Algebra, Exam 3 solutions",
+      "type": "exam-solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "18.06 Linear Algebra, Exam 3",
+      "status": "skip-duplicate",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)"
+    },
+    {
+      "file": "ef8cf047287bc629eb243a691340c823_MIT18_06S10_pset5_s10_soln.pdf",
+      "pages": 9,
+      "title": "18.06 Linear Algebra, Problem set 5 solutions",
+      "type": "solutions",
+      "subject": "Linear Algebra",
+      "partnerFile": "Problem set 5 question sheet (not present in current source set)",
+      "status": "needs-review",
+      "counts": {
+        "questions": 0,
+        "answers": 0
+      },
+      "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
+      "processedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "reviewReason": "Problem Set 5 question sheet is absent, so its solutions cannot be paired with the required partner question source by number."
+    }
+  ]
+}
