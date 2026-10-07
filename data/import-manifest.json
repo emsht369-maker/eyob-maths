@@ -2,7 +2,7 @@
   "version": 1,
   "sourceRoot": "assets/mit-linear-algebra",
   "generatedAt": "2026-10-07",
-  "notes": "Problem Sets 1, 4, and 7 are fully imported from prompts and answers printed together in their solution PDFs. Problem Set 8 has 12 live items and two source-answer disagreements held. Problem Set 9 has 13 live items and one hidden source-answer disagreement. Problem Sets 2, 3, 5, 6, and 10 remain to be reviewed. Exam answer issues are listed in data/needs-review.md. ZoomNotes is retained as a local study source.",
+  "notes": "Problem Sets 1, 4, and 7 are fully imported from prompts and answers printed together in their solution PDFs. Problem Sets 3 and 8 have 12 live items each and two held items each. Problem Set 9 has 13 live items and one hidden source-answer disagreement. Problem Sets 2, 5, 6, and 10 remain to be reviewed. Exam answer issues are listed in data/needs-review.md. ZoomNotes is retained as a local study source.",
   "counts": {
     "totalFiles": 28,
     "uniqueFiles": 23,
@@ -247,8 +247,9 @@
       "partnerFile": "Problem set 3 question sheet (not present in current source set)",
       "status": "needs-review",
       "counts": {
-        "questions": 0,
-        "answers": 0
+        "questions": 14,
+        "answers": 12,
+        "heldItems": 2
       },
       "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
       "processedPages": [
@@ -259,7 +260,7 @@
         5,
         6
       ],
-      "reviewReason": "Problem Set 3 question sheet is absent, so its solutions cannot be paired with the required partner question source by number."
+      "reviewReason": "Twelve items are live. Problem 4’s network diagram and Problem 6’s referenced matrix are absent from the PDF prompt pages, so both remain hidden. See data/needs-review.md."
     },
     {
       "file": "a7d11b1b00c1c2bd2574c3f896ce4eb3_MIT18_06S10_matlab.pdf",
