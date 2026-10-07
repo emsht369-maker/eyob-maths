@@ -2,7 +2,7 @@
   "version": 1,
   "sourceRoot": "assets/mit-linear-algebra",
   "generatedAt": "2026-10-07",
-  "notes": "Problem Sets 1, 4, and 7 are imported from prompts and worked answers printed together in their solutions PDFs. Problem Sets 2, 3, 5, 6, and 8\u201310 remain to be reviewed. Exam answer issues are listed in data/needs-review.md. ZoomNotes is retained as local study material.",
+  "notes": "Problem Sets 1, 4, and 7 are fully imported from prompts and answers printed together in their solution PDFs. Problem Set 9 has 13 live items and one hidden source-answer disagreement. Problem Sets 2, 3, 5, 6, 8, and 10 remain to be reviewed. Exam answer issues are listed in data/needs-review.md. ZoomNotes is retained as a local study source.",
   "counts": {
     "totalFiles": 28,
     "uniqueFiles": 23,
@@ -155,11 +155,12 @@
       "title": "18.06 Linear Algebra, Problem set 9 solutions",
       "type": "solutions",
       "subject": "Linear Algebra",
-      "partnerFile": "Problem set 9 question sheet (not present in current source set)",
+      "partnerFile": "Prompts printed in solutions PDF; standalone question sheet absent",
       "status": "needs-review",
       "counts": {
-        "questions": 0,
-        "answers": 0
+        "questions": 14,
+        "answers": 13,
+        "heldItems": 1
       },
       "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
       "processedPages": [
@@ -174,7 +175,8 @@
         9,
         10
       ],
-      "reviewReason": "Problem Set 9 question sheet is absent, so its solutions cannot be paired with the required partner question source by number."
+      "reviewReason": "Thirteen Q&A items are live. Problem 6.5 #26(a) remains hidden because the solution gives a lower-triangular factor despite asking for an upper-triangular C with A=C^T C; see data/needs-review.md.",
+      "author": "Gilbert Strang"
     },
     {
       "file": "6e0208c1241f197797f2757d680740c0_MIT18_06S10_pset8_s10_soln.pdf",

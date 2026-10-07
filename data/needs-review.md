@@ -16,3 +16,5 @@
 | e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf | 1–8 | Problem Set 10 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
 | ef8cf047287bc629eb243a691340c823_MIT18_06S10_pset5_s10_soln.pdf | 1–8 | Problem Set 5 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
 
+
+| 58e62cc93e3e8b6cb52e72fa5830fc4e_MIT18_06S10_pset9_s10_soln.pdf | 1 | Problem 6.5 #26(a) | source answer disagrees: it gives a lower-triangular factor despite asking for upper-triangular C with A=C^T C. Sympy was unavailable; item remains hidden. |
