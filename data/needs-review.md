@@ -9,10 +9,10 @@
 | 45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers.pdf | 7 | Final Exam, 5(c) | The source labels two vectors lying in the projection plane with eigenvalue 0; they should be fixed by projection onto the plane. |
 | 45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers.pdf | 13 | Final Exam, 9(c) | The conditions v1=1 and v4=0 contradict A^TAv=0, whose solutions are constant vectors. The later answer changes the stated problem. |
 | d039352aaa83a27f11bb2b3778ecfa96_MIT18_06S10_pset2_s10_soln.pdf | 1–5 | Problem set 2 items | The problem set question sheet is absent, so solutions cannot be paired with the required partner file by number. |
-| 4ece22f9c707878e1e57b9840469490e_MIT18_06S10_pset4_s10_soln.pdf | 1–5 | Problem Set 4 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
 | 58e62cc93e3e8b6cb52e72fa5830fc4e_MIT18_06S10_pset9_s10_soln.pdf | 1–9 | Problem Set 9 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
 | 6e0208c1241f197797f2757d680740c0_MIT18_06S10_pset8_s10_soln.pdf | 1–5 | Problem Set 8 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
 | 99823819ffda7c97ddee8abd68ca8764_MIT18_06S10_pset3_s10_soln.pdf | 1–5 | Problem Set 3 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
 | ace08d2d5a7b321229f191765c5ff2e3_MIT18_06S10_pset6_s10_soln.pdf | 1–10 | Problem Set 6 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
 | e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf | 1–8 | Problem Set 10 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
 | ef8cf047287bc629eb243a691340c823_MIT18_06S10_pset5_s10_soln.pdf | 1–8 | Problem Set 5 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
+

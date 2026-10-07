@@ -6,6 +6,8 @@ Instructor: Prof. Gilbert Strang. Course: [18.06 Linear Algebra, Spring 2010](ht
 
 Imported files:
 
+- `4ece22f9c707878e1e57b9840469490e_MIT18_06S10_pset4_s10_soln.pdf` — 18.06 Problem Set 4 Solutions (questions and worked answers printed together).
+
 - `4d1ef28c0836e81caec9122a69c7b931_MIT18_06S10_pset7_s10_soln.pdf` — 18.06 Problem Set 7 Solutions (questions and worked answers printed together).
 
 - `22297c2a6dcf06d82e93ee4af115e91a_MIT18_06S10_pset1_s10_soln.pdf` — 18.06 Problem Set 1 Solutions (questions and worked answers printed together).
