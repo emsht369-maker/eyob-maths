@@ -2,14 +2,14 @@
   "version": 1,
   "sourceRoot": "assets/mit-linear-algebra",
   "generatedAt": "2026-10-07",
-  "notes": "Problem Sets 1, 4, 6, and 7 are imported from prompts and answers printed together in their solution PDFs. Problem Sets 3 and 8 have 12 live items each and two held items each. Problem Set 9 has 13 live items and one hidden source-answer disagreement. Problem Sets 2, 5, and 10 remain to be reviewed. Exam answer issues are listed in data/needs-review.md. ZoomNotes is retained as a local study source.",
+  "notes": "Problem Sets 1, 2, 4, 6, and 7 are imported from prompts and answers printed together in their solution PDFs. Problem Sets 3 and 8 have 12 live items each and two held items each. Problem Set 9 has 13 live items and one hidden source-answer disagreement. Problem Sets 5 and 10 remain to be reviewed. Exam answer issues are listed in data/needs-review.md. ZoomNotes is retained as a local study source.",
   "counts": {
     "totalFiles": 28,
     "uniqueFiles": 23,
     "duplicatesSkipped": 5,
     "pending": 0,
-    "done": 16,
-    "needsReview": 6,
+    "done": 17,
+    "needsReview": 5,
     "localOnly": 1
   },
   "files": [
@@ -380,15 +380,22 @@
       "title": "18.06 Problem Set 2 Solutions",
       "type": "solutions",
       "subject": "Linear Algebra",
-      "partnerFile": "Problem set 2 question sheet (not present in current source set)",
-      "status": "needs-review",
+      "partnerFile": "Prompts and solutions printed together in the same PDF",
+      "status": "done",
       "counts": {
-        "questions": 0,
-        "answers": 0
+        "questions": 13,
+        "answers": 13
       },
       "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
       "author": "Prof. Gilbert Strang",
-      "reviewReason": "The problem set question sheet is absent, so solution prompts and answers cannot be matched against the required partner file."
+      "processedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
     },
     {
       "file": "d61af89db7c6303dc024e52d8ff18f96_MIT18_06S10_pascal_work.pdf",

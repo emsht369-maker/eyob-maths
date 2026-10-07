@@ -8,7 +8,6 @@
 | 45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers.pdf | 5 | Final Exam, 4(b) | The stated solution does not satisfy the given initial condition: it evaluates to (3,2) at t=0 rather than (1,0). |
 | 45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers.pdf | 7 | Final Exam, 5(c) | The source labels two vectors lying in the projection plane with eigenvalue 0; they should be fixed by projection onto the plane. |
 | 45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers.pdf | 13 | Final Exam, 9(c) | The conditions v1=1 and v4=0 contradict A^TAv=0, whose solutions are constant vectors. The later answer changes the stated problem. |
-| d039352aaa83a27f11bb2b3778ecfa96_MIT18_06S10_pset2_s10_soln.pdf | 1–5 | Problem set 2 items | The problem set question sheet is absent, so solutions cannot be paired with the required partner file by number. |
 | 58e62cc93e3e8b6cb52e72fa5830fc4e_MIT18_06S10_pset9_s10_soln.pdf | 1–9 | Problem Set 9 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
 | 6e0208c1241f197797f2757d680740c0_MIT18_06S10_pset8_s10_soln.pdf | 3–4 | Problem 8, factorization part | source answer disagrees: it says LU is always possible for the displayed permutation matrix, but its first pivot is zero; standard LU without row pivoting does not exist. Held. |
 | 6e0208c1241f197797f2757d680740c0_MIT18_06S10_pset8_s10_soln.pdf | 5 | Problem 13 | source answer disagrees: its printed limit matrix has a column that does not sum to 1 and conflicts with its stated limit vector. Held. |
