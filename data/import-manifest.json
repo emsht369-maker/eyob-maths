@@ -2,14 +2,14 @@
   "version": 1,
   "sourceRoot": "assets/mit-linear-algebra",
   "generatedAt": "2026-10-07",
-  "notes": "Problem Set 1 is now imported from prompts and worked answers printed together in its solution PDF. Problem Sets 2\u201310 remain held while their partner question sheets are absent; individual exam answer issues are listed in data/needs-review.md. ZoomNotes remains local-only because it is copyrighted with no reuse licence stated. Five duplicate copies are skipped.",
+  "notes": "Problem Sets 1 and 7 are imported from prompts and worked answers printed together in their solution PDFs. Problem Sets 2\u20136 and 8\u201310 remain held while standalone question sheets are absent; individual exam answer issues are listed in data/needs-review.md. ZoomNotes remains local-only because it is copyrighted with no reuse licence stated. Five duplicate copies are skipped.",
   "counts": {
     "totalFiles": 28,
     "uniqueFiles": 23,
     "duplicatesSkipped": 5,
     "pending": 0,
-    "done": 13,
-    "needsReview": 9,
+    "done": 14,
+    "needsReview": 8,
     "localOnly": 1
   },
   "files": [
@@ -94,11 +94,11 @@
       "title": "18.06 Linear Algebra, Problem set 7 solutions",
       "type": "solutions",
       "subject": "Linear Algebra",
-      "partnerFile": "Problem set 7 question sheet (not present in current source set)",
-      "status": "needs-review",
+      "partnerFile": "Prompts printed in solutions PDF; standalone question sheet absent",
+      "status": "done",
       "counts": {
-        "questions": 0,
-        "answers": 0
+        "questions": 13,
+        "answers": 13
       },
       "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
       "processedPages": [
@@ -108,7 +108,7 @@
         4,
         5
       ],
-      "reviewReason": "Problem Set 7 question sheet is absent. The solutions cannot be paired to the question source by number; page 4 also begins mid-question in this PDF."
+      "author": "Gilbert Strang"
     },
     {
       "file": "4d876a9159e32543eb0d73b4d4382f4c_MIT18_06S10ZoomNotes.pdf",
