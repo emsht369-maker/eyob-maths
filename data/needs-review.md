@@ -2,7 +2,6 @@
 
 | file | page(s) | question | reason |
 | --- | --- | --- | --- |
-| 22297c2a6dcf06d82e93ee4af115e91a_MIT18_06S10_pset1_s10_soln.pdf | 1–8 | Problem set 1 items | The paired question sheet is absent, so answers cannot be matched to the required partner file by number. |
 | d669bf89c103559d51427d0916c5db61_MIT18_06S10_exam2_s10_soln.pdf | 2 | Quiz 2, 1(b) | The stated plane equation 2x+y+z=0 conflicts with a=(2,1,3) and the basis shown; the source answer is inconsistent. |
 | d669bf89c103559d51427d0916c5db61_MIT18_06S10_exam2_s10_soln.pdf | 4 | Quiz 2, 2(a) | The solution claims dependent columns mean there is no unique nearest vector. Orthogonal projection onto the column space is unique; coefficients may be non-unique. |
 | 45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers.pdf | 1–2 | Final Exam, 1(c)–1(d) | The second listed nullspace vector does not satisfy Ax=0, and the complete solution reuses it. |

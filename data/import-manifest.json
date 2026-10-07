@@ -2,14 +2,14 @@
   "version": 1,
   "sourceRoot": "assets/mit-linear-algebra",
   "generatedAt": "2026-10-07",
-  "notes": "All 23 unique source files are classified. Quiz 1, Quiz 2, Quiz 3, and Final Exam question and answer files are processed; seven learn items from four licensed note PDFs are staged. Problem Sets 1\u201310 are held where their question sheets are absent; individual exam answer issues are listed in data/needs-review.md. ZoomNotes for Linear Algebra is local-only because it is copyrighted with no reuse licence stated. Five duplicate copies are skipped.",
+  "notes": "Problem Set 1 is now imported from prompts and worked answers printed together in its solution PDF. Problem Sets 2\u201310 remain held while their partner question sheets are absent; individual exam answer issues are listed in data/needs-review.md. ZoomNotes remains local-only because it is copyrighted with no reuse licence stated. Five duplicate copies are skipped.",
   "counts": {
     "totalFiles": 28,
     "uniqueFiles": 23,
     "duplicatesSkipped": 5,
     "pending": 0,
-    "done": 12,
-    "needsReview": 10,
+    "done": 13,
+    "needsReview": 9,
     "localOnly": 1
   },
   "files": [
@@ -19,14 +19,25 @@
       "title": "18.06 Linear Algebra, Problem set 1 solutions",
       "type": "solutions",
       "subject": "Linear Algebra",
-      "partnerFile": "Problem set 1 question sheet (not present in current source set)",
-      "status": "needs-review",
+      "partnerFile": "Prompts are printed in this solutions PDF; standalone question sheet absent",
+      "status": "done",
       "counts": {
-        "questions": 0,
-        "answers": 0
+        "questions": 13,
+        "answers": 13
       },
       "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
-      "reviewReason": "Problem set 1 question sheet is absent, so answers cannot be paired against the question partner file by number."
+      "author": "Gilbert Strang",
+      "processedPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
     },
     {
       "file": "2c925bea168888404287bb6b848f79ca_MIT18_06S10_symmbases.pdf",

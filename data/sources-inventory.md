@@ -4,7 +4,7 @@ Inventory of the 28 PDF files present in assets/mit-linear-algebra/ (23 unique f
 
 | file | title | pages | type | subject | partner file | licence line | status |
 | --- | --- | ---: | --- | --- | --- | --- | --- |
-| 22297c2a6dcf06d82e93ee4af115e91a_MIT18_06S10_pset1_s10_soln.pdf | 18.06 Linear Algebra, Problem set 1 solutions | 9 | solutions | Linear Algebra | Problem set 1 question sheet (not present in current source set) | CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites Terms of Use) | needs review |
+| 22297c2a6dcf06d82e93ee4af115e91a_MIT18_06S10_pset1_s10_soln.pdf | 18.06 Linear Algebra, Problem set 1 solutions | 9 | solutions | Linear Algebra | Prompts printed in solutions PDF; separate sheet absent | CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites Terms of Use) | done: 13 Q&A items |
 | 2c925bea168888404287bb6b848f79ca_MIT18_06S10_symmbases.pdf | Symmetric Matrices | 2 | notes | Linear Algebra | n/a | CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites Terms of Use) | done: 1 learn item (page 1) |
 | 45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers (1).pdf | 18.06 Linear Algebra, Final Exam Solution | 14 | exam-solutions | Linear Algebra | 18.06 Linear Algebra, Final Exam | CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites Terms of Use) | duplicate copy |
 | 45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers.pdf | 18.06 Final Exam Answers | 14 | exam-solutions | Linear Algebra | b799045edd80df18879088bcf872b214_MIT18_06S10_Final_Exam.pdf | CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites Terms of Use) | processed |
@@ -41,6 +41,6 @@ Course: 18.06 Linear Algebra, Spring 2010. Instructor: Gilbert Strang. MIT OCW a
 
 ## Processing notes
 
-- All 23 unique files have been classified: 12 done, 10 needs-review, and 1 local-only. Five duplicate copies are skipped.
+- All 23 unique files have been classified: 13 done, 9 needs-review, and 1 local-only. Five duplicate copies are skipped.
 - Quiz 1, Quiz 2, Quiz 3, and Final Exam question and answer files are processed. Seven learning items come from Symmetric Matrices, Gram-Schmidt in MATLAB, the MATLAB Tutorial, and Pascal Matrices.
-- Problem Sets 1–10 are held because their question sheets are absent. Exam answer issues are detailed in data/needs-review.md. ZoomNotes for Linear Algebra is local-only because it is copyrighted with no reuse licence stated.
+- Problem Sets 2–10 are held because their question sheets are absent; Problem Set 1 prompts and worked answers were paired within its solutions PDF. Exam answer issues are detailed in data/needs-review.md. ZoomNotes for Linear Algebra is local-only because it is copyrighted with no reuse licence stated.
