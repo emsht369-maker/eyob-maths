@@ -10,4 +10,3 @@ worker/.env
 .dev.vars*
 !.dev.vars.example
 !.env.example
-/assets/mit-linear-algebra/4d876a9159e32543eb0d73b4d4382f4c_MIT18_06S10ZoomNotes.pdf

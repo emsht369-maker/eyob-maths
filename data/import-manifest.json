@@ -2,15 +2,15 @@
   "version": 1,
   "sourceRoot": "assets/mit-linear-algebra",
   "generatedAt": "2026-10-07",
-  "notes": "Problem Sets 1, 2, 4, 6, and 7 are imported from prompts and answers printed together in their solution PDFs. Problem Sets 3 and 8 have 12 live items each and two held items each. Problem Set 9 has 13 live items and one hidden source-answer disagreement. Problem Set 5 has 11 live items and two hidden source-answer disagreements. Problem Set 10 has 12 live items and one hidden source-answer disagreement. Exam answer issues are listed in data/needs-review.md. ZoomNotes is retained as a local study source.",
+  "notes": "Problem Sets 1, 2, 4, 6, and 7 are imported from prompts and answers printed together in their solution PDFs. Problem Sets 3 and 8 have 12 live items each and two held items each. Problem Set 9 has 13 live items and one hidden source-answer disagreement. Problem Set 5 has 11 live items and two hidden source-answer disagreements. Problem Set 10 has 12 live items and one hidden source-answer disagreement. Exam answer issues are listed in data/needs-review.md. ZoomNotes is included as a public study resource; publication permission was confirmed by the site owner.",
   "counts": {
     "totalFiles": 28,
     "uniqueFiles": 23,
     "duplicatesSkipped": 5,
     "pending": 0,
-    "done": 17,
+    "done": 18,
     "needsReview": 5,
-    "localOnly": 1
+    "localOnly": 0
   },
   "files": [
     {
@@ -117,7 +117,7 @@
       "type": "notes",
       "subject": "Linear Algebra",
       "partnerFile": "n/a",
-      "status": "local-only",
+      "status": "done",
       "counts": {
         "questions": 0,
         "answers": 0

@@ -78,7 +78,7 @@
       ${items.map(renderItem).join("")}
     </section>`).join("");
     [practice, exam].forEach(panel => {
-      if (panel && !panel.querySelector("[data-imported-group]")) panel.insertAdjacentHTML("beforeend", html);
+      if (panel && !panel.querySelector("[data-imported-group]")) panel.insertAdjacentHTML("beforeend", (topicSlug === "linear-algebra" ? `<p class="imported-group-intro">Plus ${topicQuestions.length} more questions from MIT 18.06 below.</p>` : "") + html);
     });
   }
 
