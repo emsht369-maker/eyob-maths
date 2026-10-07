@@ -2,7 +2,7 @@
   "version": 1,
   "sourceRoot": "assets/mit-linear-algebra",
   "generatedAt": "2026-10-07",
-  "notes": "Problem Sets 1, 4, and 7 are fully imported from prompts and answers printed together in their solution PDFs. Problem Set 9 has 13 live items and one hidden source-answer disagreement. Problem Sets 2, 3, 5, 6, 8, and 10 remain to be reviewed. Exam answer issues are listed in data/needs-review.md. ZoomNotes is retained as a local study source.",
+  "notes": "Problem Sets 1, 4, and 7 are fully imported from prompts and answers printed together in their solution PDFs. Problem Set 8 has 12 live items and two source-answer disagreements held. Problem Set 9 has 13 live items and one hidden source-answer disagreement. Problem Sets 2, 3, 5, 6, and 10 remain to be reviewed. Exam answer issues are listed in data/needs-review.md. ZoomNotes is retained as a local study source.",
   "counts": {
     "totalFiles": 28,
     "uniqueFiles": 23,
@@ -122,7 +122,7 @@
         "questions": 0,
         "answers": 0
       },
-      "licence": "Copyright \u00a9 2021 Gilbert Strang, Wellesley\u2013Cambridge Press; no reuse licence stated",
+      "licence": "Copyright © 2021 Gilbert Strang, Wellesley–Cambridge Press; no reuse licence stated",
       "author": "Gilbert Strang",
       "localOnlyReason": "Copyrighted book; no reuse licence stated in the PDF. Not published or extracted."
     },
@@ -187,8 +187,9 @@
       "partnerFile": "Problem set 8 question sheet (not present in current source set)",
       "status": "needs-review",
       "counts": {
-        "questions": 0,
-        "answers": 0
+        "questions": 14,
+        "answers": 12,
+        "heldItems": 2
       },
       "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
       "processedPages": [
@@ -199,7 +200,7 @@
         5,
         6
       ],
-      "reviewReason": "Problem Set 8 question sheet is absent, so its solutions cannot be paired with the required partner question source by number."
+      "reviewReason": "Twelve items are live. Problem 8 factorization is held because the source claims standard LU exists for a zero-first-pivot matrix; Problem 13 is held because the printed limit matrix contradicts Markov column sums and its stated limit vector. See data/needs-review.md."
     },
     {
       "file": "768d6fe735722547c3f5e74824532c53_MIT18_06S10_gramschmidtmat.pdf",

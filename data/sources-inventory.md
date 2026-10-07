@@ -43,4 +43,4 @@ Course: 18.06 Linear Algebra, Spring 2010. Instructor: Gilbert Strang. MIT OCW a
 
 - All 23 unique files have been classified: 15 done, 7 needs-review, and 1 local-only. Five duplicate copies are skipped.
 - Quiz 1, Quiz 2, Quiz 3, and Final Exam question and answer files are processed. Seven learning items come from Symmetric Matrices, Gram-Schmidt in MATLAB, the MATLAB Tutorial, and Pascal Matrices.
-- Problem Sets 1, 4, and 7 are paired from their solutions PDFs. Problem Sets 2, 3, 5, 6, and 8–10 remain unprocessed. Exam answer issues are detailed in data/needs-review.md. ZoomNotes for Linear Algebra is local-only because it is copyrighted with no reuse licence stated.
+- Problem Sets 1, 4, and 7 are paired from their solutions PDFs. Problem Set 8 has 12 live items and two source disagreements held. Problem Sets 2, 3, 5, 6, and 10 remain unprocessed; Problem Set 9 still has one held item. Exam answer issues are detailed in data/needs-review.md. ZoomNotes for Linear Algebra is local-only because it is copyrighted with no reuse licence stated.
