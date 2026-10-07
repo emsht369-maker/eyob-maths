@@ -31,7 +31,7 @@ Inventory of the 28 PDF files present in assets/mit-linear-algebra/ (23 unique f
 | edf08929f3b2b435c7d8ca85e8d5118d_MIT18_06S10_exam3_s10_soln (1).pdf | 18.06 Linear Algebra, Exam 3 solutions | 4 | exam-solutions | Linear Algebra | 18.06 Linear Algebra, Exam 3 | CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites Terms of Use) | duplicate copy |
 | edf08929f3b2b435c7d8ca85e8d5118d_MIT18_06S10_exam3_s10_soln (2).pdf | 18.06 Linear Algebra, Exam 3 solutions | 4 | exam-solutions | Linear Algebra | 18.06 Linear Algebra, Exam 3 | CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites Terms of Use) | duplicate copy |
 | edf08929f3b2b435c7d8ca85e8d5118d_MIT18_06S10_exam3_s10_soln.pdf | 18.06 Quiz 3 Solutions | 4 | exam-solutions | Linear Algebra | c72789c2ac2ccaf5568a024c662882d2_MIT18_06S10_exam3_s10.pdf | CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites Terms of Use) | processed |
-| ef8cf047287bc629eb243a691340c823_MIT18_06S10_pset5_s10_soln.pdf | 18.06 Linear Algebra, Problem set 5 solutions | 9 | solutions | Linear Algebra | Problem set 5 question sheet (not present in current source set) | CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites Terms of Use) | needs review: unpaired solution sheet |
+| ef8cf047287bc629eb243a691340c823_MIT18_06S10_pset5_s10_soln.pdf | 18.06 Linear Algebra, Problem set 5 solutions | 9 | solutions | Linear Algebra | Prompts printed in solutions PDF; standalone sheet absent | CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites Terms of Use) | needs review: 11 Q&A live, 2 source disagreements held |
 
 ## Licence and attribution
 
@@ -43,4 +43,4 @@ Course: 18.06 Linear Algebra, Spring 2010. Instructor: Gilbert Strang. MIT OCW a
 
 - All 23 unique files have been classified: 15 done, 7 needs-review, and 1 local-only. Five duplicate copies are skipped.
 - Quiz 1, Quiz 2, Quiz 3, and Final Exam question and answer files are processed. Seven learning items come from Symmetric Matrices, Gram-Schmidt in MATLAB, the MATLAB Tutorial, and Pascal Matrices.
-- Problem Sets 1, 2, 4, 6, and 7 are paired from their solutions PDFs. Problem Set 8 has 12 live items and two source disagreements held. Problem Set 5 remains to be reviewed; Problem Sets 3, 8, 9, and 10 have held items. Exam answer issues are detailed in data/needs-review.md. ZoomNotes for Linear Algebra is local-only because it is copyrighted with no reuse licence stated.
+- Problem Sets 1, 2, 4, 6, and 7 are paired from their solutions PDFs. Problem Set 8 has 12 live items and two source disagreements held. Problem Sets 3, 5, 8, 9, and 10 have held items. Exam answer issues are detailed in data/needs-review.md. ZoomNotes for Linear Algebra is local-only because it is copyrighted with no reuse licence stated.
