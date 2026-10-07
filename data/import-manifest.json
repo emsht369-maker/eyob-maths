@@ -2,7 +2,7 @@
   "version": 1,
   "sourceRoot": "assets/mit-linear-algebra",
   "generatedAt": "2026-10-07",
-  "notes": "Problem Sets 1, 2, 4, 6, and 7 are imported from prompts and answers printed together in their solution PDFs. Problem Sets 3 and 8 have 12 live items each and two held items each. Problem Set 9 has 13 live items and one hidden source-answer disagreement. Problem Sets 5 and 10 remain to be reviewed. Exam answer issues are listed in data/needs-review.md. ZoomNotes is retained as a local study source.",
+  "notes": "Problem Sets 1, 2, 4, 6, and 7 are imported from prompts and answers printed together in their solution PDFs. Problem Sets 3 and 8 have 12 live items each and two held items each. Problem Set 9 has 13 live items and one hidden source-answer disagreement. Problem Set 10 has 12 live items and one hidden source-answer disagreement. Problem Set 5 remains to be reviewed. Exam answer issues are listed in data/needs-review.md. ZoomNotes is retained as a local study source.",
   "counts": {
     "totalFiles": 28,
     "uniqueFiles": 23,
@@ -463,11 +463,12 @@
       "title": "18.06 Linear Algebra, Problem set 10 solutions",
       "type": "solutions",
       "subject": "Linear Algebra",
-      "partnerFile": "Problem set 10 question sheet (not present in current source set)",
+      "partnerFile": "Prompts are printed in this solutions PDF; standalone question sheet absent",
       "status": "needs-review",
       "counts": {
-        "questions": 0,
-        "answers": 0
+        "questions": 13,
+        "answers": 12,
+        "heldItems": 1
       },
       "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare (PDF cites MIT OCW Terms of Use)",
       "processedPages": [
@@ -481,7 +482,7 @@
         8,
         9
       ],
-      "reviewReason": "Problem Set 10 question sheet is absent, so its solutions cannot be paired with the required partner question source by number."
+      "reviewReason": "Twelve Q&A items are live. Section 6.7 Problem 11 remains hidden because the printed SVD assigns the orthogonal column vectors to the wrong factors; see data/needs-review.md."
     },
     {
       "file": "e9bbec7a9a25a87715e8edd75e21d7b9_MIT18_06S10_exam1_s10.pdf",

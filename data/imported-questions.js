@@ -4105,4 +4105,351 @@ window.IMPORTED_QUESTIONS = [
   "author": "Gilbert Strang",
   "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
 }
+,
+{
+  "id": "MIT18-06-PS10-01",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 1,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 6.6, Problem 12",
+  "topic": "linear-algebra",
+  "subtopic": "Similarity and Jordan form",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "These two 4×4 Jordan matrices both have eigenvalues 0,0,0,0 and two eigenvectors, but their Jordan block sizes differ. Compare JM and MK for an arbitrary 4×4 matrix M; show equality forces M to be singular and conclude J and K are not similar.",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q1.webp",
+  "hint": "If JM=MK, the displayed entries force rows 2 and 4 of M to be linearly dependent.",
+  "answerText": "Let J have blocks of sizes 2 and 2, while K has a single block of size 3 and one of size 1. Equality JM=MK forces m21=m22=m24=m41=m42=m44=0. Thus rows 2 and 4 are both supported only in column 3 and are dependent, so M is singular. Similarity would require an invertible M with JM=MK, which is impossible.",
+  "solutionSteps": [
+    "Let J have blocks of sizes 2 and 2, while K has a single block of size 3 and one of size 1. Equality JM=MK forces m21=m22=m24=m41=m42=m44=0. Thus rows 2 and 4 are both supported only in column 3 and are dependent, so M is singular. Similarity would require an invertible M with JM=MK, which is impossible."
+  ],
+  "finalAnswer": "J and K are not similar because every M satisfying JM=MK is singular.",
+  "answerSourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "answerSourcePage": 1,
+  "confidence": "high",
+  "verified": true,
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+},
+{
+  "id": "MIT18-06-PS10-02",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 1,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 6.6, Problem 14",
+  "topic": "linear-algebra",
+  "subtopic": "Similarity and Jordan form",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "Prove that Aᵀ is similar to A: first show one Jordan block is similar to its transpose, extend the construction block by block, then use A=MJM⁻¹.",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q2.webp",
+  "hint": "For a Jordan block, use the permutation matrix that reverses the order of its basis vectors.",
+  "answerText": "For a Jordan block J_i, let M_i reverse the basis order; then M_i⁻¹J_iM_i=J_iᵀ. Put the M_i on the diagonal of M₀ to obtain M₀⁻¹JM₀=Jᵀ. If A=MJM⁻¹, then Aᵀ=(Mᵀ)⁻¹JᵀMᵀ, so Aᵀ is similar to Jᵀ, hence to J and to A.",
+  "solutionSteps": [
+    "For a Jordan block J_i, let M_i reverse the basis order; then M_i⁻¹J_iM_i=J_iᵀ. Put the M_i on the diagonal of M₀ to obtain M₀⁻¹JM₀=Jᵀ. If A=MJM⁻¹, then Aᵀ=(Mᵀ)⁻¹JᵀMᵀ, so Aᵀ is similar to Jᵀ, hence to J and to A."
+  ],
+  "finalAnswer": "Every square matrix is similar to its transpose.",
+  "answerSourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "answerSourcePage": 1,
+  "answerSourcePageEnd": 2,
+  "confidence": "high",
+  "verified": true,
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+},
+{
+  "id": "MIT18-06-PS10-03",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 2,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 6.6, Problem 20",
+  "topic": "linear-algebra",
+  "subtopic": "Similarity and eigenvalues",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "Explain parts (a)–(e): similarity of A and B implies similarity of A² and B²; squares may be similar when A,B are not; compare [[3,0],[0,4]] with [[3,1],[0,4]], and [[3,0],[0,3]] with [[3,1],[0,3]]; explain why swapping rows 1 and 2 then columns 1 and 2 preserves eigenvalues and identify M.",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q3.webp",
+  "hint": "For the row and column swaps, use the same permutation matrix on the left and right.",
+  "answerText": "(a) If A=M⁻¹BM then A²=M⁻¹B²M. (b) A=0 and B=[[0,1],[0,0]] have equal squares but are not similar. (c) The distinct eigenvalues 3 and 4 allow the two triangular matrices to be diagonalized to the same diagonal matrix. (d) The first matrix has a two-dimensional eigenspace for 3; the second has only a one-dimensional eigenspace. (e) M is the permutation matrix swapping coordinates 1 and 2; M=M⁻¹, and the combined operation gives MAM=M⁻¹AM.",
+  "solutionSteps": [
+    "(a) If A=M⁻¹BM then A²=M⁻¹B²M. (b) A=0 and B=[[0,1],[0,0]] have equal squares but are not similar. (c) The distinct eigenvalues 3 and 4 allow the two triangular matrices to be diagonalized to the same diagonal matrix. (d) The first matrix has a two-dimensional eigenspace for 3; the second has only a one-dimensional eigenspace. (e) M is the permutation matrix swapping coordinates 1 and 2; M=M⁻¹, and the combined operation gives MAM=M⁻¹AM."
+  ],
+  "finalAnswer": "The row and column swaps form a similarity transformation using the coordinate-swap permutation matrix.",
+  "answerSourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "answerSourcePage": 3,
+  "confidence": "high",
+  "verified": true,
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+},
+{
+  "id": "MIT18-06-PS10-04",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 4,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 6.6, Problem 22",
+  "topic": "linear-algebra",
+  "subtopic": "Cayley–Hamilton theorem",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "If every eigenvalue of an n×n matrix A is 0, prove that Aⁿ is the zero matrix.",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q4.webp",
+  "hint": "Use either the sizes of the zero-eigenvalue Jordan blocks or the characteristic polynomial.",
+  "answerText": "Every Jordan block J_i for eigenvalue 0 has nilpotency index at most its size n_i≤n, so J_iⁿ=0. Since A is similar to the block diagonal Jordan matrix, Aⁿ is also zero. Alternatively, the characteristic polynomial is xⁿ, and Cayley–Hamilton gives Aⁿ=0.",
+  "solutionSteps": [
+    "Every Jordan block J_i for eigenvalue 0 has nilpotency index at most its size n_i≤n, so J_iⁿ=0. Since A is similar to the block diagonal Jordan matrix, Aⁿ is also zero. Alternatively, the characteristic polynomial is xⁿ, and Cayley–Hamilton gives Aⁿ=0."
+  ],
+  "finalAnswer": "Aⁿ=0.",
+  "answerSourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "answerSourcePage": 4,
+  "confidence": "high",
+  "verified": true,
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+},
+{
+  "id": "MIT18-06-PS10-05",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 4,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 6.6, Problem 23",
+  "topic": "linear-algebra",
+  "subtopic": "QR iteration and similarity",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "For the shifted QR method, show that A₂=R₁Q₁−c²I is similar to A₁=Q₁R₁−c²I.",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q5.webp",
+  "hint": "Conjugate A₂ by Q₁ and use Q₁⁻¹=Q₁ᵀ.",
+  "answerText": "Q₁A₂Q₁⁻¹=Q₁(R₁Q₁−c²I)Q₁⁻¹=Q₁R₁−c²I=A₁, since the scalar matrix commutes with Q₁.",
+  "solutionSteps": [
+    "Q₁A₂Q₁⁻¹=Q₁(R₁Q₁−c²I)Q₁⁻¹=Q₁R₁−c²I=A₁, since the scalar matrix commutes with Q₁."
+  ],
+  "finalAnswer": "A₁ and A₂ are similar and have the same eigenvalues.",
+  "answerSourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "answerSourcePage": 4,
+  "confidence": "high",
+  "verified": true,
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+},
+{
+  "id": "MIT18-06-PS10-06",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 4,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 6.6, Problem 24",
+  "topic": "linear-algebra",
+  "subtopic": "Similarity and inverse matrices",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "If A is similar to A⁻¹, must all eigenvalues be 1 or −1? Give a counterexample if not.",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q6.webp",
+  "hint": "Use a diagonal matrix whose entries are reciprocals, and swap the two coordinates.",
+  "answerText": "No. Let A=diag(2,1/2) and P=[[0,1],[1,0]]. Then P⁻¹A⁻¹P=diag(2,1/2)=A, so A is similar to A⁻¹ although its eigenvalues are 2 and 1/2.",
+  "solutionSteps": [
+    "No. Let A=diag(2,1/2) and P=[[0,1],[1,0]]. Then P⁻¹A⁻¹P=diag(2,1/2)=A, so A is similar to A⁻¹ although its eigenvalues are 2 and 1/2."
+  ],
+  "finalAnswer": "No; diag(2,1/2) is similar to its inverse and has eigenvalues 2 and 1/2.",
+  "answerSourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "answerSourcePage": 4,
+  "confidence": "high",
+  "verified": true,
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+},
+{
+  "id": "MIT18-06-PS10-07",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 5,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 6.7, Problem 4",
+  "topic": "linear-algebra",
+  "subtopic": "Singular value decomposition",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "For the Fibonacci matrix A=[[1,1],[1,0]], find the eigenvalues and unit eigenvectors of AᵀA and AAᵀ, keep Av=σu, and construct an SVD.",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q7.webp",
+  "hint": "A is symmetric, and AᵀA=AAᵀ=[[2,1],[1,1]]. The smaller eigenvalue is positive, but its eigenvector changes sign under A.",
+  "answerText": "AᵀA=AAᵀ=[[2,1],[1,1]] has eigenvalues (3±√5)/2. The unit eigenvectors are (√((5+√5)/10), √((5−√5)/10))ᵀ and (√((5−√5)/10), −√((5+√5)/10))ᵀ. The singular values are (1+√5)/2 and (√5−1)/2. Choose V from those eigenvectors and U so Av_i=σ_i u_i; for the second vector u₂=−v₂. Then A=UΣVᵀ.",
+  "solutionSteps": [
+    "AᵀA=AAᵀ=[[2,1],[1,1]] has eigenvalues (3±√5)/2. The unit eigenvectors are (√((5+√5)/10), √((5−√5)/10))ᵀ and (√((5−√5)/10), −√((5+√5)/10))ᵀ. The singular values are (1+√5)/2 and (√5−1)/2. Choose V from those eigenvectors and U so Av_i=σ_i u_i; for the second vector u₂=−v₂. Then A=UΣVᵀ."
+  ],
+  "finalAnswer": "The singular values are (1+√5)/2 and (√5−1)/2; the source image gives the corresponding unit U and V columns.",
+  "answerSourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "answerSourcePage": 5,
+  "confidence": "high",
+  "verified": true,
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+},
+{
+  "id": "MIT18-06-PS10-08",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 5,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 6.7, Problem 11",
+  "topic": "linear-algebra",
+  "subtopic": "Singular value decomposition",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "Suppose A has orthogonal columns w₁,…,wₙ with lengths σ₁,…,σₙ. What are U, Σ, and V in an SVD?",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q8.webp",
+  "hint": "Compare the source’s proposed U, Σ, V with AᵀA=diag(σ₁²,…,σₙ²).",
+  "confidence": "review",
+  "reviewReason": "source answer disagrees: for nonzero orthogonal columns, the standard SVD takes V=I, Σ=diag(σᵢ), and the columns of U are wᵢ/σᵢ. The PDF instead sets U=I and makes the rows of V equal to wᵢ/σᵢ, which does not generally have the required dimensions or reconstruct A. Held.",
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+},
+{
+  "id": "MIT18-06-PS10-09",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 6,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 6.7, Problem 17",
+  "topic": "linear-algebra",
+  "subtopic": "Singular value decomposition",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "For the 4×3 first-difference matrix A in the source, (a) fill in the sine matrix V and verify its eigenvalues 2−√2, 2, 2+√2 for AᵀA; (b) verify AV has orthogonal columns; (c) find a unit fourth left singular vector u₄ in N(Aᵀ).",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q9.webp",
+  "hint": "The nullspace of Aᵀ is generated by (1,1,1,1)ᵀ; normalize it to unit length.",
+  "answerText": "The normalized sine matrix is V=[[1/2,1/√2,1/2],[1/√2,0,−1/√2],[1/2,−1/√2,1/2]]. Its columns are eigenvectors of AᵀA for eigenvalues 2−√2, 2, and 2+√2. The columns of AV are orthogonal, with lengths equal to the singular values. Since N(Aᵀ) is generated by (1,1,1,1)ᵀ, take u₄=(1/2)(1,1,1,1)ᵀ.",
+  "solutionSteps": [
+    "The normalized sine matrix is V=[[1/2,1/√2,1/2],[1/√2,0,−1/√2],[1/2,−1/√2,1/2]]. Its columns are eigenvectors of AᵀA for eigenvalues 2−√2, 2, and 2+√2. The columns of AV are orthogonal, with lengths equal to the singular values. Since N(Aᵀ) is generated by (1,1,1,1)ᵀ, take u₄=(1/2)(1,1,1,1)ᵀ."
+  ],
+  "finalAnswer": "u₄=(1/2)(1,1,1,1)ᵀ; the singular values are √(2−√2), √2, √(2+√2).",
+  "answerSourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "answerSourcePage": 6,
+  "answerSourcePageEnd": 7,
+  "confidence": "high",
+  "verified": true,
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+},
+{
+  "id": "MIT18-06-PS10-10",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 7,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 8.5, Problem 4",
+  "topic": "linear-algebra",
+  "subtopic": "Orthogonal polynomials",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "The first three Legendre polynomials are 1, x, x²−1/3. Choose c so x³−cx is orthogonal to all three on [−1,1].",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q10.webp",
+  "hint": "The condition against x is ∫₋₁¹(x³−cx)x dx=0.",
+  "answerText": "Odd symmetry makes the integrals against 1 and x²−1/3 zero. Orthogonality against x gives ∫₋₁¹(x⁴−cx²)dx=2/5−2c/3=0, so c=3/5.",
+  "solutionSteps": [
+    "Odd symmetry makes the integrals against 1 and x²−1/3 zero. Orthogonality against x gives ∫₋₁¹(x⁴−cx²)dx=2/5−2c/3=0, so c=3/5."
+  ],
+  "finalAnswer": "c=3/5.",
+  "answerSourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "answerSourcePage": 7,
+  "confidence": "high",
+  "verified": true,
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+},
+{
+  "id": "MIT18-06-PS10-11",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 7,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 8.5, Problem 5",
+  "topic": "linear-algebra",
+  "subtopic": "Fourier series",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "For the square wave in Example 3, evaluate ∫₀²π f(x)cos x dx, ∫₀²π f(x)sin x dx, and ∫₀²π f(x)sin 2x dx, and name the three Fourier coefficients.",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q11.webp",
+  "hint": "The source defines the square wave as +1 on [0,π] and −1 on [π,2π].",
+  "answerText": "The integrals are 0, 4, and 0, respectively. They correspond to Fourier coefficients a₁, b₁, and b₂.",
+  "solutionSteps": [
+    "The integrals are 0, 4, and 0, respectively. They correspond to Fourier coefficients a₁, b₁, and b₂."
+  ],
+  "finalAnswer": "The integrals are 0, 4, 0; the corresponding coefficients are a₁, b₁, b₂.",
+  "answerSourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "answerSourcePage": 7,
+  "confidence": "high",
+  "verified": true,
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+},
+{
+  "id": "MIT18-06-PS10-12",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 8,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 8.5, Problem 12",
+  "topic": "linear-algebra",
+  "subtopic": "Fourier series and differentiation",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "For the ordered basis 1, cos x, sin x, cos 2x, sin 2x, write the derivatives in this basis and give the 5×5 differentiation matrix.",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q12.webp",
+  "hint": "Differentiate each basis function and place its coefficients in the corresponding column.",
+  "answerText": "The derivatives are 0, −sin x, cos x, −2sin 2x, 2cos 2x. The matrix is [[0,0,0,0,0],[0,0,−1,0,0],[0,1,0,0,0],[0,0,0,0,−2],[0,0,0,2,0]].",
+  "solutionSteps": [
+    "The derivatives are 0, −sin x, cos x, −2sin 2x, 2cos 2x. The matrix is [[0,0,0,0,0],[0,0,−1,0,0],[0,1,0,0,0],[0,0,0,0,−2],[0,0,0,2,0]]."
+  ],
+  "finalAnswer": "[[0,0,0,0,0],[0,0,−1,0,0],[0,1,0,0,0],[0,0,0,0,−2],[0,0,0,2,0]].",
+  "answerSourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "answerSourcePage": 8,
+  "confidence": "high",
+  "verified": true,
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+},
+{
+  "id": "MIT18-06-PS10-13",
+  "sourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "sourcePage": 8,
+  "sourceTitle": "18.06 Problem Set 10 Solutions",
+  "answerSourceTitle": "18.06 Problem Set 10 Solutions",
+  "number": "Section 8.5, Problem 13",
+  "topic": "linear-algebra",
+  "subtopic": "Fourier series and delta functions",
+  "difficulty": [
+    "medium"
+  ],
+  "questionText": "For the square pulse F(x)=1/h when |x|≤h/2 and 0 when h/2<|x|≤π, find a₀, aₖ, bₖ and their limits as h→0.",
+  "questionImage": "assets/imported-question-images/mit18-06-pset10/q13.webp",
+  "hint": "The pulse is even, so all sine coefficients vanish. Integrate over only [−h/2,h/2].",
+  "answerText": "Using the source’s convention, a₀=1/π; for k≥1, aₖ=(2/(πhk))sin(kh/2) and bₖ=0. For fixed k as h→0, aₖ→1/π and bₖ→0.",
+  "solutionSteps": [
+    "Using the source’s convention, a₀=1/π; for k≥1, aₖ=(2/(πhk))sin(kh/2) and bₖ=0. For fixed k as h→0, aₖ→1/π and bₖ→0."
+  ],
+  "finalAnswer": "a₀→1/π, aₖ→1/π, and bₖ=0.",
+  "answerSourceFile": "e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf",
+  "answerSourcePage": 8,
+  "confidence": "high",
+  "verified": true,
+  "author": "Gilbert Strang",
+  "licence": "CC BY-NC-SA 4.0, MIT OpenCourseWare"
+}
 ];

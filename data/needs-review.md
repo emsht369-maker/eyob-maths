@@ -12,8 +12,6 @@
 | 6e0208c1241f197797f2757d680740c0_MIT18_06S10_pset8_s10_soln.pdf | 3–4 | Problem 8, factorization part | source answer disagrees: it says LU is always possible for the displayed permutation matrix, but its first pivot is zero; standard LU without row pivoting does not exist. Held. |
 | 6e0208c1241f197797f2757d680740c0_MIT18_06S10_pset8_s10_soln.pdf | 5 | Problem 13 | source answer disagrees: its printed limit matrix has a column that does not sum to 1 and conflicts with its stated limit vector. Held. |
 | 99823819ffda7c97ddee8abd68ca8764_MIT18_06S10_pset3_s10_soln.pdf | 1–5 | Problem Set 3 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
-| e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf | 1–8 | Problem Set 10 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
 | ef8cf047287bc629eb243a691340c823_MIT18_06S10_pset5_s10_soln.pdf | 1–8 | Problem Set 5 solutions | The paired question sheet is absent, so questions and answers cannot be matched against it by number. |
-
-
 | 58e62cc93e3e8b6cb52e72fa5830fc4e_MIT18_06S10_pset9_s10_soln.pdf | 1 | Problem 6.5 #26(a) | source answer disagrees: it gives a lower-triangular factor despite asking for upper-triangular C with A=C^T C. Sympy was unavailable; item remains hidden. |
+| e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf | 5 | Section 6.7, Problem 11 | source answer disagrees: for orthogonal columns, the standard SVD has V=I and U columns wᵢ/σᵢ. The PDF instead sets U=I and uses rows wᵢ/σᵢ for V, which does not generally have compatible dimensions or reconstruct A. Item remains hidden. |
