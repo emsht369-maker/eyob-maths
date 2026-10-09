@@ -1,0 +1,28 @@
+.site-menu > .mm-brand {
+  margin-right: 0 !important;
+}
+
+.site-menu .mm-brand-name {
+  color: var(--text);
+  font: 700 1rem/1 var(--font-ui);
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .site-menu > .mm-brand {
+    margin-right: 0 !important;
+  }
+
+  .site-menu .mm-brand-name {
+    display: none;
+  }
+
+  .site-menu > .nav-points,
+  .site-menu > .nav-streak {
+    display: inline-flex !important;
+  }
+
+  .site-menu > .site-menu-drawer {
+    display: block !important;
+  }
+}
