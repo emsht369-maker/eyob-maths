@@ -33,10 +33,32 @@ try {
     const answer = page.locator('#mm-pdf-reader textarea[data-answer-id]').first();
     await answer.waitFor();
     await page.waitForFunction(() => document.querySelector('#mm-pdf-reader [data-pdf-page]').value === '5' && document.activeElement?.matches('textarea[data-answer-id]'));
+    if (viewport.width < 900) {
+      const sheet = await page.evaluate(() => {
+        const reader = document.querySelector('#mm-pdf-reader');
+        const visibleChipRows = [...reader.querySelectorAll('.mm-exam-chips,.mm-exam-mobile-chips,.mm-reader-tutor-chips')].filter(row => row.getClientRects().length && row.querySelectorAll('[data-reader-question]').length);
+        const verticalScrollers = [...reader.querySelector('[data-exam-panel]').querySelectorAll('*')].filter(element => ['auto','scroll'].includes(getComputedStyle(element).overflowY) && element.scrollHeight > element.clientHeight + 2).map(element => ({ tag:element.tagName, className:element.className, overflowY:getComputedStyle(element).overflowY, scrollHeight:element.scrollHeight, clientHeight:element.clientHeight }));
+        return { activeDock: reader.querySelector('.mm-exam-dock .is-active')?.dataset.readerDock, chipRows: visibleChipRows.length, questionChipCount: visibleChipRows[0]?.querySelectorAll('[data-reader-question]').length, answerMinHeight: parseFloat(getComputedStyle(reader.querySelector('textarea[data-answer-id]')).minHeight), verticalScrollers, tutorChipRows: reader.querySelectorAll('.mm-reader-tutor-chips').length };
+      });
+      assert.equal(sheet.activeDock, 'answers', `phone Answer dock is active at ${viewport.width}`);
+      assert.equal(sheet.chipRows, 1, `phone shows one question chip row at ${viewport.width}`);
+      assert.equal(sheet.verticalScrollers.length, 1, `phone sheet has one vertical scroll container at ${viewport.width}: ${JSON.stringify(sheet)}`);
+      assert.ok(sheet.answerMinHeight >= 96, `phone answer area is at least 96px at ${viewport.width}`);
+      assert.equal(sheet.tutorChipRows, 0, `Tutor has no duplicate question chip row at ${viewport.width}`);
+      await page.locator('[data-reader-dock="tutor"]').click();
+      await page.locator('.ai-tutor-buttons button').first().waitFor();
+      assert.equal(await page.locator('.mm-reader-context').textContent(), 'Using Question 5');
+      await page.locator('[data-reader-dock="question"]').click();
+      assert.equal(await page.locator('#mm-pdf-reader').getAttribute('data-sheet-mode'), 'collapsed');
+      assert.equal(await page.locator('.mm-exam-dock .is-active').getAttribute('data-reader-dock'), 'question');
+      await page.locator('[data-reader-dock="answers"]').click();
+      assert.equal(await page.locator('.mm-exam-dock .is-active').getAttribute('data-reader-dock'), 'answers');
+      await page.locator('#mm-pdf-reader textarea[data-answer-id]').first().focus();
+    }
     await answer.fill('1234567890 working answer');
     await answer.evaluate(el => el.blur());
     await page.locator('[data-reader-photo]').setInputFiles({ name: 'working.png', mimeType: 'image/png', buffer: png });
-    await page.waitForTimeout(1000);
+    await page.waitForFunction(() => document.querySelector('[data-photo-status]')?.textContent === 'Photo saved', null, { timeout: 15000 });
     const photoStatus = await page.locator('[data-photo-status]').textContent();
     const photoDebug = await page.evaluate(() => ({ inputCount: document.querySelectorAll('[data-reader-photo]').length, fileCount: document.querySelector('[data-reader-photo]')?.files?.length, cardQuestion: document.querySelector('.mm-reader-answer-card strong')?.textContent, statusCount: document.querySelectorAll('[data-photo-status]').length, active: document.activeElement?.outerHTML?.slice(0, 160) }));
     assert.equal(photoStatus, 'Photo saved', `photo upload failed at ${viewport.width}: ${JSON.stringify({ photoStatus, photoDebug })}`);

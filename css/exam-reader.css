@@ -38,6 +38,10 @@
 
 @media (max-width: 899px) {
   #mm-pdf-reader .mm-exam-panel {
+    height: 40dvh;
+  }
+
+  #mm-pdf-reader .mm-exam-panel {
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -52,6 +56,20 @@
     min-height: 0;
     flex: 1 1 auto;
     overflow: auto;
+    scrollbar-width: thin;
+  }
+
+  #mm-pdf-reader .mm-exam-mobile-chips {
+    min-height: 58px;
+    flex: 0 0 auto;
+    align-items: center;
+    overflow-y: hidden;
+    box-sizing: border-box;
+  }
+
+  #mm-pdf-reader .mm-reader-result-card pre {
+    max-height: none;
+    overflow: visible;
   }
 
   #mm-pdf-reader[data-reader-kind="questions"][data-reader-tab="answers"] .mm-exam-phone-footer {
@@ -66,4 +84,32 @@
     width: 100%;
     min-height: 44px;
   }
+
+  #mm-pdf-reader .mm-reader-symbols {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+  }
+
+  #mm-pdf-reader .mm-reader-tutor-chips,
+  #mm-pdf-reader .mm-exam-mobile-chips {
+    scrollbar-width: none;
+  }
+
+  #mm-pdf-reader .mm-reader-tutor-chips::-webkit-scrollbar,
+  #mm-pdf-reader .mm-exam-mobile-chips::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (min-width: 900px) {
+  #mm-pdf-reader .mm-reader-symbols {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+}
+
+#mm-pdf-reader .mm-reader-answer-field textarea {
+  min-height: 96px;
 }
