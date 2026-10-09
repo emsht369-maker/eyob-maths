@@ -101,6 +101,16 @@
   #mm-pdf-reader .mm-exam-mobile-chips::-webkit-scrollbar {
     display: none;
   }
+
+  #mm-pdf-reader .mm-pdf-toolbar button:nth-last-child(-n + 3) {
+    display: grid !important;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    font-size: 1.15rem;
+  }
 }
 
 @media (min-width: 900px) {
