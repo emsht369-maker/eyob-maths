@@ -1,0 +1,14 @@
+/* Reader-only overrides. Loaded once, before the reader is shown. */
+#mm-pdf-reader [hidden] {
+  display: none !important;
+}
+
+@media (min-width: 900px) {
+  #mm-pdf-reader .mm-exam-more {
+    display: block !important;
+  }
+
+  #mm-pdf-reader .mm-exam-more > label {
+    display: none;
+  }
+}
