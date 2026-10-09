@@ -3,6 +3,10 @@
   display: none !important;
 }
 
+.mm-exam-phone-footer {
+  display: none;
+}
+
 @media (min-width: 900px) {
   #mm-pdf-reader .mm-exam-more {
     display: block !important;
@@ -10,5 +14,33 @@
 
   #mm-pdf-reader .mm-exam-more > label {
     display: none;
+  }
+}
+
+@media (max-width: 899px) {
+  #mm-pdf-reader .mm-exam-panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  #mm-pdf-reader .mm-exam-panel-content {
+    height: auto;
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow: auto;
+  }
+
+  #mm-pdf-reader[data-reader-kind="questions"][data-reader-tab="answers"] .mm-exam-phone-footer {
+    display: block;
+    flex: 0 0 auto;
+    padding: 8px 12px max(8px, env(safe-area-inset-bottom));
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  #mm-pdf-reader .mm-exam-phone-footer button {
+    width: 100%;
+    min-height: 44px;
   }
 }
