@@ -1,4 +1,23 @@
 /* Reader-only overrides. Loaded once, before the reader is shown. */
+#mm-pdf-reader {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  border: 0;
+  border-radius: 0;
+  overscroll-behavior: contain;
+}
+
+#mm-pdf-reader::backdrop {
+  background: rgb(2 5 9 / 84%);
+  backdrop-filter: blur(4px);
+}
+
 #mm-pdf-reader [hidden] {
   display: none !important;
 }
@@ -22,6 +41,10 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+  }
+
+  body.mm-reader-open {
+    overflow: hidden !important;
   }
 
   #mm-pdf-reader .mm-exam-panel-content {

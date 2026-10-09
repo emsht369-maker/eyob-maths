@@ -20,8 +20,14 @@ try {
   for (const viewport of [{ width: 1920, height: 1080 }, { width: 1280, height: 720 }, { width: 412, height: 915 }, { width: 360, height: 640 }]) {
     await page.setViewportSize(viewport);
     await page.evaluate(() => localStorage.clear());
+    await page.evaluate(() => window.scrollTo(0, Math.min(500, document.documentElement.scrollHeight - innerHeight)));
+    const scrollBeforeOpen = await page.evaluate(() => window.scrollY);
     await page.evaluate(({ questionUrl, solutionUrl }) => window.openReader(questionUrl, 1, { files: [{ url: questionUrl, questionUrl, solutionUrl, title: 'Exam 1 · Questions', solutionTitle: 'Exam 1 · Solutions' }], index: 0 }), { questionUrl, solutionUrl });
     await page.locator('#mm-pdf-reader[open]').waitFor();
+    const overlay = await page.locator('#mm-pdf-reader').evaluate(element => ({ position: getComputedStyle(element).position, top: element.getBoundingClientRect().top, backdrop: getComputedStyle(element, '::backdrop').backgroundColor }));
+    assert.equal(overlay.position, 'fixed', `reader root is fixed at ${viewport.width}`);
+    assert.equal(overlay.top, 0, `reader fills from top at ${viewport.width}`);
+    assert.notEqual(overlay.backdrop, 'rgba(0, 0, 0, 0)', `reader backdrop is visible at ${viewport.width}`);
     await page.locator('[data-reader-question="5"]:visible').first().waitFor();
     await page.locator('[data-reader-question="5"]:visible').first().click();
     const answer = page.locator('#mm-pdf-reader textarea[data-answer-id]').first();
@@ -59,6 +65,8 @@ try {
     }
     console.log(`PASS ${viewport.width}x${viewport.height}`);
     await page.locator('.mm-pdf-close').click();
+    await page.waitForFunction(() => !document.querySelector('#mm-pdf-reader')?.open);
+    assert.equal(await page.evaluate(() => window.scrollY), scrollBeforeOpen, `scroll position restores at ${viewport.width}`);
   }
   await page.setViewportSize({ width: 412, height: 450 });
   await page.evaluate(({ questionUrl, solutionUrl }) => window.openReader(questionUrl, 1, { files: [{ url: questionUrl, questionUrl, solutionUrl, title: 'Exam 1 · Questions', solutionTitle: 'Exam 1 · Solutions' }], index: 0 }), { questionUrl, solutionUrl });
