@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "function-graphs", title: "Cubic, reciprocal and exponential graphs", area: "Graphs", skill: "Match cubic, reciprocal and exponential curves", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("function-graphs", rng) });

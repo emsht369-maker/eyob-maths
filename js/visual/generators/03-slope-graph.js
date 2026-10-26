@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "slope-graph", title: "Slope from a graph", area: "Graphs", skill: "Gradient from a graph", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("slope-graph", rng) });

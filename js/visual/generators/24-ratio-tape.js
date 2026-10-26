@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "ratio-tape", title: "Share with a ratio tape", area: "Number", skill: "Share amounts in a ratio", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("ratio-tape", rng) });

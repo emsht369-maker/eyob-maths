@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "vectors-grid", title: "Vectors on a grid", area: "Geometry", skill: "Add and subtract vectors", tier: "H", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("vectors-grid", rng) });

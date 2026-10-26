@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "frequency-polygon", title: "Frequency polygons", area: "Graphs", skill: "Class midpoints and frequency polygons", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("frequency-polygon", rng) });

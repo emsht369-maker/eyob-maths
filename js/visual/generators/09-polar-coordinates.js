@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "polar-coordinates", title: "Polar coordinates", area: "Graphs", skill: "Polar and Cartesian coordinates", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("polar-coordinates", rng) });

@@ -15,6 +15,7 @@
   ];
   const channel=(label,url,title)=>item(label,url,"Open the channel and search for "+title+".");
   const mitLinearAlgebraPack=[
+    item("Gilbert Strang: ZoomNotes for Linear Algebra (80-page summary)","/assets/mit-linear-algebra/4d876a9159e32543eb0d73b4d4382f4c_MIT18_06S10ZoomNotes.pdf","An 80-page summary of Gilbert Strang's MIT 18.06 linear algebra notes."),
     item("MIT 18.06 Gram–Schmidt notes","/assets/mit-linear-algebra/768d6fe735722547c3f5e74824532c53_MIT18_06S10_gramschmidtmat.pdf","Helpful notes on Gram–Schmidt and orthogonalisation."),
     item("MIT 18.06 Symmetric matrices notes","/assets/mit-linear-algebra/2c925bea168888404287bb6b848f79ca_MIT18_06S10_symmbases.pdf","Notes on symmetric matrices and spectral ideas."),
     item("MIT 18.06: Pascal matrix notes","/assets/mit-linear-algebra/d61af89db7c6303dc024e52d8ff18f96_MIT18_06S10_pascal_work.pdf","A supplementary note covering related linear-algebra ideas."),
@@ -29,14 +30,14 @@
     item("Problem set 8 solutions","/assets/mit-linear-algebra/6e0208c1241f197797f2757d680740c0_MIT18_06S10_pset8_s10_soln.pdf","Worked solutions for problem set 8."),
     item("Problem set 9 solutions","/assets/mit-linear-algebra/58e62cc93e3e8b6cb52e72fa5830fc4e_MIT18_06S10_pset9_s10_soln.pdf","Worked solutions for problem set 9."),
     item("Problem set 10 solutions","/assets/mit-linear-algebra/e6ea5d4104066f874afe1c34e06b8268_MIT18_06S10_pset10_s10_sol.pdf","Worked solutions for the final problem set."),
-    item("Exam 1 paper","/assets/mit-linear-algebra/e9bbec7a9a25a87715e8edd75e21d7b9_MIT18_06S10_exam1_s10.pdf","The first MIT linear algebra exam."),
-    item("Exam 1 solutions","/assets/mit-linear-algebra/b7efef974f7a2c8b5c925f5ea8fc9152_MIT18_06S10_exam1_s10_sol.pdf","Worked solutions for exam 1."),
-    item("Exam 2 paper","/assets/mit-linear-algebra/892238e7e16a658abd5813bea8399170_MIT18_06S10_exam2_s10.pdf","The second MIT linear algebra exam."),
-    item("Exam 2 solutions","/assets/mit-linear-algebra/d669bf89c103559d51427d0916c5db61_MIT18_06S10_exam2_s10_soln.pdf","Worked solutions for exam 2."),
-    item("Exam 3 paper","/assets/mit-linear-algebra/c72789c2ac2ccaf5568a024c662882d2_MIT18_06S10_exam3_s10.pdf","The third MIT linear algebra exam."),
-    item("Exam 3 solutions","/assets/mit-linear-algebra/edf08929f3b2b435c7d8ca85e8d5118d_MIT18_06S10_exam3_s10_soln.pdf","Worked solutions for exam 3."),
-    item("Final exam","/assets/mit-linear-algebra/b799045edd80df18879088bcf872b214_MIT18_06S10_Final_Exam.pdf","Final exam paper from the MIT linear algebra course."),
-    item("MIT 18.06 Final exam: answers","/assets/mit-linear-algebra/45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers.pdf","Answer key to the final exam.")
+    item("Exam 1: Questions","/assets/mit-linear-algebra/e9bbec7a9a25a87715e8edd75e21d7b9_MIT18_06S10_exam1_s10.pdf","MIT 18.06 exam 1 question paper."),
+    item("Exam 1: Solutions","/assets/mit-linear-algebra/b7efef974f7a2c8b5c925f5ea8fc9152_MIT18_06S10_exam1_s10_sol.pdf","Worked solutions for MIT 18.06 exam 1."),
+    item("Exam 2: Questions","/assets/mit-linear-algebra/892238e7e16a658abd5813bea8399170_MIT18_06S10_exam2_s10.pdf","MIT 18.06 exam 2 question paper."),
+    item("Exam 2: Solutions","/assets/mit-linear-algebra/d669bf89c103559d51427d0916c5db61_MIT18_06S10_exam2_s10_soln.pdf","Worked solutions for MIT 18.06 exam 2."),
+    item("Exam 3: Questions","/assets/mit-linear-algebra/c72789c2ac2ccaf5568a024c662882d2_MIT18_06S10_exam3_s10.pdf","MIT 18.06 exam 3 question paper."),
+    item("Exam 3: Solutions","/assets/mit-linear-algebra/edf08929f3b2b435c7d8ca85e8d5118d_MIT18_06S10_exam3_s10_soln.pdf","Worked solutions for MIT 18.06 exam 3."),
+    item("Final exam: Questions","/assets/mit-linear-algebra/b799045edd80df18879088bcf872b214_MIT18_06S10_Final_Exam.pdf","MIT 18.06 final exam question paper."),
+    item("Final exam: Solutions","/assets/mit-linear-algebra/45790724487e46dcc02f55d0fc092ab7_MIT18_06S10_Final_Answers.pdf","Answer key to the MIT 18.06 final exam.")
   ];
   const topics=[
     {
@@ -53,7 +54,8 @@
     },
     {
       title:"Algebra",
-      start:[item("Khan Academy: Algebra","https://www.khanacademy.org/math/algebra","Learn equations, expressions and graphs."),item("Paul's Online Notes: Algebra","https://tutorial.math.lamar.edu/Classes/Alg/Alg.aspx","Use the free notes and worked algebra examples.")],
+      start:[item("Khan Academy: Algebra","https://www.khanacademy.org/math/algebra","Free lessons and guided practice for expressions, equations and graphs."),item("Paul's Online Notes: Algebra","https://tutorial.math.lamar.edu/Classes/Alg/Alg.aspx","Free algebra notes with explanations and worked examples."),item("OpenStax Elementary Algebra 2e · Full textbook PDF · CC BY-NC-SA 4.0","https://openstax.org/details/books/elementary-algebra-2e","Open the free full 1,340-page PDF or read online on OpenStax. By Lynn Marecek, MaryAnne Anthony-Smith and Andrea Honeycutt Mathis."),item("MIT OpenCourseWare · License and attribution","https://ocw.mit.edu/pages/privacy-and-terms-of-use/","MIT 18.06 Spring 2010 · CC BY-NC-SA 4.0. Original MIT course materials are shown for study; this Math Master page is not affiliated with or endorsed by MIT.")],
+      notes:mitLinearAlgebraPack,
       videos:[channel("The Organic Chemistry Tutor","https://www.youtube.com/@TheOrganicChemistryTutor","algebra"),channel("Professor Leonard","https://www.youtube.com/@ProfessorLeonard","algebra"),channel("PatrickJMT","https://www.youtube.com/@patrickjmt","algebra")],
       practice:"Practise algebra questions with step-by-step hints."
     },
@@ -85,7 +87,7 @@
     },
     {
       title:"Calculus",
-      start:[item("Khan Academy: Calculus 1","https://www.khanacademy.org/math/calculus-1","Learn limits, derivatives and integrals."),item("MIT OpenCourseWare: Single Variable Calculus","https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/","Free university lectures, notes and problem sets.")],
+      start:[item("Khan Academy: Calculus 1","https://www.khanacademy.org/math/calculus-1","Free lessons and guided practice for limits, derivatives and integrals."),item("MIT OpenCourseWare · 18.01SC Single Variable Calculus","https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/","Free MIT lectures, notes, problem sets and exams · Fall 2010.")],
       videos:[channel("Professor Leonard","https://www.youtube.com/@ProfessorLeonard","calculus"),channel("3Blue1Brown","https://www.youtube.com/@3blue1brown","calculus"),channel("PatrickJMT","https://www.youtube.com/@patrickjmt","calculus")],
       practice:"Practise limits, derivatives and integrals.",
       notes:[item("Paul's Online Notes: Calculus I","https://tutorial.math.lamar.edu/Classes/CalcI/CalcI.aspx","Read concise notes with worked calculus examples.")],
@@ -180,12 +182,12 @@
     },
     {
       title:"Linear Algebra",
-      start:[item("Gilbert Strang: ZoomNotes for Linear Algebra (80-page summary)","/assets/mit-linear-algebra/4d876a9159e32543eb0d73b4d4382f4c_MIT18_06S10ZoomNotes.pdf","An 80-page summary of Gilbert Strang's MIT 18.06 linear algebra notes."),item("Khan Academy: Linear Algebra","https://www.khanacademy.org/math/linear-algebra","Learn vectors, matrices and linear systems."),item("MIT OpenCourseWare: Linear Algebra","https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/","Free university lectures, notes and problem sets.")],
+      start:[item("Khan Academy: Linear Algebra","https://www.khanacademy.org/math/linear-algebra","Learn vectors, matrices and linear systems."),item("MIT OpenCourseWare: Linear Algebra","https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/","Free university lectures, notes and problem sets."),item("MIT OpenCourseWare · License and attribution","https://ocw.mit.edu/pages/privacy-and-terms-of-use/","MIT 18.06 Spring 2010 · CC BY-NC-SA 4.0. Original MIT course materials are shown for study; this Math Master page is not affiliated with or endorsed by MIT.")],
       videos:[channel("3Blue1Brown","https://www.youtube.com/@3blue1brown","linear algebra"),channel("Professor Leonard","https://www.youtube.com/@ProfessorLeonard","linear algebra"),channel("PatrickJMT","https://www.youtube.com/@patrickjmt","linear algebra")],
       practice:"Practise matrix operations, vector spaces and linear systems.",
-      notes:mitLinearAlgebraPack.concat([
+      notes:[
         item("Immersive Math resource search",googleSearch("site:immersivemath.com linear algebra matrices"),"Search for free interactive maths lessons; the direct site did not respond to the link check.")
-      ]),
+      ],
       courses:[]
     },
     {

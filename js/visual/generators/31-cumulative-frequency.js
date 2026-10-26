@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "cumulative-frequency", title: "Cumulative frequency", area: "Graphs", skill: "Median and IQR from cumulative frequency", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("cumulative-frequency", rng) });

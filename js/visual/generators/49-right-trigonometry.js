@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "right-trigonometry", title: "Right-triangle trigonometry", area: "Geometry", skill: "SOH CAH TOA in degree mode", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("right-trigonometry", rng) });

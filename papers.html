@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1,interactive-widget=resizes-content">
+<meta name="description" content="Build guided or timed, printable maths practice papers across GCSE and university-level topics.">
+<title>Practice Papers | Math Master</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/gcse.css">
+<link rel="stylesheet" href="css/papers.css">
+<link rel="stylesheet" href="css/visual-map.css">
+<link rel="stylesheet" href="css/ai.css">
+</head>
+<body class="papers-page">
+<a class="skip-link" href="#papers-main">Skip to practice papers</a>
+<nav class="site-menu" aria-label="Main menu">
+    <a href="index.html">Math Master</a>
+    <a href="courses.html">Courses</a>
+    <a href="gcse.html">GCSE Topics</a>
+    <a href="rooms.html">Rooms</a>
+    <a href="visual.html">Visual Lab</a>
+    <a href="questions.html">Question Bank</a>
+    <details class="site-menu-more" open>
+      <summary>More study tools</summary>
+      <div class="site-menu-submenu">
+    <a href="gcse-formulas.html">Formulas</a>
+    <a href="gcse-exam-words.html">Exam Words</a>
+    <a href="gcse-mock.html">Mock Paper</a>
+    <a href="papers.html" aria-current="page">Practice Papers</a>
+    <a href="reference.html">Reference</a>
+      </div>
+    </details>
+  </nav>
+<header class="hero papers-hero">
+  <div class="hero-shell">
+    <div class="hero-copy">
+      <span class="eyebrow">Build a paper · practise · review</span>
+      <h1>Practice Papers</h1>
+      <p>Build a practice paper for GCSE maths or any of 25 maths-to-machine-learning topics. Practise with tutor guidance or set a timer.</p>
+      <p class="papers-note">These are original Math Master practice questions, not official AQA papers. Use the official link for real past papers and mark schemes.</p>
+      <div class="hero-actions">
+        <a class="papers-official-link" href="https://www.aqa.org.uk/find-past-papers-and-mark-schemes" target="_blank" rel="noopener noreferrer">AQA past papers ↗</a>
+        <a class="papers-official-link" href="https://qualifications.pearson.com/en/support/support-topics/exams/past-papers.html" target="_blank" rel="noopener noreferrer">Pearson Edexcel past papers ↗</a>
+        <a class="papers-official-link" href="https://www.ocr.org.uk/qualifications/past-paper-finder/" target="_blank" rel="noopener noreferrer">OCR past papers ↗</a>
+        <a class="secondary-link" href="gcse-mock.html">Open the existing GCSE mock</a>
+      </div>
+    </div>
+  </div>
+</header>
+<main id="papers-main">
+  <p id="paper-load-status" class="paper-status" role="status">Loading the GCSE and maths lesson question banks…</p>
+  <section class="paper-builder" aria-labelledby="builder-heading">
+    <div class="paper-builder-heading">
+      <div><span class="eyebrow dark">Choose your practice</span><h2 id="builder-heading">Build a paper</h2></div>
+      <button id="paper-print" class="paper-secondary" type="button" aria-label="Print or save the paper as a PDF" disabled>Print / save PDF</button>
+    </div>
+    <div class="paper-controls">
+      <label>Subject
+        <select id="paper-subject" aria-label="Choose GCSE or maths and machine learning" disabled>
+          <option value="gcse">GCSE maths · 91 topics</option>
+          <option value="ml">Maths and machine learning · 25 topics</option>
+        </select>
+      </label>
+      <label><span id="paper-area-label">Area</span>
+        <select id="paper-area" aria-label="Filter topics by area" disabled><option value="all">All areas</option></select>
+      </label>
+      <label id="paper-tier-wrap">GCSE tier
+        <select id="paper-tier" aria-label="Filter GCSE questions by tier" disabled>
+          <option value="all">All tiers</option>
+          <option value="foundation">Foundation</option>
+          <option value="higher">Higher</option>
+        </select>
+      </label>
+      <label>Topic
+        <select id="paper-topic" aria-label="Choose a topic or a mixed paper" disabled><option value="all">Mixed paper</option></select>
+      </label>
+      <label>Difficulty
+        <select id="paper-level" aria-label="Choose question difficulty" disabled>
+          <option value="all">Mixed difficulty</option>
+          <option value="easy">Foundation / easier</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Higher / challenge</option>
+        </select>
+      </label>
+      <label>Question count
+        <select id="paper-count" aria-label="Choose the number of questions" disabled>
+          <option value="10">10 questions</option>
+          <option value="20">20 questions</option>
+          <option value="25" selected>25 questions</option>
+          <option value="30">30 questions</option>
+        </select>
+      </label>
+      <fieldset class="paper-mode-choice" id="paper-mode-choice" disabled>
+        <legend>Choose how to practise</legend>
+        <label><input type="radio" name="paper-mode" value="untimed" checked disabled> Untimed practice <small>Tutor available; save your work automatically.</small></label>
+        <label><input type="radio" name="paper-mode" value="timed" disabled> Timed paper <small>Tutor unavailable until you submit; timer and answers survive refresh.</small></label>
+      </fieldset>
+      <label id="paper-duration-wrap" hidden>Time limit
+        <select id="paper-duration" aria-label="Choose the paper time limit" disabled>
+          <option value="30">30 minutes</option>
+          <option value="45">45 minutes</option>
+          <option value="60">60 minutes</option>
+          <option value="90">90 minutes</option>
+        </select>
+      </label>
+      <button id="paper-start" class="paper-primary" type="button" disabled>Start paper</button>
+    </div>
+    <p class="paper-help">Untimed practice lets you ask the tutor for guidance. Timed papers turn tutor help off until submission. Both modes autosave your answers on this device. Mixed maths-to-ML papers sample across all 25 subjects; GCSE papers use the 91 topic banks.</p>
+    <div id="paper-message" class="paper-message" role="status" aria-live="polite"></div>
+  </section>
+  <section class="paper-resources" aria-labelledby="paper-resources-heading">
+    <span class="eyebrow dark">Go deeper with open course materials</span>
+    <h2 id="paper-resources-heading">University practice and study resources</h2>
+    <p class="paper-help">These links open the original providers’ pages. Math Master writes its own practice questions and does not copy these papers into its AI tutor.</p>
+    <div class="paper-resource-grid">
+      <a href="https://ocw.mit.edu/courses/18-01-single-variable-calculus-fall-2006/pages/exams/" target="_blank" rel="noopener noreferrer"><strong>MIT · Single-variable calculus exams</strong><span>Past exams and practice exams with solutions.</span></a>
+      <a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/pages/exams/" target="_blank" rel="noopener noreferrer"><strong>MIT · Linear algebra exams</strong><span>University-level practice and solutions.</span></a>
+      <a href="https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/resources/problem-sets/" target="_blank" rel="noopener noreferrer"><strong>MIT · Multivariable calculus</strong><span>Problem sets for vectors, derivatives and integrals.</span></a>
+      <a href="https://openstax.org/details/books/college-algebra" target="_blank" rel="noopener noreferrer"><strong>OpenStax · College Algebra</strong><span>Free course text and worked examples.</span></a>
+      <a href="https://nrich.maths.org/articles/problem-solving-classroom" target="_blank" rel="noopener noreferrer"><strong>NRICH · Problem solving</strong><span>Ideas for exploring a problem and explaining your reasoning.</span></a>
+      <a href="https://www.aqa.org.uk/find-past-papers-and-mark-schemes" target="_blank" rel="noopener noreferrer"><strong>AQA · Official past papers</strong><span>Find GCSE Mathematics papers and mark schemes.</span></a>
+      <a href="https://qualifications.pearson.com/en/support/support-topics/exams/past-papers.html" target="_blank" rel="noopener noreferrer"><strong>Pearson Edexcel · Official past papers</strong><span>Find GCSE Mathematics papers and mark schemes.</span></a>
+      <a href="https://www.ocr.org.uk/qualifications/past-paper-finder/" target="_blank" rel="noopener noreferrer"><strong>OCR · Official past papers</strong><span>Find GCSE Mathematics papers and mark schemes.</span></a>
+    </div>
+  </section>
+  <section id="paper-load-fallback" class="paper-load-fallback" role="alert" hidden>
+    <h2>Question banks did not load</h2>
+    <p>You can still practise from the topic pages or use the official exam-board paper links above. Check your connection and reload to try again.</p>
+    <a href="questions.html">Open the GCSE Question Bank</a>
+  </section>
+  <section id="paper-workspace" class="paper-workspace" aria-live="polite"></section>
+  <section class="paper-history" aria-labelledby="paper-history-heading">
+    <h2 id="paper-history-heading">Recent self-marked results</h2>
+    <div id="paper-history"><p class="paper-help">Your completed papers will appear here on this device.</p></div>
+  </section>
+</main>
+<script defer src="js/visual/map.js"></script>
+<script defer src="js/ai/config.js"></script>
+<script defer src="js/ai/tutor.js"></script>
+<script defer src="js/papers/engine.js"></script>
+<script defer src="/js/shared-header.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "pie-chart", title: "Pie chart angles", area: "Graphs", skill: "Pie charts, angles and fractions", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("pie-chart", rng) });

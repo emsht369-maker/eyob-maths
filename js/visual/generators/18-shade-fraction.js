@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "shade-fraction", title: "Shade a fraction", area: "Fractions", skill: "Shade a fraction model", tier: "F", level: "Easy", make: rng => window.VisualFactory.makeVisualQuestion("shade-fraction", rng) });

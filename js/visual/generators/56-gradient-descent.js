@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "gradient-descent", title: "Gradient descent on a parabola", area: "Graphs", skill: "Gradient descent update steps", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("gradient-descent", rng) });

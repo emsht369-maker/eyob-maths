@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "equation-points", title: "Match points to a rule", area: "Algebra", skill: "Linear rules from points", tier: "F", level: "Easy", make: rng => window.VisualFactory.makeVisualQuestion("equation-points", rng) });

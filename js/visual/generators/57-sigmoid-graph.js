@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "sigmoid-graph", title: "Sigmoid probability", area: "Graphs", skill: "Read a sigmoid probability", tier: "H", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("sigmoid-graph", rng) });

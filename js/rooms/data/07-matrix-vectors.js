@@ -1,0 +1,16 @@
+(function(root){
+  "use strict";
+  const q=(text,answer,hint,explain)=>({q:text,answer:String(answer),accept:[],type:"number",tolerance:0,hint:hint,explain:explain,points:10});
+  (root.ROOMS=root.ROOMS||[]).push({
+    id:"ml-matrix-vectors",title:"Matrices and Vectors",path:"ml",order:2,next:"ml-linear-regression",area:"Linear algebra",difficulty:"Beginner",minutes:20,points:160,icon:"▦",
+    blurb:"Use a small matrix to transform a vector and calculate what each output means.",
+    objectives:["You will read rows and columns in a 2 by 2 matrix.","You will multiply a matrix by a vector row by row.","You will recognize identity, scale and area changes."],
+    tasks:[
+      {title:"Read a matrix",story:"A matrix stores a rule as rows of numbers. Each row makes one output coordinate.",learn:"For [[a,b],[c,d]] times (x,y), the new coordinates are (ax+by, cx+dy). Pair a row with the whole vector.",example:"[[2,1],[0,3]] × (4,2) = (2×4+1×2, 0×4+3×2) = (10,6).",questions:[q("Find the first coordinate of [[2, 1], [0, 3]] × (4, 2).",10,"Multiply the first row by the vector.",["Use the first row (2, 1).","2 × 4 + 1 × 2 = 8 + 2.","The first coordinate is 10."])]},
+      {title:"Find the second coordinate",story:"The second row creates the second output coordinate.",learn:"Keep the same vector order and use the second matrix row.",example:"The second coordinate above is 0×4 + 3×2 = 6.",questions:[q("Find the second coordinate of [[2, 1], [0, 3]] × (4, 2).",6,"Use the second row (0, 3).",["Multiply matching positions: 0 × 4 and 3 × 2.","The products are 0 and 6.","Add them: 0 + 6 = 6."])]},
+      {title:"Spot the identity matrix",story:"Sometimes a transformation should leave every vector unchanged.",learn:"The identity matrix [[1,0],[0,1]] keeps both coordinates the same.",example:"[[1,0],[0,1]] × (5,−2) = (5,−2).",questions:[q("What is the first coordinate after [[1, 0], [0, 1]] transforms (7, 3)?",7,"The identity matrix leaves the vector unchanged.",["The first row is (1, 0).","1 × 7 + 0 × 3 = 7.","The first coordinate stays 7."])]},
+      {title:"Scale a vector",story:"A scale transformation stretches or shrinks every coordinate by the same factor.",learn:"A scale matrix [[k,0],[0,k]] turns (x,y) into (kx,ky).",example:"A scale factor of 3 sends (2,4) to (6,12).",questions:[q("A scale factor of 4 transforms (3, 2). Find the first coordinate.",12,"Multiply the first coordinate by 4.",["The scale rule multiplies every coordinate by 4.","The first coordinate is 3 × 4.","The answer is 12."])]},
+      {title:"Area scale and determinant",story:"A matrix can change the area of a shape as well as move its points.",learn:"For [[a,b],[c,d]], the determinant is ad−bc. Its absolute value is the area scale factor.",example:"det([[2,1],[1,3]]) = 2×3 − 1×1 = 5.",questions:[q("Find the determinant of [[3, 1], [1, 2]].",5,"Multiply the main diagonal, then subtract the other diagonal.",["Main diagonal: 3 × 2 = 6.","Other diagonal: 1 × 1 = 1.","6 − 1 = 5."])]}
+    ],examPool:root.ROOMS_DATA.makePool("matrix-vectors"),links:[["Matrix transformations","https://www.khanacademy.org/search?page_search_query=matrix%20transformations%20vectors"]]
+  });
+})(typeof window!=="undefined"?window:globalThis);

@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "vertical-angles", title: "Opposite angles", area: "Geometry", skill: "Vertically opposite angles", tier: "F", level: "Easy", make: rng => window.VisualFactory.makeVisualQuestion("vertical-angles", rng) });

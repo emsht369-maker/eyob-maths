@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "dot-product-angle", title: "Vector dot product angle", area: "Geometry", skill: "Dot product and angle between vectors", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("dot-product-angle", rng) });

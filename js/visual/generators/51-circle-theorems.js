@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "circle-theorems", title: "Circle theorems", area: "Geometry", skill: "Circle theorem angle problems", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("circle-theorems", rng) });

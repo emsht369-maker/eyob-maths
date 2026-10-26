@@ -1,0 +1,508 @@
+ "+escapeHTML(item.grade)+"</span>":"");
+    const stateText=complete?"Completed":inProgress?"In progress · "+item.progress+"%":locked?"Locked · Preview":"Not started";
+    const marker=complete?"<span class=\"room-card-check\" aria-hidden=\"true\">✓</span>":locked?"<span class=\"room-card-lock\" aria-hidden=\"true\">🔒</span>":"";
+    const href=item.kind==="guided"?"#room="+encodeURIComponent(item.id):item.href;
+    const attributes=item.kind==="guided"?" data-room-link=\""+escapeHTML(item.id)+"\"":"";
+    const classes="room-card"+(locked?" is-locked":"")+(complete?" is-complete":"")+(inProgress?" is-in-progress":"")+(item.kind==="guided"?" is-guided":"");
+    const progress=itemProgress(item);
+    const tasks=room?room.tasks.length:lessonQuestionCount(item);
+    const minutes=room?room.minutes:Math.max(10,tasks*2);
+    const points=room?room.points:tasks*10;
+    const action=locked?"Preview":complete?"Review":inProgress?"Continue":"Start room";
+    const roadmapNode=item.roadmapIndex==null?"":String(item.roadmapIndex+1).padStart(2,"0");
+    return "<a role=\"listitem\" class=\""+classes+"\" href=\""+escapeHTML(href)+"\""+attributes+" aria-label=\""+(locked?"Preview locked ":"Open ")+escapeHTML(item.title)+"\"><span class=\"roadmap-node\" aria-hidden=\"true\">"+(complete?"✓":locked?"🔒":roadmapNode)+"</span><span class=\"room-card-top\"><span class=\"room-icon\" aria-hidden=\"true\">"+escapeHTML(item.icon||"📘")+"</span>"+marker+"</span><span class=\"room-card-title\">"+escapeHTML(item.title)+"</span><span class=\"room-card-description\">"+escapeHTML(description)+"</span><span class=\"room-card-badges\">"+badges+"</span><span class=\"room-card-meta\">◷ "+minutes+" min · ✦ "+points+" pts · "+tasks+" tasks</span><span class=\"room-card-footer\"><span>"+stateText+"</span><span class=\"room-card-progress\" role=\"progressbar\" aria-label=\""+escapeHTML(item.title)+" progress\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\""+progress+"\"><span style=\"width:"+progress+"%\"></span></span><span class=\"room-card-action\">"+action+" <span aria-hidden=\"true\">→</span></span></span></a>";
+  }
+
+  function route(){
+    if(!dom["room-view"]||!state)return;
+    if(timerId){clearInterval(timerId);timerId=null;}
+    const match=window.location.hash.match(/(?:^#|&)room=([^&]+)/);
+    if(!match){
+      document.body.classList.remove("rooms-room-open");
+      dom["room-view"].hidden=true;
+      dom["room-view"].innerHTML="";
+      return;
+    }
+    let id="";
+    try{id=decodeURIComponent(match[1]);}catch(error){id=match[1];}
+    const routedRoom=rooms.find(item=>item.id===id);
+    if(routedRoom&&selectedPath!==routedRoom.path){
+      selectedPath=routedRoom.path;
+      history.replaceState({},"",window.location.pathname+"?path="+selectedPath+window.location.hash);
+      updatePathView();
+      renderSummary();
+      renderRoadmaps();
+    }
+    const access=roomAccess(rooms,state,id);
+    const room=access.room;
+    document.body.classList.add("rooms-room-open");
+    if(!room){
+      showRoomNotice("Room not found","Choose a room from one of the paths above.");
+      return;
+    }
+    const roomState=roomRecord(state,room.id);
+    if(!roomState.lastOpened||Date.now()-roomState.lastOpened>60000){roomState.lastOpened=Date.now();saveState(localStorage,state);}
+    renderRoom(room,!access.allowed);
+  }
+
+  function showRoomNotice(title,message){
+    dom["room-view"].hidden=false;
+    const pathLink="/rooms.html?path="+encodeURIComponent(selectedPath||"ml")+"#rooms-list";
+    dom["room-view"].innerHTML="<section class=\"room-locked-page\"><h1>"+escapeHTML(title)+"</h1><p>"+escapeHTML(message)+"</p><a class=\"room-primary\" href=\""+pathLink+"\">Back to the "+(selectedPath==="gcse"?"GCSE":"ML")+" path</a></section>";
+    dom["room-view"].scrollIntoView({behavior:"smooth",block:"start"});
+  }
+
+  function renderRoom(room,previewLocked){
+    const record=roomRecord(state,room.id);
+    renderSummary();
+    renderRoadmaps();
+    const previous=roomPrevious(rooms,room);
+    const next=roomNext(rooms,room);
+    const objectives=room.objectives.map(item=>"<li>"+escapeHTML(item)+"</li>").join("");
+    const badges=roomComplete(room,record)?"<span class=\"room-pill\">🏅 Room complete</span>":"";
+    const visualPractice=root.VisualMap?root.VisualMap.render({id:room.id,title:room.title,area:room.area,description:room.blurb,topics:room.objectives.join(" ")}):"";
+    const allDone=tasksComplete(room,record);
+    const requestedStep=window.location.hash.match(/(?:^#|&)step=(\d+)/);
+    const firstOpenStep=room.tasks.findIndex((task,index)=>!taskDone(room,record,index));
+    const fallbackStep=firstOpenStep===-1?Math.max(0,room.tasks.length-1):firstOpenStep;
+    const requestedStepIndex=requestedStep?Number(requestedStep[1]):fallbackStep;
+    const activeStep=previewLocked||canOpenTask(room,record,requestedStepIndex)
+      ?Math.min(room.tasks.length-1,Math.max(0,requestedStepIndex))
+      :fallbackStep;
+    const taskHTML=room.tasks.map(function(task,index){
+      const done=taskDone(room,record,index);
+      const open=previewLocked||canOpenTask(room,record,index);
+      const title=done?"✓ Task "+(index+1):open?"Task "+(index+1):"🔒 Task "+(index+1);
+      return "<details class=\"room-task-accordion"+(done?" is-complete":"")+(index===activeStep?" is-current":"")+(open?"":" is-locked")+"\""+(index===activeStep?" open":"")+" data-task-accordion=\""+index+"\"><summary><span class=\"task-accordion-number\">"+title+"</span><strong>"+escapeHTML(task.title)+"</strong><span class=\"task-accordion-state\">"+(done?"Completed":open?"Open":"Locked")+"</span></summary>"+renderTask(room,record,task,index,previewLocked)+"</details>";
+    }).join("");
+    const taskNavigation=room.tasks.map(function(task,index){
+      const done=taskDone(room,record,index);
+      const open=previewLocked||canOpenTask(room,record,index);
+      const current=index===activeStep;
+      const status=done?"Complete":open?"Ready":"Locked";
+      const link="<a href=\"#room="+encodeURIComponent(room.id)+"&step="+index+"\""+(current?" aria-current=\"step\"":"")+"><span class=\"room-step-number\">"+String(index+1).padStart(2,"0")+"</span><span class=\"room-step-label\"><strong>"+escapeHTML(task.title)+"</strong><small>"+(done?"Complete":open?"Open":"Locked")+"</small></span></a>";
+      return "<li class=\"room-step-item"+(done?" is-complete":"")+(current?" is-current":"")+(!open?" is-locked":"")+"\">"+(open?link:"<span class=\"room-step-locked\" aria-disabled=\"true\"><span class=\"room-step-number\">"+String(index+1).padStart(2,"0")+"</span><span class=\"room-step-label\"><strong>"+escapeHTML(task.title)+"</strong><small>🔒 "+status+"</small></span></span>")+"</li>";
+    }).join("");
+    const examStepStatus=record.lastResult
+      ?(record.lastResult.passed?"Complete":"Review")
+      :record.activeExam?"In progress":allDone?"Ready":"Locked";
+    const examStepClass=record.lastResult&&record.lastResult.passed?" is-complete":"";
+    const examNavigation="<li class=\"room-step-item room-exam-step"+examStepClass+"\"><span class=\"room-step-number\">★</span><span class=\"room-step-label\"><strong>Hard Exam</strong><small>"+(allDone?"Open · ":"🔒 ")+examStepStatus+"</small></span></li>";
+    const examHTML=previewLocked?"<section class=\"room-exam\"><h2>Hard Exam 🔒</h2><p class=\"room-muted\">Preview only. Pass the previous room to unlock this room's tasks and exam.</p></section>":
+      record.activeExam?renderExam(room,record):
+      record.lastResult?renderResult(room,record,record.lastResult,next):
+      allDone?renderExamReady(room):"";
+    const resourceQuery=encodeURIComponent(room.title);
+    const links=(room.links||[]).map(link=>[link[0],link[1]]).concat([
+      ["Explore "+room.title+" with Wolfram|Alpha","https://www.wolframalpha.com/input?i="+encodeURIComponent(room.title+" mathematics")],
+      ["YouTube search","https://www.youtube.com/results?search_query="+resourceQuery],
+      ["Khan Academy search","https://www.khanacademy.org/search?page_search_query="+resourceQuery],
+      ["Corbettmaths search","https://corbettmaths.com/?s="+resourceQuery]
+    ]);
+    dom["room-view"].hidden=false;
+    dom["room-view"].innerHTML=
+      (previewLocked?"<p class=\"room-notice\" role=\"status\">Preview only: finish and pass "+escapeHTML(previous?previous.title:"the previous room")+" to unlock these tasks and the exam. You can read the lesson and questions now.</p>":"")+
+      "<a class=\"room-back-link\" href=\"#rooms-list\">← All learning rooms</a><section class=\"room-panel\"><div class=\"room-title-row\"><div><span class=\"eyebrow dark\">"+escapeHTML(room.path==="gcse"?"GCSE room":"Machine learning room")+" · Room "+room.order+"</span><h1><span class=\"room-page-icon\" aria-hidden=\"true\">"+escapeHTML(room.icon)+"</span>"+escapeHTML(room.title)+"</h1></div><div class=\"room-badges\"><span class=\"room-pill\">Guided</span><span class=\"room-pill\">"+escapeHTML(room.difficulty)+"</span><span class=\"room-pill\">"+room.minutes+" minutes</span><span class=\"room-pill\">"+room.points+" points</span>"+badges+"</div></div>"+
+      "<p class=\"room-earned-points\" role=\"status\">⭐ "+state.points+" points earned</p>"+
+      "<p>"+escapeHTML(room.blurb)+"</p><div data-room-ai-guide></div><details class=\"room-goals\"><summary>What you’ll learn</summary><ul class=\"room-objectives\">"+objectives+"</ul></details>"+
+      "<div class=\"room-progress\" role=\"progressbar\" aria-label=\"Room task progress\" aria-valuemin=\"0\" aria-valuemax=\""+room.tasks.length+"\" aria-valuenow=\""+completedTaskCount(room,record)+"\"><span style=\"width:"+progressPercent(room)+"%\"></span></div>"+
+      "<p class=\"room-muted\">"+completedTaskCount(room,record)+" of "+room.tasks.length+" steps complete · "+(record.attempts?"Best exam: "+record.bestScore+"/"+EXAM_SIZE:"Final check at the end")+"</p>"+
+      "<details class=\"room-options\"><summary>Room options</summary><button type=\"button\" class=\"room-danger\" data-action=\"reset-room\" aria-label=\"Reset "+escapeHTML(room.title)+" and later rooms on this path\">Reset this room and later rooms</button></details></section>"+
+      (record.lastTaskAttempt?"<p class=\"room-step-feedback "+(record.lastTaskAttempt.correct?"is-correct":"is-wrong")+"\" role=\"status\">"+(record.lastTaskAttempt.correct?"✅ Correct! "+(record.lastTaskAttempt.points?"+"+record.lastTaskAttempt.points+" points earned.":"Points already earned for this question.")+" Your next step is unlocked.":"❌ Not correct yet. No points earned. This step stays open until you get it right.")+"</p>":"") +
+      "<div class=\"room-learning-layout\"><aside class=\"room-sidebar\" aria-label=\"Room progress\"><strong>Room progress</strong><ol>"+taskNavigation+examNavigation+"</ol><p>"+completedTaskCount(room,record)+" of "+room.tasks.length+" tasks complete</p><div class=\"room-sidebar-progress\"><span style=\"width:"+progressPercent(room)+"%\"></span></div></aside><div class=\"room-step-main\"><div class=\"room-task-list\">"+taskHTML+"</div>"+
+      "<nav class=\"room-step-navigation\" aria-label=\"Room step navigation\">"+(activeStep>0?"<a class=\"room-secondary\" href=\"#room="+encodeURIComponent(room.id)+"&step="+(activeStep-1)+"\">← Previous step</a>":"<span></span>")+(activeStep<room.tasks.length-1?(canOpenTask(room,record,activeStep+1)?"<a class=\"room-primary\" href=\"#room="+encodeURIComponent(room.id)+"&step="+(activeStep+1)+"\">Next step →</a>":"<span class=\"room-next-locked\" aria-disabled=\"true\">🔒 Answer this step to continue</span>"):"")+"</nav>"+examHTML+
+      "<details class=\"room-resource-details\"><summary>Optional extra help</summary><section class=\"room-panel\"><p class=\"room-muted\">Use these if you want another explanation or more practice. You can finish the room without opening them.</p>"+(visualPractice?"<div class=\"room-visual-extra\">"+visualPractice+"</div>":"")+"<div class=\"room-links\">"+links.map(link=>"<a href=\""+escapeHTML(link[1])+"\" target=\"_blank\" rel=\"noopener noreferrer\">"+escapeHTML(link[0])+"</a>").join("")+"</div></section></details></div></div>"+
+      "<nav class=\"room-path-navigation\" aria-label=\"Previous and next room\">"+(previous?"<a class=\"room-secondary\" href=\"#room="+encodeURIComponent(previous.id)+"\">← Previous room</a>":"<span></span>")+(next?"<a class=\"room-primary\" href=\"#room="+encodeURIComponent(next.id)+"\">Next room →</a>":"<a class=\"room-secondary\" href=\"/rooms.html?path="+room.path+"\">Back to path</a>")+"</nav>";
+    if(!previewLocked)window.AITutor?.attach(dom["room-view"].querySelector("[data-room-ai-guide]"),{
+      question:"Explain the main idea of "+room.title+" in this context: "+room.blurb+" Learning goals: "+room.objectives.join(" "),
+      topic:room.title,
+      level:room.tier||room.difficulty,
+      compact:true,
+      isBlocked:()=>Boolean(roomRecord(state,room.id).activeExam)
+    });
+    if(!previewLocked&&!record.activeExam){
+      dom["room-view"].querySelectorAll(".room-question[data-task-index]").forEach(card=>{
+        const task=room.tasks[Number(card.dataset.taskIndex)];
+        const question=task&&task.questions[Number(card.dataset.questionIndex)];
+        if(!question)return;
+        window.AITutor?.attach(card,{
+          question:question.q,
+          studentAnswer:card.querySelector(".room-answer")?.value||roomRecord(state,room.id).taskResponses?.[`${card.dataset.taskIndex}-${card.dataset.questionIndex}`]||"",
+          topic:room.title,
+          level:room.tier||room.difficulty,
+          responseElement:card.querySelector(".room-answer"),
+          compact:true,
+          roomLocked:false,
+          isBlocked:()=>!roomAccess(rooms,state,room.id).allowed||Boolean(roomRecord(state,room.id).activeExam)
+        });
+      });
+    }
+    if(!previewLocked&&!record.activeExam&&record.lastResult){
+      dom["room-view"].querySelectorAll(".room-review-item").forEach((card,index)=>{
+        const question=record.lastResult.review[index];
+        if(!question)return;
+        window.AITutor?.attach(card,{
+          question:question.q,
+          studentAnswer:question.userAnswer,
+          topic:room.title,
+          level:room.tier||room.difficulty,
+          compact:true,
+          wolframLink:card.querySelector(".wolfram-question-link")?.href,
+          isBlocked:()=>!roomAccess(rooms,state,room.id).allowed||Boolean(roomRecord(state,room.id).activeExam)
+        });
+      });
+    }
+    if(record.activeExam)startTimer(room,record);
+    dom["room-view"].scrollIntoView({behavior:"smooth",block:"start"});
+  }
+
+  function renderTask(room,record,task,index,previewLocked){
+    const open=!previewLocked&&canOpenTask(room,record,index);
+    const done=taskDone(room,record,index);
+    const questionHTML=(task.questions||[]).map(function(question,qIndex){
+      const key=String(index)+"-"+String(qIndex);
+      const isCorrect=record.taskAnswers&&record.taskAnswers[key]===true;
+      const response=record.taskResponses&&record.taskResponses[key]||"";
+      const attempted=taskQuestionAttempted(record,index,qIndex);
+      if(attempted)return "<details class=\"room-question room-question-reviewed mm-question\" data-task-index=\""+index+"\" data-question-index=\""+qIndex+"\"><summary>"+(isCorrect?"✅":"↺")+" Question "+(qIndex+1)+" · "+(isCorrect?"Correct":"Answered; review")+"</summary><p><b>"+escapeHTML(question.q)+"</b></p><p class=\"room-feedback "+(isCorrect?"is-correct":"is-wrong")+"\" role=\"status\">"+(isCorrect?"✓ Correct answer · "+(record.answerRewards&&record.answerRewards["task:"+key]?"Points saved.":"No points for a revealed answer."):"Not yet. Try again; review the worked steps.")+"</p><ol class=\"room-explanation\">"+question.explain.map(step=>"<li>"+escapeHTML(step)+"</li>").join("")+"</ol></details>";
+      if(!open||!canOpenQuestion(room,record,index,qIndex))return "<div class=\"room-question room-question-preview\" aria-disabled=\"true\"><p><b>🔒 Question "+(qIndex+1)+"</b></p><p class=\"room-muted\">"+(previewLocked?"Pass the previous room to unlock this question.":open?"Answer the previous question to unlock this step.":"Finish the previous task to answer this question.")+"</p></div>";
+      return "<article class=\"room-question mm-question\" data-task-index=\""+index+"\" data-question-index=\""+qIndex+"\"><header class=\"mm-question-header\"><b class=\"mm-question-number\">Q"+(qIndex+1)+"</b><p class=\"mm-question-prompt\">"+escapeHTML(question.q)+"</p></header><label for=\"task-answer-"+index+"-"+qIndex+"\">Your answer</label>"+
+        wolframQuestionLink(question.q)+
+        "<input class=\"room-answer\" id=\"task-answer-"+index+"-"+qIndex+"\" data-task-answer=\""+key+"\" type=\"text\" autocomplete=\"off\" value=\""+escapeHTML(response)+"\" aria-label=\"Answer for "+escapeHTML(question.q)+"\">"+
+        "<div class=\"mm-question-actions\"><button type=\"button\" class=\"mm-button mm-button-primary\" data-action=\"check-task\" data-task=\""+index+"\" data-question=\""+qIndex+"\" aria-label=\"Check your answer to "+escapeHTML(question.q)+"\">Check answer</button> "+
+        "<button type=\"button\" class=\"mm-button mm-button-secondary\" data-action=\"toggle-hint\" data-key=\"hint-"+index+"-"+qIndex+"\" aria-label=\"Show or hide the hint for "+escapeHTML(question.q)+"\">Hint</button><button type=\"button\" class=\"mm-button mm-button-ghost\" data-action=\"show-task-answer\" data-key=\"task-answer-reveal-"+index+"-"+qIndex+"\">Show answer</button></div>"+
+        "<p class=\"room-hint\" id=\"hint-"+index+"-"+qIndex+"\" hidden>"+escapeHTML(question.hint)+"</p>"+
+        "<div class=\"room-hint mm-question-final\" id=\"task-answer-reveal-"+index+"-"+qIndex+"\" hidden><strong>Final answer:</strong> "+escapeHTML(question.answer)+"<p class=\"mm-revealed-note\">No points for a revealed answer.</p><ol>"+question.explain.map(step=>"<li>"+escapeHTML(step)+"</li>").join("")+"</ol></div></article>";
+    }).join("");
+    return "<section class=\"room-task"+(open?"":" room-task-preview")+"\" id=\"room-task-"+index+"\" data-task-index=\""+index+"\""+(open?"":" aria-disabled=\"true\"")+"><h3>"+(open?"":"🔒 Preview · ")+"Task "+(index+1)+": "+escapeHTML(task.title)+(done?" ✓":"")+"</h3>"+
+      "<p class=\"room-muted\">"+escapeHTML(task.story)+"</p><p class=\"room-task-learn\">"+escapeHTML(task.learn)+"</p>"+
+      "<div class=\"room-example\"><b>Worked example:</b> "+escapeHTML(task.example)+"</div>"+questionHTML+
+      (done?"<p class=\"room-feedback is-correct\">Task complete. The next task is open.</p>":"")+"</section>";
+  }
+
+  function renderExamReady(room){
+    return "<section class=\"room-exam\"><h2>Hard Exam</h2><p>This exam has "+EXAM_SIZE+" questions: 8 medium, 10 hard and 7 very hard. Pass mark: "+Math.round(PASS_MARK*100)+"%. You can move between questions before finishing. The timer does not stop you.</p>"+
+      "<button type=\"button\" class=\"exam-submit\" data-action=\"start-exam\" aria-label=\"Start the hard exam for "+escapeHTML(room.title)+"\">Start Hard Exam</button></section>";
+  }
+
+  function renderExam(room,record){
+    const exam=record.activeExam;
+    const index=Math.max(0,Math.min(exam.current||0,exam.questions.length-1));
+    const question=exam.questions[index];
+    const submitted=exam.submitted[index]===true;
+    const response=exam.answers[index]||"";
+    const done=exam.submitted.filter(Boolean).length;
+    const elapsed=Date.now()-exam.startedAt;
+    return "<section class=\"room-exam\" aria-label=\"Hard exam\"><h2>Hard Exam</h2><div class=\"exam-meter\"><span>Question "+(index+1)+" of "+EXAM_SIZE+"</span><span>"+done+" submitted</span><span class=\"exam-timer\" data-timer>Time: "+formatTime(elapsed)+"</span></div>"+
+      "<div class=\"exam-track\" role=\"progressbar\" aria-label=\"Questions submitted\" aria-valuemin=\"0\" aria-valuemax=\""+EXAM_SIZE+"\" aria-valuenow=\""+done+"\"><span style=\"width:"+(done/EXAM_SIZE*100)+"%\"></span></div>"+
+      "<div class=\"exam-question\"><h3>"+escapeHTML(question.q)+"</h3><label for=\"exam-answer\">Type your final answer</label><input id=\"exam-answer\" class=\"room-answer\" data-exam-answer=\""+index+"\" type=\"text\" autocomplete=\"off\" value=\""+escapeHTML(response)+"\" "+(submitted?"disabled":"")+" aria-label=\"Answer to exam question "+(index+1)+"\">"+
+      (submitted?"<p class=\"room-feedback "+(exam.correct[index]?"is-correct":"is-wrong")+"\" role=\"status\">"+(exam.correct[index]?"✅ Correct! "+(exam.pointsEarned&&exam.pointsEarned[index]?"+10 points earned.":"Points already earned for this question.")+" Next question unlocked.":"❌ Not correct yet. No points earned. The next question is unlocked; review the answer.")+"</p>":"<button type=\"button\" class=\"room-secondary\" data-action=\"submit-exam-answer\" aria-label=\"Submit answer to question "+(index+1)+" once\">Submit this answer</button>")+"</div>"+
+      "<div class=\"exam-nav\"><button type=\"button\" class=\"room-secondary\" data-action=\"exam-prev\" aria-label=\"Go to previous exam question\" "+(index===0?"disabled":"")+">Previous</button><button type=\"button\" class=\"room-secondary\" data-action=\"exam-next\" aria-label=\"Go to next exam question\" "+(index===EXAM_SIZE-1||!submitted?"disabled":"")+">Next</button></div>"+
+      "<button type=\"button\" class=\"exam-submit\" data-action=\"finish-exam\" aria-label=\"Finish and submit the hard exam\" "+(done<EXAM_SIZE?"disabled":"")+">Finish exam</button></section>";
+  }
+
+  function renderResult(room,record,result,next){
+    const passed=result.passed;
+    const earned=passed?earnedBadges(state,rooms):[];
+    const reward=passed
+      ?"<section class=\"room-completion-reward\" role=\"status\" tabindex=\"-1\"><span>ROOM COMPLETE</span><h2>🏆 "+escapeHTML(room.title)+" completed!</h2><p>You passed the Hard Exam with "+result.score+"/"+EXAM_SIZE+" ("+result.percentage+"%).</p><p class=\"room-completion-reward-points\">+"+(record.pointsAwarded?room.points:0)+" points earned</p><div class=\"room-completion-reward-badges\" aria-label=\"Your badges\">"+earned.map(function(badge){return "<span class=\"room-pill\">🏅 "+escapeHTML(badge)+"</span>";}).join("")+"</div></section>"
+      :"";
+    const review=result.review.map(function(item,index){
+      return "<article class=\"room-review-item\"><h3>Question "+escapeHTML(item.number)+": "+escapeHTML(item.q)+"</h3>"+
+        wolframQuestionLink(item.q)+
+        "<p><b>Your answer:</b> "+(item.userAnswer?escapeHTML(item.userAnswer):"Blank")+"</p><p><b>Correct answer:</b> "+escapeHTML(item.answer)+"</p>"+
+        "<ol>"+item.explain.map(step=>"<li>"+escapeHTML(step)+"</li>").join("")+"</ol></article>";
+    }).join("");
+    const transition=passed&&next?"<p class=\"room-notice\" role=\"status\">Next room unlocked: "+escapeHTML(next.title)+"</p><a class=\"room-primary\" href=\"#room="+encodeURIComponent(next.id)+"\" data-room-link=\""+escapeHTML(next.id)+"\">Go to next room</a>":
+      passed?"<p class=\"room-notice\">You passed the final room on this path.</p>":"<p class=\"room-muted\">Weak spots: review the missed questions below, then try a new set.</p><button type=\"button\" class=\"exam-submit\" data-action=\"retake-exam\" aria-label=\"Retake the hard exam with a new question set\">Retake exam</button>";
+    return "<section class=\"room-result\">"+reward+"<h2>Exam result</h2><p class=\"room-result-score\">"+result.score+"/"+EXAM_SIZE+" · "+result.percentage+"% · "+(passed?"PASS":"NOT YET")+"</p>"+
+      "<p>Time taken: "+escapeHTML(result.time)+" · Attempts: "+record.attempts+" · Best score: "+record.bestScore+"/"+EXAM_SIZE+"</p>"+
+      transition+"<h3>Review missed questions ("+review.length+")</h3>"+(review?"<div class=\"room-review\">"+review+"</div>":"<p class=\"room-feedback is-correct\">No wrong answers. Perfect work.</p>")+"</section>";
+  }
+
+  function showFeedback(element,text,correct){
+    element.textContent=text;
+    element.classList.toggle("is-correct",correct);
+    element.classList.toggle("is-wrong",!correct);
+  }
+
+  function handleRoomInput(event){
+    const input=event.target.closest("[data-task-answer]");
+    if(input){
+      const room=getCurrentRoom();
+      if(!room)return;
+      const record=roomRecord(state,room.id);
+      record.taskResponses=record.taskResponses||{};
+      record.taskResponses[input.dataset.taskAnswer]=input.value;
+      saveState(localStorage,state);
+      return;
+    }
+    const examInput=event.target.closest("[data-exam-answer]");
+    if(examInput){
+      const room=getCurrentRoom();
+      if(!room)return;
+      const exam=roomRecord(state,room.id).activeExam;
+      const index=Number(examInput.dataset.examAnswer);
+      if(exam&&!exam.submitted[index]){
+        exam.answers[index]=examInput.value;
+        saveState(localStorage,state);
+      }
+    }
+  }
+
+  function getCurrentRoom(){
+    const match=window.location.hash.match(/(?:^#|&)room=([^&]+)/);
+    if(!match)return null;
+    let id="";
+    try{id=decodeURIComponent(match[1]);}catch(error){id=match[1];}
+    return rooms.find(room=>room.id===id)||null;
+  }
+
+  function handleRoomClick(event){
+    const actionButton=event.target.closest("[data-action]");
+    if(!actionButton)return;
+    const action=actionButton.dataset.action;
+    const room=getCurrentRoom();
+    if(action==="toggle-hint"){
+      const hint=document.getElementById(actionButton.dataset.key);
+      if(hint)hint.hidden=!hint.hidden;
+      return;
+    }
+    if(action==="show-task-answer"){
+      const answer=document.getElementById(actionButton.dataset.key);
+      if(answer){answer.hidden=!answer.hidden;actionButton.textContent=answer.hidden?"Show answer":"Hide answer";if(!answer.hidden)answer.closest(".room-question").dataset.answerRevealed="true";}
+      return;
+    }
+    if(!room)return;
+    const record=roomRecord(state,room.id);
+    if(action==="check-task"){
+      checkTaskAnswer(room,record,Number(actionButton.dataset.task),Number(actionButton.dataset.question));
+    }else if(action==="reset-room"){
+      resetRoom(room);
+    }else if(action==="start-exam"||action==="retake-exam"){
+      startExam(room,record);
+    }else if(action==="submit-exam-answer"){
+      submitExamAnswer(room,record);
+    }else if(action==="exam-prev"||action==="exam-next"){
+      moveExam(room,record,action==="exam-prev"?-1:1);
+    }else if(action==="finish-exam"){
+      finishExam(room,record);
+    }
+  }
+
+  function checkTaskAnswer(room,record,taskIndex,questionIndex){
+    if(!canOpenQuestion(room,record,taskIndex,questionIndex))return;
+    const question=room.tasks[taskIndex].questions[questionIndex];
+    const key=String(taskIndex)+"-"+String(questionIndex);
+    const input=dom["room-view"].querySelector("[data-task-answer=\""+key+"\"]");
+    if(!input.value.trim()){
+      input.focus();
+      return;
+    }
+    const correct=checkAnswer(question,input.value);
+    record.taskAttempts[key]=true;
+    record.taskResponses[key]=input.value;
+    let pointsEarned=0;
+    if(correct){
+      record.taskAnswers[key]=true;
+      updateStreak(state,new Date());
+      pointsEarned=input.closest(".room-question")?.dataset.answerRevealed==="true"?0:awardCorrectAnswer(state,record,"task:"+key);
+    }
+    if(room.tasks[taskIndex].questions.every((item,index)=>taskQuestionAttempted(record,taskIndex,index))){
+      record.tasks[taskIndex]=true;
+    }
+    record.lastTaskAttempt={correct:correct,points:pointsEarned,taskIndex:taskIndex,questionIndex:questionIndex};
+    saveState(localStorage,state);
+    if(correct)window.MathMasterFeedback?.correct();
+    renderSummary();
+    renderRoom(room);
+    window.MathMasterFeedback?.answered(correct,pointsEarned);
+  }
+
+  function startExam(room,record){
+    if(!tasksComplete(room,record))return;
+    const attemptSeed=(Date.now()>>>0)^((record.attempts+1)*2654435761);
+    const questions=selectExam(room,record.seen,attemptSeed);
+    record.activeExam={
+      questions:questions,
+      answers:Array(EXAM_SIZE).fill(""),
+      submitted:Array(EXAM_SIZE).fill(false),
+      correct:Array(EXAM_SIZE).fill(false),
+      current:0,
+      startedAt:Date.now(),
+      seed:attemptSeed
+    };
+    record.lastResult=null;
+    saveState(localStorage,state);
+    renderRoom(room);
+  }
+
+  function submitExamAnswer(room,record){
+    const exam=record.activeExam;
+    if(!exam)return;
+    const index=exam.current;
+    if(exam.submitted[index])return;
+    const response=exam.answers[index]||"";
+    if(!response.trim())return;
+    exam.correct[index]=checkAnswer(exam.questions[index],response);
+    exam.submitted[index]=true;
+    exam.pointsEarned=exam.pointsEarned||[];
+    if(exam.correct[index]){
+      exam.pointsEarned[index]=awardCorrectAnswer(state,record,"exam:"+exam.questions[index].id);
+      updateStreak(state,new Date());
+      window.MathMasterFeedback?.correct();
+    }else{
+      exam.pointsEarned[index]=0;
+    }
+    renderSummary();
+    saveState(localStorage,state);
+    renderRoom(room);
+    window.MathMasterFeedback?.answered(exam.correct[index],exam.pointsEarned[index]);
+  }
+
+  function moveExam(room,record,direction){
+    const exam=record.activeExam;
+    if(!exam)return;
+    if(direction>0&&!exam.submitted[exam.current])return;
+    exam.current=Math.max(0,Math.min(EXAM_SIZE-1,exam.current+direction));
+    saveState(localStorage,state);
+    renderRoom(room);
+  }
+
+  function finishExam(room,record){
+    const exam=record.activeExam;
+    if(!exam||exam.submitted.some(answer=>!answer))return;
+    const blank=exam.answers.filter(answer=>!String(answer||"").trim()).length;
+    if(blank&&!window.confirm("There are "+blank+" empty answer(s). Empty answers will be marked wrong. Finish the exam now?"))return;
+    const score=exam.correct.filter(Boolean).length;
+    const percentage=Math.round(score/EXAM_SIZE*100);
+    const passed=score/EXAM_SIZE>=PASS_MARK;
+    const timeMilliseconds=Date.now()-exam.startedAt;
+    const review=exam.questions.map(function(question,index){
+      return exam.correct[index]?null:{
+        number:index+1,
+        q:question.q,
+        userAnswer:exam.answers[index]||"",
+        answer:question.answer,
+        explain:question.explain
+      };
+    }).filter(Boolean);
+    record.attempts+=1;
+    record.bestScore=Math.max(record.bestScore,score);
+    record.seen=Array.from(new Set((record.seen||[]).concat(exam.questions.map(question=>question.id))));
+    const wasComplete=record.complete;
+    record.complete=wasComplete||passed;
+    record.lastResult={score:score,percentage:percentage,passed:passed,time:formatTime(timeMilliseconds),review:review};
+    record.activeExam=null;
+    if(passed&&!record.pointsAwarded){
+      record.pointsAwarded=true;
+      state.points+=room.points;
+      root.dispatchEvent(new root.CustomEvent("mm2:points",{detail:{pointsEarned:room.points,source:"room-complete"}}));
+    }
+    if(passed)updateStreak(state,new Date());
+    earnedBadges(state,rooms);
+    saveState(localStorage,state);
+    refresh();
+    if(passed&&!wasComplete){
+      const nextRoom=rooms.find(item=>item.path===room.path&&item.order===room.order+1);
+      root.dispatchEvent(new root.CustomEvent("mm2:complete",{detail:{id:`room:${room.id}:${record.attempts}`,points:state.points,badge:state.badges.at(-1)||"Room complete",nextUrl:nextRoom?`/rooms.html#room=${encodeURIComponent(nextRoom.id)}`:"/index.html#topics",message:"You passed the room exam."}}));
+    }
+    if(passed&&!wasComplete){
+      const nextRoom=rooms.find(item=>item.path===room.path&&item.order===room.order+1);
+      root.dispatchEvent(new root.CustomEvent("mm2:complete",{detail:{id:`room:${room.id}:${record.attempts}`,points:state.points,badge:state.badges.at(-1)||"Room complete",nextUrl:nextRoom?`/rooms.html#room=${encodeURIComponent(nextRoom.id)}`:"/index.html#topics",message:"You passed the room exam."}}));
+    }
+    window.location.hash="room="+encodeURIComponent(room.id);
+  }
+
+  function startTimer(room,record){
+    const render=function(){
+      const display=dom["room-view"].querySelector("[data-timer]");
+      if(display&&record.activeExam)display.textContent="Time: "+formatTime(Date.now()-record.activeExam.startedAt);
+    };
+    render();
+    timerId=window.setInterval(render,1000);
+  }
+
+  function resetRoom(room){
+    if(!window.confirm("Reset "+room.title+" and any later rooms that depend on it? This cannot be undone."))return;
+    rooms.filter(item=>item.path===room.path&&item.order>=room.order).forEach(function(item){delete state.rooms[item.id];});
+    roomRecord(state,room.id);
+    state.points=calculatePoints(state,rooms);
+    state.badges=[];
+    saveState(localStorage,state);
+    refresh();
+  }
+
+  function resetEverything(){
+    if(!window.confirm("Reset all room tasks, exams, points, badges, and streaks? This cannot be undone."))return;
+    state={rooms:{},practiceMode:false,points:0,badges:[],days:[]};
+    saveState(localStorage,state);
+    const gcseState=readStored("mathmaster-gcse");gcseState.practiceMode=false;localStorage.setItem("mathmaster-gcse",JSON.stringify(gcseState));
+    refresh();
+  }
+
+  function exportProgress(){
+    const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const link=document.createElement("a");
+    link.href=url;
+    link.download="mathmaster-rooms-progress.json";
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function importProgress(event){
+    const file=event.target.files&&event.target.files[0];
+    if(!file)return;
+    const reader=new FileReader();
+    reader.onload=function(){
+      try{
+        const imported=JSON.parse(String(reader.result||""));
+        if(!imported||typeof imported!=="object"||Array.isArray(imported)||!imported.rooms||typeof imported.rooms!=="object"||typeof imported.practiceMode!=="boolean"){
+          throw new Error("This file is not room progress JSON.");
+        }
+        if(!window.confirm("Replace the current room progress with this file?"))return;
+        const next={rooms:{},practiceMode:imported.practiceMode,points:0,badges:Array.isArray(imported.badges)?imported.badges:[],days:Array.isArray(imported.days)?imported.days:[]};
+        rooms.forEach(room=>{
+          const item=imported.rooms[room.id];
+          if(item&&typeof item==="object"){
+            next.rooms[room.id]={
+              tasks:Array.isArray(item.tasks)?item.tasks.slice(0,room.tasks.length).map(Boolean):[],
+              complete:item.complete===true,
+              attempts:Number.isFinite(item.attempts)?Math.max(0,item.attempts):0,
+              bestScore:Number.isFinite(item.bestScore)?Math.max(0,Math.min(EXAM_SIZE,item.bestScore)):0,
+              seen:Array.isArray(item.seen)?item.seen.filter(id=>room.examPool.some(question=>question.id===id)):[],
+              activeExam:validActiveExam(room,item.activeExam)?item.activeExam:null,
+              lastResult:item.lastResult&&typeof item.lastResult==="object"?item.lastResult:null,
+              taskAnswers:item.taskAnswers&&typeof item.taskAnswers==="object"?item.taskAnswers:{},
+              taskAttempts:item.taskAttempts&&typeof item.taskAttempts==="object"?item.taskAttempts:{},
+              taskResponses:item.taskResponses&&typeof item.taskResponses==="object"?item.taskResponses:{},
+              answerRewards:item.answerRewards&&typeof item.answerRewards==="object"?item.answerRewards:{},
+              pointsAwarded:item.pointsAwarded===true
+            };
+          }
+        });
+        next.points=calculatePoints(next,rooms);
+        state=next;
+        earnedBadges(state,rooms);
+        saveState(localStorage,state);
+        const gcseState=readStored("mathmaster-gcse");gcseState.practiceMode=state.practiceMode;localStorage.setItem("mathmaster-gcse",JSON.stringify(gcseState));
+        refresh();
+      }catch(error){
+        window.alert("Could not import progress: "+error.message);
+      }finally{
+        event.target.value="";
+      }
+    };
+    reader.onerror=function(){window.alert("Could not read the selected progress file.");};
+    reader.readAsText(file);
+  }
+
+  function validActiveExam(room,exam){
+    return Boolean(exam&&Array.isArray(exam.questions)&&exam.questions.length===EXAM_SIZE&&
+      exam.questions.every(question=>room.examPool.some(item=>item.id===question.id))&&
+      Array.isArray(exam.answers)&&exam.answers.length===EXAM_SIZE&&
+      Array.isArray(exam.submitted)&&exam.submitted.length===EXAM_SIZE&&
+      Array.isArray(exam.correct)&&exam.correct.length===EXAM_SIZE);
+  }
+})(typeof window!=="undefined"?window:globalThis);

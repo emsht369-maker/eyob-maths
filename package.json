@@ -1,0 +1,11 @@
+{
+  "name": "math-master-site",
+  "private": true,
+  "scripts": {
+    "test": "node tests/parse-exams.mjs && node tests/check-exam-reader.mjs",
+    "test:reader-smoke": "node tests/check-exam-reader-smoke.mjs"
+  },
+  "devDependencies": {
+    "pdfjs-dist": "^6.4.299"
+  }
+}

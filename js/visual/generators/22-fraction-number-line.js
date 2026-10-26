@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "fraction-number-line", title: "Fractions on a number line", area: "Fractions", skill: "Fractions on a number line", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("fraction-number-line", rng) });

@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "percentages", title: "Percentages in a visual model", area: "Number", skill: "Percentages and percent change", tier: "FH", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("percentages", rng) });

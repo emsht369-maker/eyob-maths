@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "angles-on-straight-line", title: "Angles on a straight line", area: "Geometry", skill: "Angles on a straight line", tier: "F", level: "Easy", make: rng => window.VisualFactory.makeVisualQuestion("angles-on-straight-line", rng) });

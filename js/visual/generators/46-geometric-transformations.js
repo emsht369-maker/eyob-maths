@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "geometric-transformations", title: "Transformations on a grid", area: "Geometry", skill: "Reflection, rotation, translation and enlargement", tier: "FH", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("geometric-transformations", rng) });

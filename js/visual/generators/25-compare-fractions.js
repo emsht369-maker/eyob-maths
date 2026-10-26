@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "compare-fractions", title: "Compare fractions with bars", area: "Fractions", skill: "Compare and order fractions", tier: "F", level: "Easy", make: rng => window.VisualFactory.makeVisualQuestion("compare-fractions", rng) });

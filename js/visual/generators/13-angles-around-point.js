@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "angles-around-point", title: "Angles around a point", area: "Geometry", skill: "Angles around a point", tier: "F", level: "Easy", make: rng => window.VisualFactory.makeVisualQuestion("angles-around-point", rng) });

@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "normal-distribution", title: "Normal distribution", area: "Graphs", skill: "Empirical rule and shaded normal curves", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("normal-distribution", rng) });

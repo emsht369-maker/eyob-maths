@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width,initial-scale=1,interactive-widget=resizes-content">
+  <meta name="description" content="Browse the original MIT OpenCourseWare calculus and linear algebra PDFs used by Math Master guided lessons.">
+  <title>Course Materials | Math Master</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/materials.css">
+</head>
+<body class="materials-page">
+  <a class="skip-link" href="#materials-main">Skip to course materials</a>
+  <nav class="site-menu" aria-label="Main menu">
+    <a href="index.html">Math Master</a>
+    <a href="rooms.html">Learning rooms</a>
+    <a href="courses.html">Courses</a>
+    <a href="gcse.html">GCSE Topics</a>
+    <details class="site-menu-more">
+      <summary>More</summary>
+      <div class="site-menu-submenu">
+        <a href="materials.html" aria-current="page">Course materials</a>
+        <a href="visual.html">Visual Lab</a>
+        <a href="questions.html">Question Bank</a>
+        <a href="papers.html">Practice Papers</a>
+      </div>
+    </details>
+  </nav>
+  <header class="hero materials-hero">
+    <div class="hero-shell">
+      <div class="hero-copy">
+        <span class="eyebrow">Optional · original course PDFs</span>
+        <h1>Course materials, neatly organised.</h1>
+        <p>Browse MIT OpenCourseWare notes, problem sets, exams and solutions. You can use the guided rooms without opening any PDFs.</p>
+        <p class="materials-note">Full source documents are kept intact. Repeated copies are listed once; solution files are clearly labelled so you can choose when to check them.</p>
+        <div class="hero-actions">
+          <a class="room-primary" href="rooms.html">Back to learning rooms <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="materials-main">
+    <section class="materials-controls" aria-label="Find course materials">
+      <label>Search materials
+        <input id="material-search" type="search" placeholder="Try “exam 1” or “derivative”" autocomplete="off">
+      </label>
+      <label>Course
+        <select id="material-course">
+          <option value="all">All courses</option>
+          <option value="Calculus">Calculus</option>
+          <option value="Linear Algebra">Linear Algebra</option>
+        </select>
+      </label>
+      <label>Material type
+        <select id="material-type"><option value="all">All types</option></select>
+      </label>
+    </section>
+    <p id="materials-count" class="materials-count" role="status" aria-live="polite">Loading course materials…</p>
+    <div id="materials-list" class="materials-list"></div>
+    <p id="materials-error" class="materials-error" role="alert" hidden></p>
+    <section class="materials-attribution" aria-labelledby="materials-source-heading">
+      <h2 id="materials-source-heading">About these sources</h2>
+      <p>Calculus resources are from <a href="https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/" target="_blank" rel="noopener noreferrer">MIT OpenCourseWare 18.01SC</a>. Linear Algebra resources are from <a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/" target="_blank" rel="noopener noreferrer">MIT OpenCourseWare 18.06</a>. See each original file for its attribution and terms.</p>
+    </section>
+  </main>
+  <footer>Use the guided lessons for a smaller, step-by-step study session. Original papers are optional extra practice.</footer>
+  <script defer src="js/materials.js"></script>
+  <script defer src="js/pdf-reader.js"></script>
+  <script defer src="/js/shared-header.js"></script>
+</body>
+</html>

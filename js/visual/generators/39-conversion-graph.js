@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "conversion-graph", title: "Conversion graphs", area: "Graphs", skill: "Read a conversion graph", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("conversion-graph", rng) });

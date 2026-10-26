@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "plot-line-click", title: "Plot a line by its endpoints", area: "Graphs", skill: "Plot two points and join them", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("plot-line-click", rng) });

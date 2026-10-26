@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "probability-tree", title: "Probability tree diagrams", area: "Number", skill: "Probability trees with and without replacement", tier: "FH", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("probability-tree", rng) });

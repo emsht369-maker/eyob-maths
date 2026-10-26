@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "number-line-inequality", title: "Inequalities on a number line", area: "Algebra", skill: "Number-line inequalities", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("number-line-inequality", rng) });

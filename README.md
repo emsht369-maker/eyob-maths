@@ -1,59 +1,35 @@
 # Math Master
 
-25 maths topics, beginner to machine learning, using the 80/20 rule. Open `index.html` and study 1 hour a day.
+Math Master is a maths learning site with GCSE topics, practice questions,
+step-by-step lessons, visual explanations, study rooms, practice papers, and an
+AI tutor.
 
-## Folder tree
+## Live site
 
-```
-math-master/
-├── index.html
-├── README.md
-├── css/
-│   └── style.css
-└── js/
-    ├── data.js
-    └── app.js
-```
+https://eyob-maths-site.pages.dev/
 
-## Make the tree in a terminal (then paste the code into each file)
+The older GitHub Pages copy is at
+https://emsht369-maker.github.io/eyob-maths/.
+
+## Run locally
+
+From the repository root, run:
 
 ```bash
-mkdir -p math-master/css math-master/js
-touch math-master/index.html math-master/README.md math-master/css/style.css math-master/js/data.js math-master/js/app.js
-code math-master
-```
-
-## Test on your computer
-
-```bash
-cd math-master
 python3 -m http.server 8000
 ```
 
-Open http://localhost:8000
+Then open http://localhost:8000.
 
-## Put it on GitHub Pages
+Each topic has a full-page route at `/topic/<slug>` (for example,
+`/topic/basic-arithmetic`). The Cloudflare Pages build exports each topic page,
+rewrites known topic URLs to its HTML file, and uses the real 404 page for
+unknown slugs.
 
-1. Create an empty repo on github.com named `math-master`.
-2. Run (change YOUR_USERNAME):
+## AI tutor
 
-```bash
-cd math-master
-git init
-git add .
-git commit -m "Math Master site"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/math-master.git
-git push -u origin main
-```
+The Worker is configured in `js/ai/config.js`. It uses the Cloudflare Worker
+deployed from `worker/`. Avoid entering personal information into the tutor.
 
-3. GitHub: Settings → Pages → Deploy from a branch → `main` / `(root)` → Save.
-4. Your site: `https://YOUR_USERNAME.github.io/math-master/`
-
-## Add more questions
-
-Open `js/data.js`. Each topic ends with a list of `[question, answer]`. Add a new pair, save, then:
-
-```bash
-git add . && git commit -m "More questions" && git push
-```
+To redeploy the Worker, run `bash worker/setup.sh` from the repository root.
+To publish the website, run `bash worker/deploy-site.sh`.

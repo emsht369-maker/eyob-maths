@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "parallel-lines", title: "Parallel lines and a transversal", area: "Geometry", skill: "Angles in parallel lines", tier: "FH", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("parallel-lines", rng) });

@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "scatter-graph", title: "Scatter graphs", area: "Graphs", skill: "Correlation and best-fit estimates", tier: "FH", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("scatter-graph", rng) });

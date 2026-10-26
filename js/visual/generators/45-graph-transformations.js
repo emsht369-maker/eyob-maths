@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "graph-transformations", title: "Transformations of graphs", area: "Graphs", skill: "Transformations of y=f(x)", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("graph-transformations", rng) });

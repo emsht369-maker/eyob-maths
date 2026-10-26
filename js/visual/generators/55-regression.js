@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "regression", title: "Regression and residuals", area: "Graphs", skill: "Regression slope, intercept and residuals", tier: "FH", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("regression", rng) });

@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "box-plot", title: "Box plots", area: "Graphs", skill: "Median, range and IQR", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("box-plot", rng) });

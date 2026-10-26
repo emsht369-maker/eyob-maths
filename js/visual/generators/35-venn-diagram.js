@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "venn-diagram", title: "Venn diagrams", area: "Number", skill: "Counts and probabilities from Venn diagrams", tier: "FH", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("venn-diagram", rng) });

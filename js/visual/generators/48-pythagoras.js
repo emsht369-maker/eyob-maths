@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "pythagoras", title: "Pythagoras' theorem", area: "Geometry", skill: "Find a missing side with Pythagoras", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("pythagoras", rng) });

@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "simultaneous-graphs", title: "Simultaneous equations from graphs", area: "Graphs", skill: "Solve simultaneous equations by graphing", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("simultaneous-graphs", rng) });

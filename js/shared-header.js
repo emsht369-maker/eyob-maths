@@ -1,11 +1,7 @@
 (function () {
   "use strict";
   const links = [
-    ["Learning rooms", "/rooms.html"], ["Courses", "/courses.html"], ["GCSE", "/gcse.html"], ["Question Bank", "/questions.html"]
-  ];
-  const more = [
-    ["Visual Lab", "/visual.html"], ["Formulas", "/gcse-formulas.html"], ["Exam Words", "/gcse-exam-words.html"],
-    ["Mock Paper", "/gcse-mock.html"], ["Practice Papers", "/papers.html"], ["Course materials", "/materials.html"], ["Reference", "/reference.html"]
+    ["GCSE rooms", "/rooms.html?path=gcse"], ["ML rooms", "/rooms.html?path=ml"]
   ];
   const stylesReady = new Promise(resolve => {
     const existing = document.querySelector('link[data-site-header-styles]');
@@ -28,8 +24,14 @@
     let menu = document.querySelector(".site-menu");
     if (!menu) { menu = document.createElement("nav"); menu.className = "site-menu"; document.body.prepend(menu); }
     menu.setAttribute("aria-label", "Main menu");
-    const link = ([label, href]) => `<a href="${href}"${current === href || current.startsWith(href.replace(/\.html$/, "/")) ? ' aria-current="page"' : ""}>${label}</a>`;
-    menu.innerHTML = `<a class="mm-brand" href="/index.html" aria-label="Math Master home"><span class="mm-brand-mark" aria-hidden="true">M</span><b class="mm-brand-name">Math Master</b></a>${links.map(link).join("")}<details class="site-menu-more"><summary>More</summary><div class="site-menu-submenu">${more.map(link).join("")}</div></details><span class="nav-points" data-nav-points aria-label="${points} points">★ <span>${points}</span> points</span><span class="nav-streak" aria-label="${streak} day streak">🔥 <span>${streak}</span> day${streak === 1 ? "" : "s"}</span><details class="site-menu-drawer"><summary aria-label="Open navigation">☰</summary><div class="site-menu-drawer-panel">${links.map(link).join("")}<strong>More</strong>${more.map(link).join("")}<span class="nav-points">★ <span>${points}</span> points</span><span class="nav-streak">🔥 <span>${streak}</span> day${streak === 1 ? "" : "s"}</span></div></details>`;
+    const link = ([label, href]) => {
+      const target = new URL(href, location.origin);
+      const isRoomPath = target.pathname === "/rooms.html" && current === target.pathname && selectedPath === target.searchParams.get("path");
+      const isCurrent = isRoomPath || current === target.pathname && !target.search || current.startsWith(target.pathname.replace(/\.html$/, "/"));
+      return `<a href="${href}"${isCurrent ? ' aria-current="page"' : ""}>${label}</a>`;
+    };
+    const selectedPath = new URLSearchParams(location.search).get("path");
+    menu.innerHTML = `<a class="mm-brand" href="/index.html" aria-label="Math Master home"><span class="mm-brand-mark" aria-hidden="true">M</span><b class="mm-brand-name">Math Master</b></a>${links.map(link).join("")}<span class="nav-points" data-nav-points aria-label="${points} points">★ <span>${points}</span> points</span><span class="nav-streak" aria-label="${streak} day streak">🔥 <span>${streak}</span> day${streak === 1 ? "" : "s"}</span><details class="site-menu-drawer"><summary aria-label="Open navigation">☰</summary><div class="site-menu-drawer-panel">${links.map(link).join("")}<span class="nav-points">★ <span>${points}</span> points</span><span class="nav-streak">🔥 <span>${streak}</span> day${streak === 1 ? "" : "s"}</span></div></details>`;
     menu.querySelector(".site-menu-drawer").addEventListener("toggle", event => event.currentTarget.querySelector("summary").setAttribute("aria-label", event.currentTarget.open ? "Close navigation" : "Open navigation"));
   }
   window.MathMasterSharedHeader = Object.freeze({ render });

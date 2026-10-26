@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "coordinates-read", title: "Read and plot coordinates", area: "Graphs", skill: "Coordinates on a grid", tier: "F", level: "Easy", make: rng => window.VisualFactory.makeVisualQuestion("coordinates-read", rng) });

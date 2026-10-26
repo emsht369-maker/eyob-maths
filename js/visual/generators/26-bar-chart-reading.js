@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "bar-chart-reading", title: "Read a bar chart", area: "Graphs", skill: "Bar charts and misleading axes", tier: "F", level: "Easy", make: rng => window.VisualFactory.makeVisualQuestion("bar-chart-reading", rng) });

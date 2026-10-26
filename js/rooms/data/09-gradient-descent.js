@@ -1,0 +1,16 @@
+(function(root){
+  "use strict";
+  const q=(text,answer,hint,explain)=>({q:text,answer:String(answer),accept:[],type:"number",tolerance:0.000001,hint:hint,explain:explain,points:10});
+  (root.ROOMS=root.ROOMS||[]).push({
+    id:"ml-gradient-descent",title:"Gradient Descent",path:"ml",order:4,next:null,area:"Machine learning",difficulty:"Beginner",minutes:24,points:200,icon:"⤵️",
+    blurb:"Follow a slope downhill, one careful update at a time, to improve a model parameter.",
+    objectives:["You will calculate the gradient of a simple loss function.","You will apply the learning-rate update rule.","You will explain why the step size matters."],
+    tasks:[
+      {title:"Read the slope",story:"A model has a loss value that depends on a weight w. We want to move toward a lower loss.",learn:"For L(w)=(w−t)², the gradient is 2(w−t). The gradient gives the direction and steepness of change.",example:"If w=5 and target t=2, gradient = 2(5−2)=6.",questions:[q("For L(w) = (w − 2)², find the gradient at w = 5.",6,"Use gradient = 2(w−target).",["Here w=5 and target=2.","Gradient = 2(5−2).","2 × 3 = 6."])]},
+      {title:"Take one update",story:"The update moves opposite the gradient so the loss can decrease.",learn:"New w = old w − learning rate × gradient. Keep the minus sign: it points downhill.",example:"w=5, gradient=6, rate=0.1: new w=5−0.1×6=4.4.",questions:[q("w = 5, gradient = 6 and learning rate = 0.1. Find the new w.",4.4,"Use new w = old w − rate × gradient.",["Multiply rate by gradient: 0.1 × 6 = 0.6.","Subtract the step from 5: 5 − 0.6.","The new w is 4.4."])]},
+      {title:"Follow a negative gradient",story:"When the weight is below the target, the gradient is negative and the update moves upward.",learn:"Subtracting a negative gradient makes the weight increase. The learning rate still controls the step size.",example:"w=1, gradient=−4, rate=0.25: new w=1−0.25×(−4)=2.",questions:[q("w = 2, gradient = −5 and learning rate = 0.2. Find the new w.",3,"Subtracting a negative moves the weight up.",["Step = 0.2 × (−5) = −1.","New w = 2 − (−1).","The new w is 3."])]},
+      {title:"Choose a step size",story:"A learning rate controls how far each update moves.",learn:"A rate that is too large can jump past a minimum. A smaller rate takes more careful steps.",example:"With gradient 8, rate 0.05 gives a step of 0.4.",questions:[q("A gradient is 10 and the learning rate is 0.05. How far is the update step?",0.5,"Step size = learning rate × gradient magnitude.",["Multiply 0.05 by 10.","0.05 × 10 = 0.5.","The step size is 0.5."])]},
+      {title:"Check whether loss falls",story:"After an update, check whether the new weight is closer to the target for this simple loss.",learn:"For L(w)=(w−t)², the loss is the square of the distance from w to t.",example:"At w=4 and t=2, loss=(4−2)²=4.",questions:[q("For L(w) = (w − 3)², find the loss at w = 5.",4,"Substitute 5 for w, then square the difference.",["Difference: 5 − 3 = 2.","Square it: 2² = 4.","The loss is 4."])]}
+    ],examPool:root.ROOMS_DATA.makePool("gradient-descent"),links:[["Gradient descent","https://www.khanacademy.org/search?page_search_query=gradient%20descent%20machine%20learning"]]
+  });
+})(typeof window!=="undefined"?window:globalThis);

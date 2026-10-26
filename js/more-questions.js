@@ -402,8 +402,11 @@ function isPrime(value) {
 function digitSum(value) { return String(value).split("").reduce((sum, digit) => sum + Number(digit), 0); }
 function factorial(value) { let result = 1; for (let i = 2; i <= value; i++) result *= i; return result; }
 
+window.MORE_QUESTION_GENERATORS = window.MORE_QUESTIONS;
 window.MORE_QUESTIONS = window.MORE_QUESTIONS.map((makeQuestions, topicIndex) =>
   makeQuestions(topicIndex).map((question, questionIndex) => [
-    question[0], question[1], question[2], "", "M"
+    question[0], question[1], question[2],
+    window.MATH_EXPLANATIONS.create(topicIndex, questionIndex, question, "generated"),
+    "M"
   ])
 );

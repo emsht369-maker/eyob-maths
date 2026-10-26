@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "gradient-intercept", title: "Gradient and intercept", area: "Graphs", skill: "Gradient and intercept from points", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("gradient-intercept", rng) });

@@ -1,0 +1,14 @@
+name = "math-master-ai-tutor"
+main = "src/index.js"
+compatibility_date = "2026-10-04"
+
+[vars]
+ALLOWED_ORIGIN = "https://eyob-maths-site.pages.dev"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["TutorDailyLimits"]
+
+[[migrations]]
+tag = "v2"
+deleted_classes = ["TutorDailyLimits"]

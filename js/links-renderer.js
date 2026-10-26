@@ -43,11 +43,12 @@
     const renderRow=item=>{
       const isPdf=pdfUrl(item.url);
       const info=isPdf?fileInfo(item.url):{};
-      const details=[info.pages?`${info.pages} pages`:"",sizeLabel(info.bytes)||item.note].filter(Boolean).join(" · ");
+      const details=[info.pages?`${info.pages} page${info.pages === 1 ? "" : "s"}`:"",sizeLabel(info.bytes)||item.note].filter(Boolean).join(" · ");
       const readLabel=window.MathMasterReading?.isRead(item.url)?"Read ✓":"Read";
       const readingId=escapeHtml(item.url);
+      const readerId=readingId.split(/[?#]/,1)[0].split("/").pop().replace(/\.pdf$/i,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
       const content=isPdf
-        ? `<a class="resource-title" href="${escapeHtml(item.url)}"><span class="resource-icon" aria-hidden="true">PDF</span><strong>${escapeHtml(item.label)}</strong></a><span class="resource-meta">${escapeHtml(details)}</span><a class="resource-read resource-action resource-action-primary mm-button mm-button-primary" data-reading-id="${readingId}" href="${escapeHtml(item.url)}">${readLabel}</a>`
+        ? `<a class="resource-title" data-pdf-id="${readerId}" data-kind="${escapeHtml(category(item.groupTitle,item.label))}" href="${escapeHtml(item.url)}"><span class="resource-icon" aria-hidden="true">PDF</span><strong>${escapeHtml(item.label)}</strong></a><span class="resource-meta">${escapeHtml(details)}</span><a class="resource-read resource-action resource-action-primary mm-button mm-button-primary" data-pdf-id="${readerId}" data-kind="${escapeHtml(category(item.groupTitle,item.label))}" data-reading-id="${readingId}" href="${escapeHtml(item.url)}">${readLabel}</a>`
         : `<a class="resource-title" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer"><span class="resource-icon" aria-hidden="true">WEB</span><strong>${escapeHtml(item.label)}</strong></a><span class="resource-meta resource-description">${escapeHtml(item.note||"External learning resource")}</span><a class="resource-web-action resource-action resource-action-outline" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">Visit ↗</a>`;
       return `<li class="resource-row">${content}</li>`;
     };
@@ -68,7 +69,7 @@
         });
         items=[...Array.from(exams.values(),row=>{
           const question=row.links.Questions,solution=row.links.Solutions;
-          return `<li class="resource-row resource-exam-row"><strong class="resource-exam-title">${escapeHtml(row.title)}</strong><div class="resource-exam-actions">${question?`<a class="mm-button mm-button-primary resource-action resource-action-primary" aria-label="Open ${escapeHtml(row.title)} questions PDF" href="${escapeHtml(question.url)}">Questions</a>`:""}${solution?`<a class="mm-button mm-button-secondary resource-action resource-action-outline" aria-label="Open ${escapeHtml(row.title)} solutions PDF" href="${escapeHtml(solution.url)}">Solutions</a>`:""}</div></li>`;
+          return `<li class="resource-row resource-exam-row"><strong class="resource-exam-title">${escapeHtml(row.title)}</strong><div class="resource-exam-actions">${question?`<a class="mm-button mm-button-primary resource-action resource-action-primary" data-pdf-id="${question.url.split(/[?#]/,1)[0].split("/").pop().replace(/\.pdf$/i,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}" data-kind="Questions" aria-label="Open ${escapeHtml(row.title)} questions PDF" href="${escapeHtml(question.url)}">Questions</a>`:""}${solution?`<a class="mm-button mm-button-secondary resource-action resource-action-outline" data-pdf-id="${solution.url.split(/[?#]/,1)[0].split("/").pop().replace(/\.pdf$/i,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}" data-kind="Solutions" aria-label="Open ${escapeHtml(row.title)} solutions PDF" href="${escapeHtml(solution.url)}">Solutions</a>`:""}</div></li>`;
         }),...remaining.map(renderRow)];
       }else items=items.map(renderRow);
       return `<details class="resource-group"${name==="Start here"?" open":""}><summary>${escapeHtml(name)} <span class="resource-count">${buckets.get(name).length}</span></summary><ul>${items.join("")}</ul></details>`;

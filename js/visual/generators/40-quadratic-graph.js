@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "quadratic-graph", title: "Quadratic graphs", area: "Graphs", skill: "Roots, turning points and symmetry", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("quadratic-graph", rng) });

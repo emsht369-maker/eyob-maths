@@ -1,0 +1,301 @@
+/* ==========================================================================
+   Math Master – clean UI layer
+   Load this file LAST (after style.css, rooms.css, ai.css).
+   ========================================================================== */
+
+:root {
+  --mm-bg: #0b1018;
+  --mm-panel: #111a26;
+  --mm-panel-2: #172332;
+  --mm-line: #263649;
+  --mm-line-soft: #1d2b3b;
+  --mm-text: #f2f6fa;
+  --mm-muted: #a0adbc;
+  --mm-green: #9be15d;
+  --mm-green-soft: rgba(155, 225, 93, .12);
+  --mm-blue: #6ab7ff;
+  --mm-radius: 14px;
+  --mm-radius-sm: 10px;
+  --mm-page: 1120px;
+}
+
+/* ---------- Page rhythm ---------- */
+body { background: var(--mm-bg); }
+main { width: min(var(--mm-page), 100%); margin-inline: auto; padding: 8px clamp(16px, 3vw, 32px) 72px; }
+.rooms-page main { width: min(1400px, 100%); }
+:focus-visible { outline: 2px solid var(--mm-green); outline-offset: 2px; }
+
+/* ---------- Header ---------- */
+body .site-menu {
+  height: 60px;
+  gap: 6px;
+  padding-inline: max(16px, calc((100vw - var(--mm-page)) / 2 + clamp(16px, 3vw, 32px)));
+  border-bottom: 1px solid var(--mm-line-soft);
+  background: rgba(11, 16, 24, .92);
+  backdrop-filter: blur(12px);
+}
+body .site-menu > a:not(.mm-brand):not(#mm) {
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  color: var(--mm-muted) !important;
+  font-size: .92rem;
+}
+body .site-menu > a:not(.mm-brand)::after { display: none; }
+body .site-menu > a:not(.mm-brand):not(#mm):hover { color: var(--mm-text) !important; background: var(--mm-panel-2); }
+body .site-menu > a[aria-current="page"]:not(.mm-brand):not(#mm) { color: var(--mm-green) !important; background: var(--mm-green-soft); }
+body .site-menu .mm-brand { margin-right: auto !important; gap: 10px; }
+body .site-menu a.mm-brand:not(#mm) { color: var(--mm-text) !important; }
+.mm-brand-mark {
+  display: grid; width: 32px; height: 32px; place-items: center;
+  border-radius: 9px; color: #12200c; background: var(--mm-green); font-weight: 700;
+}
+body .site-menu .nav-points,
+body .site-menu .nav-streak {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 12px; border: 1px solid var(--mm-line); border-radius: 999px;
+  color: var(--mm-text); background: var(--mm-panel); font-size: .84rem; font-weight: 500;
+}
+
+body.rooms-page .site-menu { padding-inline: max(16px, calc((100vw - 1400px) / 2 + clamp(16px, 3vw, 44px))); }
+
+/* ---------- Page intro (home + rooms) ---------- */
+body .hero {
+  padding: clamp(32px, 6vw, 64px) 0 clamp(20px, 3vw, 32px);
+  border-bottom: 0;
+  background: none;
+}
+body .hero::after { display: none; }
+body .hero-shell { display: block; box-sizing: border-box; width: min(var(--mm-page), 100%); margin-inline: auto; padding-inline: clamp(16px, 3vw, 32px); }
+body .hero-copy h1,
+body .hero-copy .hero-title {
+  max-width: 16ch; margin: 0 0 12px;
+  color: var(--mm-text); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700;
+  letter-spacing: -.03em; line-height: 1.1;
+}
+body .hero-copy > p { max-width: 52ch; margin: 0; color: var(--mm-muted); font-size: 1.05rem; line-height: 1.6; }
+.rooms-page .rooms-hero { min-height: 0; padding-block: 20px 0; }
+.rooms-page .rooms-hero .hero-shell { width: min(1400px, 100%); }
+.rooms-page .rooms-hero .hero-title { font-size: 1rem; color: var(--mm-muted); font-weight: 500; letter-spacing: 0; }
+.rooms-page .rooms-hero .hero-copy > p { display: none; }
+
+/* ---------- Home: path cards ---------- */
+body .pathways { margin: 8px 0 20px; padding: 0; border: 0; background: none; }
+.pathways-heading { max-width: none; margin-bottom: 16px; }
+.pathways-heading h2 { margin: 0; font-size: 1.25rem; letter-spacing: 0; }
+.pathways-heading p { display: none; }
+.pathway-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+
+body .pathway-card {
+  position: relative; display: flex; min-height: 0; flex-direction: column; gap: 20px;
+  padding: 26px; border: 1px solid var(--mm-line); border-radius: var(--mm-radius);
+  background: var(--mm-panel); box-shadow: none; transform: none;
+}
+body .pathway-card:hover { transform: none; border-color: var(--mm-green); background: var(--mm-panel); }
+body .pathway-card > div { display: flex; flex: 1; flex-direction: column; gap: 10px; }
+body .pathway-icon {
+  display: grid; width: 48px; height: 48px; place-items: center;
+  border: 0; border-radius: 12px; color: var(--mm-green); background: var(--mm-green-soft);
+  font: 700 1.5rem/1 var(--font-ui);
+}
+body .pathway-ml .pathway-icon { color: var(--mm-blue); background: rgba(106, 183, 255, .12); }
+body .pathway-label { margin: 0; color: var(--mm-muted); font: 500 .9rem var(--font-ui); letter-spacing: 0; text-transform: none; }
+body .pathway-card h3 { margin: 0; font-size: 1.6rem; letter-spacing: -.02em; }
+body .pathway-card p { margin: 0; color: var(--mm-muted); line-height: 1.55; }
+body .home-path-progress { gap: 8px; margin: auto 0 0; padding-top: 6px; font-size: .88rem; }
+body .home-path-progress small { display: none; }
+body .home-path-progress span { color: var(--mm-text); font-weight: 500; }
+body .home-path-progress progress,
+.path-progress progress {
+  width: 100%; max-width: none; height: 8px; overflow: hidden; border: 0; border-radius: 99px;
+  background: var(--mm-panel-2); accent-color: var(--mm-green); appearance: none;
+}
+.home-path-progress progress::-webkit-progress-bar,
+.path-progress progress::-webkit-progress-bar { background: var(--mm-panel-2); border-radius: 99px; }
+.home-path-progress progress::-webkit-progress-value,
+.path-progress progress::-webkit-progress-value { background: var(--mm-green); border-radius: 99px; }
+.home-path-progress progress::-moz-progress-bar,
+.path-progress progress::-moz-progress-bar { background: var(--mm-green); border-radius: 99px; }
+body .pathway-ml .home-path-progress progress::-webkit-progress-value { background: var(--mm-blue); }
+body .pathway-ml .home-path-progress progress::-moz-progress-bar { background: var(--mm-blue); }
+
+body .pathway-card a.pathway-link:not(#mm) {
+  display: flex; min-height: 46px; align-items: center; justify-content: center; gap: 8px;
+  padding: 0 18px; border-radius: var(--mm-radius-sm);
+  color: #0b1018 !important; background: var(--mm-green); font-weight: 700; text-decoration: none;
+}
+body .pathway-card a.pathway-link:not(#mm):hover { color: #0b1018 !important; background: #b4f27d; }
+body .pathway-ml a.pathway-link:not(#mm) { background: var(--mm-blue); }
+body .pathway-ml a.pathway-link:not(#mm):hover { background: #8cc9ff; }
+
+/* ---------- Home: progress strip ---------- */
+body .home-progress-card {
+  grid-template-columns: 1fr; gap: 14px; margin: 0 0 20px; padding: 20px 24px;
+  border: 1px solid var(--mm-line); border-radius: var(--mm-radius); background: var(--mm-panel);
+}
+body .home-progress-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+body .home-progress-stats > div { min-width: 0; padding: 4px 0 4px 14px; border: 0; border-left: 3px solid var(--mm-green); border-radius: 0; background: none; }
+body .home-progress-stats strong { overflow: hidden; font-size: 1.4rem; text-overflow: ellipsis; text-transform: capitalize; white-space: nowrap; }
+body .home-progress-stats small { color: var(--mm-muted); font-size: .85rem; }
+
+/* ---------- Home: extra panels (collapsed) ---------- */
+.home-extra-panel { margin: 0 0 12px; border: 1px solid var(--mm-line); border-radius: var(--mm-radius); background: var(--mm-panel); }
+.home-extra-panel > summary { padding: 16px 20px; cursor: pointer; color: var(--mm-text); font-weight: 500; }
+.home-extra-panel > summary:hover { color: var(--mm-green); }
+.home-extra-panel > :not(summary) { padding-inline: 20px; padding-bottom: 20px; }
+
+/* ---------- Rooms: path picker ---------- */
+.room-path-picker { padding: 8px 0 0; border: 0; background: none; }
+.room-path-picker .eyebrow { display: none; }
+.room-path-picker h1 { margin: 0 0 6px; font-size: clamp(1.6rem, 3.5vw, 2.2rem); letter-spacing: -.02em; }
+.room-path-picker > p { margin: 0 0 20px; color: var(--mm-muted); }
+.room-path-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+body .room-path-choice {
+  display: flex; align-items: center; gap: 16px; padding: 22px;
+  border: 1px solid var(--mm-line); border-radius: var(--mm-radius);
+  color: var(--mm-text); background: var(--mm-panel); text-decoration: none; transform: none;
+}
+body .room-path-choice:hover { transform: none; border-color: var(--mm-green); background: var(--mm-panel); }
+.room-path-choice > span:nth-child(2) { display: grid; flex: 1; gap: 4px; }
+.room-path-choice strong { font-size: 1.2rem; }
+.room-path-choice small { color: var(--mm-muted); font-size: .92rem; line-height: 1.4; }
+.room-path-choice-icon { display: grid; width: 48px; height: 48px; place-items: center; border-radius: 12px; background: var(--mm-green-soft); font-size: 1.4rem; }
+.room-path-choice-ml .room-path-choice-icon { background: rgba(106, 183, 255, .12); }
+.room-path-arrow { color: var(--mm-green); font-size: 1.3rem; }
+
+/* ---------- Rooms: path header ---------- */
+.room-path-back { display: inline-block; margin: 4px 0 14px; color: var(--mm-muted); font-size: .92rem; text-decoration: none; }
+.room-path-back:hover { color: var(--mm-green); }
+body .path-header {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center;
+  padding: 26px; border: 1px solid var(--mm-line); border-radius: var(--mm-radius); background: var(--mm-panel);
+}
+.path-header .eyebrow { display: none; }
+.path-header h1 { margin: 0 0 6px; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.02em; }
+.path-header-main > p { margin: 0 0 16px; color: var(--mm-muted); }
+.path-progress { display: grid; gap: 8px; max-width: 520px; }
+.path-progress-copy { display: flex; justify-content: space-between; font-size: .9rem; }
+.path-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+body .path-stat { display: inline-flex; align-items: baseline; gap: 6px; padding: 6px 12px; border: 1px solid var(--mm-line); border-radius: 999px; background: var(--mm-bg); }
+.path-stat strong { font-size: 1rem; }
+.path-stat small { color: var(--mm-muted); font-size: .82rem; }
+.path-header-actions { display: grid; gap: 12px; justify-items: stretch; min-width: 230px; }
+body a.room-primary {
+  display: flex; min-height: 48px; align-items: center; justify-content: center; gap: 8px;
+  padding: 0 22px; border: 0; border-radius: var(--mm-radius-sm);
+  color: #0b1018 !important; background: var(--mm-green); font-weight: 700; text-decoration: none;
+}
+body a.room-primary:hover { background: #b4f27d; }
+.practice-switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; }
+.practice-switch strong { display: block; font-size: .92rem; }
+.practice-switch small { color: var(--mm-muted); font-size: .8rem; }
+.rooms-settings-menu > summary { display: inline-flex; gap: 6px; align-items: center; color: var(--mm-muted); font-size: .88rem; cursor: pointer; list-style: none; }
+.rooms-settings-menu > summary:hover { color: var(--mm-text); }
+
+/* ---------- Rooms: search + filters ---------- */
+body .rooms-controls { display: grid; gap: 12px; padding: 0; border: 0; background: none; }
+.room-search-label { display: grid; gap: 6px; color: var(--mm-muted); font-size: .88rem; }
+.room-search-label input,
+.rooms-controls select {
+  width: 100%; min-height: 46px; padding: 0 14px; border: 1px solid var(--mm-line);
+  border-radius: var(--mm-radius-sm); color: var(--mm-text); background: var(--mm-panel); font: inherit;
+}
+.room-search-label input:focus { border-color: var(--mm-green); outline: none; box-shadow: 0 0 0 3px var(--mm-green-soft); }
+.room-filters { border: 0; }
+.room-filters > summary { display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 0 14px; border: 1px solid var(--mm-line); border-radius: 999px; color: var(--mm-muted); background: var(--mm-panel); font-size: .9rem; cursor: pointer; list-style: none; }
+.room-filters > summary::-webkit-details-marker { display: none; }
+.room-filters[open] > summary { color: var(--mm-green); border-color: var(--mm-green); }
+.room-filters .room-filter-groups { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-top: 12px; }
+body .filter-chip-group { display: flex; flex-wrap: wrap; gap: 6px; }
+body .filter-chip { min-height: 34px; padding: 0 14px; border: 1px solid var(--mm-line); border-radius: 999px; color: var(--mm-muted); background: transparent; font-size: .86rem; cursor: pointer; }
+body .filter-chip:hover { color: var(--mm-text); border-color: var(--mm-muted); }
+body .filter-chip.is-selected { color: #12200c; border-color: var(--mm-green); background: var(--mm-green); font-weight: 700; }
+.room-results-count { margin: 0; color: var(--mm-muted); font-size: .86rem; }
+
+/* ---------- Buttons: dark readable text on every green button ---------- */
+body :is(a.btn-primary, a.mm-button-primary, a.gcse-entry, a.topic-start-button, a.topic-flow-next, .room-card-action > a:not(.room-preview-link)):not(#mm),
+body :is(.mm-modal, .room-step-navigation, .topic-flow) :is(a, button)[class*="primary"]:not(#mm),
+body :is(.mm-modal, .room-step-navigation, .topic-flow) a[class*="next"]:not(#mm) {
+  color: #0b1220 !important;
+}
+body a.topic-start-button:not(#mm) { border-color: var(--mm-green); background: var(--mm-green) !important; transform: none; box-shadow: none; }
+body a.topic-start-button:not(#mm):hover { background: #b4f27d !important; transform: none; box-shadow: none; }
+
+/* ---------- Rooms: topic sections ---------- */
+.rooms-workspace { margin-top: 24px; }
+.rooms-roadmaps { gap: 16px; }
+body .topic-section { border: 1px solid var(--mm-line); border-radius: var(--mm-radius); background: var(--mm-panel); box-shadow: none; }
+body .topic-section-footer { max-width: none; margin: 0 0 16px; justify-content: flex-start; }
+body .topic-section-heading > small { display: -webkit-box; overflow: hidden; white-space: normal; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+
+/* ---------- Rooms: room cards (TryHackMe style) ---------- */
+body .room-card {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  grid-template-areas:
+    "top title footer"
+    "top desc footer"
+    "top badges footer"
+    "top meta footer";
+  align-items: start;
+  gap: 4px 16px;
+  min-height: 0;
+  padding: 18px 20px;
+  border: 1px solid var(--mm-line);
+  border-radius: var(--mm-radius);
+  background: var(--mm-panel);
+  box-shadow: none;
+  transform: none;
+}
+body .room-card:hover { transform: none; border-color: var(--mm-green); background: var(--mm-panel-2); }
+body .room-card.is-complete { border-color: rgba(155, 225, 93, .55); }
+body .room-card.is-locked { opacity: .6; }
+body .room-card > .room-card-top { grid-area: top; align-self: start; }
+body .room-card > .room-card-title { grid-area: title; margin: 0; font-size: 1.1rem; line-height: 1.3; }
+body .room-card > .room-card-description {
+  grid-area: desc; margin: 0; color: var(--mm-muted); font-size: .92rem; line-height: 1.5;
+  display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+}
+body .room-card > .room-card-badges { grid-area: badges; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+body .room-card > .room-card-meta { grid-area: meta; margin-top: 6px; color: var(--mm-muted); font-size: .84rem; }
+body .room-card > .room-card-footer { grid-area: footer; align-self: center; justify-self: end; width: auto; min-width: 130px; }
+body .room-card .room-card-action { min-height: 40px; padding: 0 16px; border-radius: var(--mm-radius-sm); font-size: .9rem; }
+body .room-card .room-icon,
+body .room-card-top .room-icon { width: 48px; height: 48px; border-radius: 12px; }
+
+/* timeline dot: a clean circle on the path line */
+body .room-card > .roadmap-node {
+  left: -46px; width: 28px; height: 28px; border: 2px solid var(--mm-line); border-radius: 50%;
+  color: var(--mm-muted); background: var(--mm-bg); font-size: .7rem; line-height: 1; animation: none;
+}
+body .room-card.is-in-progress > .roadmap-node { border-color: var(--mm-green); color: var(--mm-green); box-shadow: 0 0 0 4px var(--mm-green-soft); }
+body .room-card.is-complete > .roadmap-node { border-color: var(--mm-green); color: #0b1220; background: var(--mm-green); }
+
+/* ---------- Pop-ups: tutor button must not cover them ---------- */
+body:has(dialog[open]) .ai-tutor-dock { display: none !important; }
+.mm-modal .eyebrow { display: none; }
+
+/* ---------- Footer ---------- */
+footer { padding: 28px 16px; border-top: 1px solid var(--mm-line-soft); color: var(--mm-muted); font-size: .88rem; text-align: center; }
+
+/* ---------- Phones ---------- */
+@media (max-width: 760px) {
+  .pathway-grid,
+  .room-path-choices { grid-template-columns: 1fr; }
+  body .path-header { grid-template-columns: 1fr; padding: 20px; }
+  .path-header-actions { min-width: 0; }
+  body .home-progress-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  body .home-progress-stats > div { padding-left: 10px; }
+  body .home-progress-stats strong { font-size: 1.1rem; }
+  body .room-card {
+    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-areas: "top title" "top desc" "top badges" "top meta" "footer footer";
+    padding: 16px;
+  }
+  body .room-card > .room-card-footer { justify-self: stretch; margin-top: 12px; }
+  body .room-card .room-card-action { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

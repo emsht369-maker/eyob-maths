@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,interactive-widget=resizes-content">
+  <meta name="description" content="Learn GCSE and machine learning maths in focused rooms, with guided practice and saved progress.">
+  <title>Maths Rooms | Math Master</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/rooms.css">
+  <link rel="stylesheet" href="css/visual-map.css">
+  <link rel="stylesheet" href="css/ai.css">
+  <link rel="stylesheet" href="css/mm-pro.css">
+</head>
+<body class="rooms-page">
+  <a class="skip-link" href="#rooms-main">Skip to rooms</a>
+  <nav class="site-menu" aria-label="Main menu">
+    <a class="mm-brand" href="/index.html" aria-label="Math Master home"><span aria-hidden="true">M</span> Math Master</a>
+    <a href="/rooms.html?path=gcse">GCSE rooms</a>
+    <a href="/rooms.html?path=ml">ML rooms</a>
+  </nav>
+  <header id="rooms-hero" class="hero rooms-hero">
+    <div class="hero-shell">
+      <div class="hero-copy">
+        <p class="hero-title">Learn one small room at a time</p>
+      </div>
+    </div>
+  </header>
+  <main id="rooms-main">
+    <section id="room-path-picker" class="room-path-picker" aria-labelledby="room-path-title">
+      <h1 id="room-path-title">Choose a path</h1>
+      <p>Your place is saved as you go.</p>
+      <div class="room-path-choices">
+        <a class="room-path-choice room-path-choice-gcse" href="/rooms.html?path=gcse">
+          <span class="room-path-choice-icon" aria-hidden="true">🧮</span>
+          <span><strong>GCSE</strong><small>The full GCSE maths course.</small></span>
+          <span class="room-path-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="room-path-choice room-path-choice-ml" href="/rooms.html?path=ml">
+          <span class="room-path-choice-icon" aria-hidden="true">📈</span>
+          <span><strong>Machine Learning</strong><small>The maths behind data and AI.</small></span>
+          <span class="room-path-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <div id="room-path-content" hidden>
+      <a id="room-path-back" class="room-path-back" href="/rooms.html">← All learning paths</a>
+      <section class="path-header" aria-labelledby="rooms-start-title">
+        <div class="path-header-main">
+          <span id="room-path-kicker" class="eyebrow">Your learning path</span>
+          <h1 id="rooms-start-title">Your next step</h1>
+          <p id="rooms-start-copy">Pick up where you left off.</p>
+          <div class="path-progress">
+            <div class="path-progress-copy"><strong id="path-progress-label">0 of 0 rooms complete</strong><span id="path-progress-percent">0%</span></div>
+            <progress id="path-overall-progress" max="100" value="0" aria-label="Path progress"></progress>
+          </div>
+          <div class="path-stats" aria-label="Your path stats">
+            <span class="path-stat"><strong id="path-points">0</strong><small>points</small></span>
+            <span class="path-stat"><strong id="path-streak">0</strong><small>day streak</small></span>
+            <span class="path-stat"><strong id="path-rooms-done">0</strong><small>rooms done</small></span>
+          </div>
+        </div>
+        <div class="path-header-actions">
+          <a id="continue-room" class="room-primary" href="#rooms-list">Continue <span aria-hidden="true">→</span></a>
+          <label class="practice-switch" title="Practice mode opens locked rooms to explore. Tasks within each room still unlock in order.">
+            <span><strong>Practice mode</strong><small>Explore rooms in any order</small></span>
+            <input id="practice-mode" type="checkbox" aria-label="Unlock all rooms in practice mode">
+            <span class="switch-track" aria-hidden="true"></span>
+          </label>
+          <p id="practice-mode-help" class="sr-only">Practice mode unlocks rooms to explore. Tasks inside a room still unlock in order.</p>
+          <details class="rooms-settings-menu">
+            <summary aria-label="Settings" title="Progress settings"><span aria-hidden="true">⚙</span><span>Settings</span></summary>
+            <div class="rooms-tools" aria-label="Progress tools">
+              <button id="export-progress" type="button">Export progress</button>
+              <label class="room-import">Import progress<input id="import-progress" type="file" accept="application/json" aria-label="Choose room progress JSON"></label>
+              <button id="reset-all" type="button" class="room-danger">Reset progress</button>
+            </div>
+          </details>
+        </div>
+      </section>
+      <p id="practice-banner" class="rooms-banner" role="status" hidden>Practice mode is on. Room locks are off; tasks inside each room still unlock in order.</p>
+
+      <section class="rooms-workspace" aria-label="Learning path rooms">
+        <aside class="topic-jump" aria-label="Jump to topic">
+          <label for="topic-jump-select" class="topic-jump-mobile-label">Jump to topic</label>
+          <select id="topic-jump-select" aria-label="Jump to topic"><option value="">Jump to topic</option></select>
+          <h2>Topics</h2>
+          <nav id="topic-jump-list" aria-label="Jump to topic list"></nav>
+        </aside>
+        <div class="rooms-catalog-column">
+          <section class="rooms-controls" aria-label="Search and filter rooms">
+            <label class="room-search-label" for="room-search">Search rooms
+              <input id="room-search" type="search" placeholder="Search by room or topic…" autocomplete="off">
+            </label>
+            <details class="room-filters"><summary>Filters</summary>
+            <div class="room-filter-groups">
+              <div class="filter-chip-group" aria-label="Filter by level">
+                <button type="button" class="filter-chip is-selected" data-filter-group="tier" data-filter="all" aria-pressed="true">All levels</button>
+                <button type="button" class="filter-chip" data-filter-group="tier" data-filter="F" aria-pressed="false">Foundation</button>
+                <button type="button" class="filter-chip" data-filter-group="tier" data-filter="H" aria-pressed="false">Higher</button>
+              </div>
+              <label class="room-filter-select">Grade
+                <select id="room-grade-filter" aria-label="Filter by grade">
+                  <option value="all">All grades</option>
+                  <option value="1-3">Grades 1–3</option>
+                  <option value="4-5">Grades 4–5</option>
+                  <option value="6-7">Grades 6–7</option>
+                  <option value="8-9">Grades 8–9</option>
+                </select>
+              </label>
+              <div class="filter-chip-group" aria-label="Filter by room type">
+                <button type="button" class="filter-chip is-selected" data-filter-group="type" data-filter="all" aria-pressed="true">All rooms</button>
+                <button type="button" class="filter-chip" data-filter-group="type" data-filter="guided" aria-pressed="false">Guided</button>
+                <button type="button" class="filter-chip" data-filter-group="type" data-filter="lesson" aria-pressed="false">Lesson</button>
+              </div>
+              <div class="filter-chip-group" aria-label="Filter by progress">
+                <button type="button" class="filter-chip is-selected" data-filter-group="status" data-filter="all" aria-pressed="true">Any progress</button>
+                <button type="button" class="filter-chip" data-filter-group="status" data-filter="open" aria-pressed="false">Not started</button>
+                <button type="button" class="filter-chip" data-filter-group="status" data-filter="progress" aria-pressed="false">In progress</button>
+                <button type="button" class="filter-chip" data-filter-group="status" data-filter="complete" aria-pressed="false">Completed</button>
+              </div>
+            </div></details>
+          </section>
+          <p id="room-results-count" class="room-results-count" aria-live="polite"></p>
+          <div id="rooms-list" class="rooms-roadmaps" aria-live="polite"><p class="room-loading" role="status">Loading your rooms…</p></div>
+        </div>
+      </section>
+      <details id="rooms-materials" class="rooms-materials" hidden>
+        <summary>Optional university course papers and extra materials</summary>
+        <div class="rooms-materials-content">
+          <div><h2>Want the original course papers?</h2><p>Browse original course materials separately when you want to go deeper.</p></div>
+          <div class="rooms-material-links">
+            <a href="topic/linear-algebra/">Linear Algebra materials <span aria-hidden="true">→</span></a>
+            <a href="topic/calculus/">Calculus materials <span aria-hidden="true">→</span></a>
+            <a href="materials.html">Browse the original PDFs <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </details>
+      <section id="room-view" class="room-view" hidden aria-label="Selected learning room" aria-live="polite"></section>
+    </div>
+  </main>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/rooms/index.js"></script>
+  <script defer src="js/visual/map.js"></script>
+  <script defer src="js/answer-feedback.js"></script>
+  <script defer src="js/ai/config.js"></script>
+  <script defer src="js/ai/tutor.js"></script>
+  <script defer src="js/rooms/engine.js"></script>
+  <script defer src="js/pdf-reader.js"></script>
+  <script defer src="js/mm2-rewards.js"></script>
+  <script defer src="js/mobile-nav.js"></script>
+  <script defer src="/js/shared-header.js"></script>
+</body>
+</html>

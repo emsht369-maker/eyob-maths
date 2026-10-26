@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "regular-polygon-angles", title: "Angles in regular polygons", area: "Geometry", skill: "Interior and exterior polygon angles", tier: "H", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("regular-polygon-angles", rng) });

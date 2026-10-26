@@ -57,7 +57,9 @@
   function render(record) {
     const items = idsFor(record);
     if (!items.length) return "";
-    const title = escapeHtml(record.title || "this topic");
+    const decoder=document.createElement("textarea");
+    decoder.innerHTML=String(record.title||"this topic");
+    const title = escapeHtml(decoder.value);
     const machineLearning = String(record.path || "").toLowerCase() === "ml" || /^ml-/.test(String(record.id || ""));
     return `<section class="visual-map-card" aria-label="Visual practice for ${title}"><h3>Visual practice for ${title}</h3><p>${machineLearning ? "Choose a diagram to explore vectors, model scores, learning steps and probabilities:" : "Open an original diagram question:"}</p><ul>${items.slice(0, machineLearning ? 8 : 3).map(id =>
       `<li><a href="/visual.html?generator=${encodeURIComponent(id)}">${escapeHtml(titleFor(id))} ↗</a></li>`

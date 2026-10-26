@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "area-sector", title: "Compound shapes and sectors", area: "Geometry", skill: "Area, perimeter, sector area and arc length", tier: "FH", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("area-sector", rng) });

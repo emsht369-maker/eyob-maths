@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PATTERN='AI''za|gsk''_|AQ.''Ab'
+while IFS= read -r -d '' file; do
+  if git show ":$file" 2>/dev/null | grep -aEq "$PATTERN"; then
+    printf 'Commit blocked: a staged file matches a protected key pattern (%s).\n' "$file" >&2
+    printf 'Remove the sensitive value, then stage the safe version again.\n' >&2
+    exit 1
+  fi
+done < <(git diff --cached --name-only --diff-filter=ACMR -z)

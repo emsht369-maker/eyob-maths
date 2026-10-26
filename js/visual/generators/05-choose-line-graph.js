@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "choose-line-graph", title: "Choose a line graph", area: "Graphs", skill: "Graph a straight-line equation", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("choose-line-graph", rng) });

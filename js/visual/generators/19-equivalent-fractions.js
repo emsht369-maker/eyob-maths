@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "equivalent-fractions", title: "Equivalent fractions", area: "Fractions", skill: "Equivalent and simplified fractions", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("equivalent-fractions", rng) });

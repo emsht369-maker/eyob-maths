@@ -31,7 +31,11 @@ await cp(path.join(repo, "js"), path.join(output, "js"), { recursive: true });
 await cp(path.join(repo, "css"), path.join(output, "css"), { recursive: true });
 await cp(path.join(repo, "topic"), path.join(output, "topic"), { recursive: true });
 await cp(path.join(repo, "data"), path.join(output, "data"), { recursive: true });
-await cp(path.join(repo, "assets"), path.join(output, "assets"), { recursive: true });
+await cp(path.join(repo, "vendor"), path.join(output, "vendor"), { recursive: true });
+await cp(path.join(repo, "assets"), path.join(output, "assets"), {
+  recursive: true,
+  filter: source => !source.endsWith(path.join("assets", "openstax", "ElementaryAlgebra2e-WEB.pdf"))
+});
 for (const file of await readdir(repo, { withFileTypes: true })) {
   if (file.isFile() && (file.name.endsWith(".html") || file.name === "_headers" || file.name === "favicon.svg")) {
     await cp(path.join(repo, file.name), path.join(output, file.name));
@@ -64,6 +68,12 @@ for (const relativeName of htmlFiles) {
       /(<script\b[^>]*\bsrc=(['"])\/*js\/app\.js\2[^>]*><\/script>)/i,
       '<script defer src="/js/answer-feedback.js"></script>$1'
     );
+  }
+  if (!/\/?js\/shared-header\.js/.test(html)) {
+    html = html.replace(/<\/body>/i, '<script defer src="/js/shared-header.js"></script>\n</body>');
+  }
+  if (!/\/?js\/mobile-nav\.js/.test(html)) {
+    html = html.replace(/<\/body>/i, '<script defer src="/js/mobile-nav.js"></script>\n</body>');
   }
   html = html.replace(/\b(src|href)=(['"])(\/?)(js|css|data)\/([^'"]+)\2/g, (whole, attr, quote, slash, folder, rest) => {
     const suffixIndex = rest.search(/[?#]/);

@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "histogram", title: "Unequal-width histograms", area: "Graphs", skill: "Frequency density", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("histogram", rng) });

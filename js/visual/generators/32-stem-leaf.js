@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "stem-leaf", title: "Stem-and-leaf diagrams", area: "Graphs", skill: "Median, mode and range from a stem-and-leaf", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("stem-leaf", rng) });

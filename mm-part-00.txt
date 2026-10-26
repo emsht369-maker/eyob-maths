@@ -1,0 +1,818 @@
+
+=================== index.html ===================
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1,interactive-widget=resizes-content">
+<title>Math Master – Beginner to Machine Learning</title>
+<meta name="description" content="Learn all maths from beginner to machine learning with the 80/20 rule.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/visual-map.css">
+<link rel="stylesheet" href="css/ai.css">
+</head><body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<nav class="site-menu" aria-label="Main menu">
+  <a class="mm-brand" href="/index.html" aria-label="Math Master home"><span aria-hidden="true">M</span> Math Master</a>
+  <a href="/rooms.html?path=gcse">GCSE rooms</a>
+  <a href="/rooms.html?path=ml">ML rooms</a>
+</nav>
+<header class="hero home-hero">
+  <div class="hero-shell">
+    <div class="hero-copy">
+      <h1>Choose your learning path</h1>
+      <p>Pick GCSE or ML. Each path takes you through its rooms in order, one step at a time.</p>
+    </div>
+  </div>
+</header>
+<main id="main-content">
+  <section id="next-step-flow" class="study-flow" aria-label="Your next step" hidden>
+    <div class="study-queue">
+      <span class="eyebrow dark">Pick up where you left off</span>
+      <h2 id="next-topic-title">Start with the basics</h2>
+      <p id="next-topic-copy">Build the core number skills first, then move through algebra, graphs, probability and calculus in the right order.</p>
+      <button id="start-next-topic" class="gcse-entry" type="button">Continue learning <span aria-hidden="true">→</span></button>
+    </div>
+    <div class="study-summary" aria-label="Your learning progress">
+      <div class="summary-item"><strong id="next-level-tag">Beginner</strong><small>Your current stage</small></div>
+      <div class="summary-item"><strong id="core-progress-value">0/12</strong><small>ML core topics passed</small></div>
+    </div>
+  </section>
+  <section class="pathways" aria-labelledby="pathways-heading">
+    <div class="pathways-heading">
+      <span class="eyebrow dark">Start here</span>
+      <h2 id="pathways-heading">Choose how you want to learn</h2>
+      <p class="mut">Not sure? Start with a room. It guides you through one step at a time.</p>
+    </div>
+    <div class="pathway-grid">
+      <article class="pathway-card pathway-gcse">
+        <span class="pathway-icon" aria-hidden="true">01</span>
+        <div>
+          <span class="pathway-label">For school and exams</span>
+          <h3>GCSE</h3>
+          <p>Start with number skills, then progress through fractions, percentages, algebra and statistics.</p>
+          <div class="home-path-progress"><small>91 topics · 5 guided rooms</small><span id="home-gcse-progress-label">0 of 5 guided rooms complete</span><progress id="home-gcse-progress" max="5" value="0" aria-label="GCSE guided room progress"></progress></div>
+        </div>
+        <a class="pathway-link" href="rooms.html?path=gcse">Continue GCSE <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="pathway-card pathway-ml">
+        <span class="pathway-icon" aria-hidden="true">02</span>
+        <div>
+          <span class="pathway-label">Build towards machine learning</span>
+          <h3>ML</h3>
+          <p>Start with vectors, then move through matrices, regression and gradient descent in order.</p>
+          <div class="home-path-progress"><small>25 topics · 4 guided rooms</small><span id="home-ml-progress-label">0 of 4 guided rooms complete</span><progress id="home-ml-progress" max="4" value="0" aria-label="ML guided room progress"></progress></div>
+        </div>
+        <a class="pathway-link" href="rooms.html?path=ml">Continue ML <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+  </section>
+  <section class="home-progress-card" aria-labelledby="home-progress-heading">
+    <div><span class="eyebrow dark">Your progress</span><h2 id="home-progress-heading">Keep your learning moving</h2><p>Points reward correct answers. Your streak counts study days you marked.</p></div>
+    <div class="home-progress-stats"><div><strong id="home-points">0</strong><small>points earned</small></div><div><strong id="home-streak">0</strong><small>day streak</small></div><div><strong id="home-last-room">Not started</strong><small>last room opened</small></div></div>
+  </section>
+  <details class="home-extra-panel" hidden>
+    <summary>Other study tools</summary>
+    <div class="home-extra-content">
+  <details class="home-extra-panel">
+    <summary>Your progress and daily practice</summary>
+    <section id="today-panel" class="today-panel" aria-labelledby="today-heading">
+    <div class="today-heading-row">
+      <div>
+        <span class="eyebrow dark">Your study dashboard</span>
+        <h2 id="today-heading">Today</h2>
+        <p class="mut">Your progress at a glance. Open daily practice whenever you want a quick check-in.</p>
+        <button id="today" class="mark-studied" type="button">Mark today as studied</button>
+      </div>
+    </div>
+    <div class="today-stats" aria-label="Your progress today">
+      <div><strong id="today-streak">0</strong><small>day streak</small></div>
+      <div><strong id="today-topics-done">0</strong><small>topics done</small></div>
+      <div><strong id="today-questions-count">0</strong><small>questions answered today</small></div>
+    </div>
+    <details class="quick-practice">
+      <summary>Optional daily practice <span>3 quick questions</span></summary>
+      <p class="mut">Short questions matched to your current level.</p>
+      <div id="today-questions" class="today-questions" aria-live="polite"></div>
+    </details>
+    </section>
+  </details>
+  <details class="home-extra-panel">
+  <summary>Browse all topics individually</summary>
+  <section id="topics">
+    <h2>All maths topics</h2>
+    <aside id="topic-lock-settings" class="topic-lock-settings" aria-label="Topic lock settings">
+      <label><input id="topic-practice-mode" type="checkbox"> <strong>Practice mode (unlock all)</strong></label>
+      <p class="mut">Switch this on to explore every topic without passing earlier assessments first.</p>
+      <p id="topic-practice-banner" class="topic-practice-banner" role="status" hidden>Practice mode: locks are off</p>
+      <p id="topic-lock-status" class="mut">Pass each topic to unlock the next one.</p>
+    </aside>
+    <div class="tools">
+      <input id="search" type="search" placeholder="Search a topic…" aria-label="Search">
+      <div id="chips" class="chip-group" aria-label="Filter topics">
+        <button class="chip on" data-f="all">All</button>
+        <button class="chip" data-f="core">⭐ ML core</button>
+        <details class="topic-filter-more"><summary>More filters</summary>
+          <button class="chip" data-f="useful">Useful</button>
+          <button class="chip" data-f="later">Later</button>
+          <button class="chip" data-f="completed">✓ Completed</button>
+          <div id="level-chips" class="chip-group" aria-label="Filter by level">
+            <button class="chip on" data-level="all">All levels</button>
+            <button class="chip" data-level="beginner">Beginner</button>
+            <button class="chip" data-level="intermediate">Intermediate</button>
+            <button class="chip" data-level="advanced">Advanced</button>
+          </div>
+        </details>
+      </div>
+    </div>
+    <p class="mut">Choose an open topic and follow the roadmap. Pass it to unlock the next topic.</p>
+    <div id="grid"></div>
+  </section>
+  </details>
+  <details class="home-extra-panel">
+    <summary>More ways to study</summary>
+    <section id="video-picks" class="video-section">
+      <h2>Video picks</h2>
+      <div class="video-grid">
+      <a href="https://www.youtube.com/results?search_query=Khan+Academy+algebra+full+course" target="_blank" rel="noopener">
+        <span>🎓</span>
+        <strong>Khan Academy</strong>
+        <small>Best for clear step-by-step explanations.</small>
+      </a>
+      <a href="https://www.youtube.com/results?search_query=3Blue1Brown+linear+algebra" target="_blank" rel="noopener">
+        <span>🧮</span>
+        <strong>3Blue1Brown</strong>
+        <small>Excellent for intuition in algebra and geometry.</small>
+      </a>
+      <a href="https://www.youtube.com/results?search_query=StatQuest+statistics+for+beginners" target="_blank" rel="noopener">
+        <span>📊</span>
+        <strong>StatQuest</strong>
+        <small>Simple and practical statistics and probability.</small>
+      </a>
+      <a href="https://www.youtube.com/results?search_query=MIT+OpenCourseWare+single+variable+calculus" target="_blank" rel="noopener">
+        <span>∫</span>
+        <strong>MIT OCW</strong>
+        <small>Strong for deeper ideas in calculus and analysis.</small>
+      </a>
+      </div>
+    </section>
+    <section>
+      <h2>Daily plan · 60 minutes</h2>
+      <ol id="today-plan">
+        <li><strong>20 minutes:</strong> learn one idea from a lesson or video.</li>
+        <li><strong>30 minutes:</strong> practise questions and write out your method.</li>
+        <li><strong>10 minutes:</strong> explain what you learned in your own words.</li>
+      </ol>
+    </section>
+  </details>
+    </div>
+  </details>
+</main>
+<footer>Made for daily learning. Progress is saved in your browser.</footer>
+<script defer src="js/data.js"></script>
+<script defer src="js/rooms/index.js"></script>
+<script defer src="js/home-path-progress.js"></script>
+<script defer src="js/more-questions.js"></script>
+<script defer src="js/resources.js"></script>
+<script defer src="js/links.js"></script>
+<script defer src="js/links-renderer.js"></script>
+<script defer src="js/topic-locks.js"></script>
+<script defer src="js/visual/map.js"></script>
+<script defer src="js/practice-variants.js"></script>
+<script defer src="js/ai/config.js"></script>
+<script defer src="js/ai/tutor.js"></script>
+<script defer src="/js/shared-header.js"></script>
+<script defer src="js/app.js"></script>
+</body></html>
+
+=================== rooms.html ===================
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,interactive-widget=resizes-content">
+  <meta name="description" content="Learn GCSE and machine learning maths in focused rooms, with guided practice and saved progress.">
+  <title>Maths Rooms | Math Master</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/rooms.css">
+  <link rel="stylesheet" href="css/visual-map.css">
+  <link rel="stylesheet" href="css/ai.css">
+</head>
+<body class="rooms-page">
+  <a class="skip-link" href="#rooms-main">Skip to rooms</a>
+  <nav class="site-menu" aria-label="Main menu">
+    <a class="mm-brand" href="/index.html" aria-label="Math Master home"><span aria-hidden="true">M</span> Math Master</a>
+    <a href="/rooms.html?path=gcse">GCSE rooms</a>
+    <a href="/rooms.html?path=ml">ML rooms</a>
+  </nav>
+  <header id="rooms-hero" class="hero rooms-hero">
+    <div class="hero-shell">
+      <div class="hero-copy">
+        <span class="eyebrow">Learn · practise · progress</span>
+        <h1>Choose your learning path</h1>
+        <p>Build your maths skills one focused room at a time.</p>
+      </div>
+    </div>
+  </header>
+  <main id="rooms-main">
+    <section id="room-path-picker" class="room-path-picker" aria-labelledby="room-path-title">
+      <span class="eyebrow dark">Start learning</span>
+      <h1 id="room-path-title">Choose a path</h1>
+      <p>Your place is saved as you go. Pick the path that fits what you want to learn.</p>
+      <div class="room-path-choices">
+        <a class="room-path-choice room-path-choice-gcse" href="/rooms.html?path=gcse">
+          <span class="room-path-choice-icon" aria-hidden="true">🧮</span>
+          <span><strong>GCSE</strong><small>Build confidence across the full GCSE maths curriculum.</small></span>
+          <span class="room-path-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="room-path-choice room-path-choice-ml" href="/rooms.html?path=ml">
+          <span class="room-path-choice-icon" aria-hidden="true">📈</span>
+          <span><strong>Machine Learning</strong><small>Learn the maths behind data and machine learning.</small></span>
+          <span class="room-path-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <div id="room-path-content" hidden>
+      <a id="room-path-back" class="room-path-back" href="/rooms.html">← All learning paths</a>
+      <section class="path-header" aria-labelledby="rooms-start-title">
+        <div class="path-header-main">
+          <span id="room-path-kicker" class="eyebrow">Your learning path</span>
+          <h1 id="rooms-start-title">Your next step</h1>
+          <p id="rooms-start-copy">Pick up where you left off.</p>
+          <div class="path-progress">
+            <div class="path-progress-copy"><strong id="path-progress-label">0 of 0 rooms complete</strong><span id="path-progress-percent">0%</span></div>
+            <progress id="path-overall-progress" max="100" value="0" aria-label="Path progress"></progress>
+          </div>
+          <div class="path-stats" aria-label="Your path stats">
+            <span class="path-stat"><strong id="path-points">0</strong><small>points</small></span>
+            <span class="path-stat"><strong id="path-streak">0</strong><small>day streak</small></span>
+            <span class="path-stat"><strong id="path-rooms-done">0</strong><small>rooms done</small></span>
+          </div>
+        </div>
+        <div class="path-header-actions">
+          <a id="continue-room" class="room-primary" href="#rooms-list">Continue <span aria-hidden="true">→</span></a>
+          <label class="practice-switch" title="Practice mode opens locked rooms to explore. Tasks within each room still unlock in order.">
+            <span><strong>Practice mode</strong><small>Explore rooms in any order</small></span>
+            <input id="practice-mode" type="checkbox" aria-label="Unlock all rooms in practice mode">
+            <span class="switch-track" aria-hidden="true"></span>
+          </label>
+          <p id="practice-mode-help" class="sr-only">Practice mode unlocks rooms to explore. Tasks inside a room still unlock in order.</p>
+          <details class="rooms-settings-menu">
+            <summary aria-label="Settings" title="Progress settings"><span aria-hidden="true">⚙</span><span>Settings</span></summary>
+            <div class="rooms-tools" aria-label="Progress tools">
+              <button id="export-progress" type="button">Export progress</button>
+              <label class="room-import">Import progress<input id="import-progress" type="file" accept="application/json" aria-label="Choose room progress JSON"></label>
+              <button id="reset-all" type="button" class="room-danger">Reset progress</button>
+            </div>
+          </details>
+        </div>
+      </section>
+      <p id="practice-banner" class="rooms-banner" role="status" hidden>Practice mode is on. Room locks are off; tasks inside each room still unlock in order.</p>
+
+      <section class="rooms-workspace" aria-label="Learning path rooms">
+        <aside class="topic-jump" aria-label="Jump to topic">
+          <label for="topic-jump-select" class="topic-jump-mobile-label">Jump to topic</label>
+          <select id="topic-jump-select" aria-label="Jump to topic"><option value="">Jump to topic</option></select>
+          <h2>Topics</h2>
+          <nav id="topic-jump-list" aria-label="Jump to topic list"></nav>
+        </aside>
+        <div class="rooms-catalog-column">
+          <section class="rooms-controls" aria-label="Search and filter rooms">
+            <label class="room-search-label" for="room-search">Search rooms
+              <input id="room-search" type="search" placeholder="Search by room or topic…" autocomplete="off">
+            </label>
+            <div class="room-filter-groups">
+              <div class="filter-chip-group" aria-label="Filter by level">
+                <button type="button" class="filter-chip is-selected" data-filter-group="tier" data-filter="all" aria-pressed="true">All levels</button>
+                <button type="button" class="filter-chip" data-filter-group="tier" data-filter="F" aria-pressed="false">Foundation</button>
+                <button type="button" class="filter-chip" data-filter-group="tier" data-filter="H" aria-pressed="false">Higher</button>
+              </div>
+              <label class="room-filter-select">Grade
+                <select id="room-grade-filter" aria-label="Filter by grade">
+                  <option value="all">All grades</option>
+                  <option value="1-3">Grades 1–3</option>
+                  <option value="4-5">Grades 4–5</option>
+                  <option value="6-7">Grades 6–7</option>
+                  <option value="8-9">Grades 8–9</option>
+                </select>
+              </label>
+              <div class="filter-chip-group" aria-label="Filter by room type">
+                <button type="button" class="filter-chip is-selected" data-filter-group="type" data-filter="all" aria-pressed="true">All rooms</button>
+                <button type="button" class="filter-chip" data-filter-group="type" data-filter="guided" aria-pressed="false">Guided</button>
+                <button type="button" class="filter-chip" data-filter-group="type" data-filter="lesson" aria-pressed="false">Lesson</button>
+              </div>
+              <div class="filter-chip-group" aria-label="Filter by progress">
+                <button type="button" class="filter-chip is-selected" data-filter-group="status" data-filter="all" aria-pressed="true">Any progress</button>
+                <button type="button" class="filter-chip" data-filter-group="status" data-filter="open" aria-pressed="false">Not started</button>
+                <button type="button" class="filter-chip" data-filter-group="status" data-filter="progress" aria-pressed="false">In progress</button>
+                <button type="button" class="filter-chip" data-filter-group="status" data-filter="complete" aria-pressed="false">Completed</button>
+              </div>
+            </div>
+          </section>
+          <p id="room-results-count" class="room-results-count" aria-live="polite"></p>
+          <div id="rooms-list" class="rooms-roadmaps" aria-live="polite"><p class="room-loading" role="status">Loading your rooms…</p></div>
+        </div>
+      </section>
+      <details id="rooms-materials" class="rooms-materials" hidden>
+        <summary>Optional university course papers and extra materials</summary>
+        <div class="rooms-materials-content">
+          <div><span class="eyebrow dark">Optional extra practice</span><h2>Want the original course papers?</h2><p>Browse original course materials separately when you want to go deeper.</p></div>
+          <div class="rooms-material-links">
+            <a href="topic/linear-algebra/">Linear Algebra materials <span aria-hidden="true">→</span></a>
+            <a href="topic/calculus/">Calculus materials <span aria-hidden="true">→</span></a>
+            <a href="materials.html">Browse the original PDFs <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </details>
+      <section id="room-view" class="room-view" hidden aria-label="Selected learning room" aria-live="polite"></section>
+    </div>
+  </main>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/rooms/index.js"></script>
+  <script defer src="js/visual/map.js"></script>
+  <script defer src="js/answer-feedback.js"></script>
+  <script defer src="js/ai/config.js"></script>
+  <script defer src="js/ai/tutor.js"></script>
+  <script defer src="js/rooms/engine.js"></script>
+  <script defer src="js/pdf-reader.js"></script>
+  <script defer src="js/mm2-rewards.js"></script>
+  <script defer src="js/mobile-nav.js"></script>
+  <script defer src="/js/shared-header.js"></script>
+</body>
+</html>
+
+=================== css/style.css ===================
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Source+Code+Pro:wght@400;500;600;700&display=swap');
+
+:root {
+  color-scheme: dark;
+  --bg: #0b1018;
+  --surface: #111a26;
+  --surface-2: #172332;
+  --border: #263649;
+  --text: #f2f6fa;
+  --muted: #a0adbc;
+  --green: #9be15d;
+  --green-hover: #b4f27d;
+  --green-text: #12200c;
+  --easy: #9be15d;
+  --medium: #f5a623;
+  --hard: #ff4d4f;
+  --danger: #ff4d4f;
+  --success: #88cc14;
+  --warning: #f5a623;
+  --shadow: rgba(0, 0, 0, .28);
+  --focus: 0 0 0 3px rgba(155, 225, 93, .25);
+  --shadow-card: 0 12px 28px rgba(0, 0, 0, .18);
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --radius: 8px;
+  --radius-card: 12px;
+  --pill: 999px;
+  --font-ui: 'Ubuntu', Arial, sans-serif;
+  --font-mono: 'Source Code Pro', ui-monospace, SFMono-Regular, Consolas, monospace;
+  --text-xs: .75rem;
+  --text-sm: .875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  /* Shared aliases retained for page scripts and page-specific stylesheets. */
+  --bg-strong: var(--surface-2);
+  --fg: var(--text);
+  --card: var(--surface);
+  --card-alt: var(--surface-2);
+  --bd: var(--border);
+  --ac: var(--green);
+  --ac2: var(--green-hover);
+  --mut: var(--muted);
+  --ok: var(--success);
+  --lux-link-bg: var(--surface);
+  --lux-link-fg: var(--text);
+  --lux-link-accent: var(--green);
+  --lux-link-border: var(--border);
+  --lux-link-hover: var(--surface-2);
+  --line: var(--border);
+  --accent: var(--green);
+  --link: #a7e977;
+}
+
+.home-path-progress{display:grid;gap:5px;margin:12px 0;color:var(--muted);font-size:.83rem;font-weight:700}
+.home-path-progress progress{display:block;width:100%;max-width:420px;height:9px;accent-color:var(--green)}
+.home-progress-card{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:24px;margin:22px 0;padding:22px;border:1px solid var(--border);border-radius:16px;background:var(--surface)}
+.home-progress-card h2{margin:5px 0}.home-progress-card p{margin:0;color:var(--muted)}
+.home-progress-stats{display:flex;gap:10px;flex-wrap:wrap}.home-progress-stats>div{min-width:105px;padding:10px 13px;border:1px solid var(--border);border-radius:11px;background:var(--bg)}
+.home-progress-stats strong,.home-progress-stats small{display:block}.home-progress-stats small{color:var(--muted)}
+@media(max-width:700px){.home-progress-card{grid-template-columns:1fr;gap:14px}}
+
+* { box-sizing: border-box; }
+html { min-width: 320px; scroll-behavior: smooth; scrollbar-color: var(--border) var(--bg); scrollbar-width: thin; }
+body { min-height: 100vh; margin: 0; color: var(--text); background: var(--bg); font: 16px/1.55 var(--font-ui); }
+::selection { color: var(--green-text); background: var(--green); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { border: 2px solid var(--bg); border-radius: var(--pill); background: var(--border); }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+[hidden] { display: none !important; }
+.skip-link { position: fixed; z-index: 1000; top: 8px; left: 8px; padding: 10px 14px; transform: translateY(-160%); border-radius: var(--radius); color: var(--green-text); background: var(--green); font-weight: 700; text-decoration: none; }
+.skip-link:focus { transform: translateY(0); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; box-shadow: var(--focus); }
+
+/* Shared room components */
+.mm-button { display: inline-flex; min-height: 40px; align-items: center; justify-content: center; gap: 7px; padding: 0 14px; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); background: transparent; font: 500 .92rem var(--font-ui); text-decoration: none; cursor: pointer; }
+.mm-button-primary { border-color: var(--green); color: var(--green-text); background: var(--green); font-weight: 700; }
+.mm-button-primary:hover { border-color: var(--green-hover); background: var(--green-hover); }
+.mm-button-secondary { border-color: var(--green); color: var(--green); background: transparent; }
+.mm-button-ghost { border-color: transparent; color: var(--muted); background: transparent; }
+.mm-card { border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); }
+.mm-pill { display: inline-flex; min-height: 28px; align-items: center; gap: 6px; padding: 3px 9px; border: 1px solid var(--border); border-radius: var(--pill); color: var(--text); background: var(--surface-2); font: 600 var(--text-xs) var(--font-mono); }
+.mm-pill-easy { border-color: color-mix(in srgb,var(--easy) 55%,var(--border)); color: #b9ee72; }
+.mm-pill-medium { border-color: color-mix(in srgb,var(--medium) 55%,var(--border)); color: #ffd38a; }
+.mm-pill-hard { border-color: color-mix(in srgb,var(--hard) 55%,var(--border)); color: #ff9898; }
+.mm-progress { width: 100%; height: 8px; overflow: hidden; border-radius: var(--pill); background: var(--surface-2); }
+.mm-progress > span { display: block; height: 100%; border-radius: inherit; background: var(--green); }
+.mm-callout { padding: 12px 14px; border-left: 3px solid var(--green); border-radius: 0 var(--radius) var(--radius) 0; color: var(--text); background: var(--surface-2); }
+.mm-task-header { display: grid; gap: var(--space-2); padding-bottom: var(--space-3); border-bottom: 1px solid var(--border); }
+.mm-task-header h2, .mm-task-header h3 { margin: 0; }
+.mm-question { display: grid; gap: 14px; padding: 18px; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); }
+.mm-question-header { display: flex; align-items: flex-start; gap: 12px; }
+.mm-question-number { display: inline-flex; min-width: 40px; min-height: 28px; align-items: center; justify-content: center; border: 1px solid color-mix(in srgb,var(--green) 55%,var(--border)); border-radius: var(--radius); color: var(--green); background: color-mix(in srgb,var(--green) 10%,var(--surface)); font: 600 .75rem var(--font-mono); }
+.mm-question-prompt, .mm-question-header p { min-width: 0; margin: 0; font-weight: 600; }
+.mm-question .answer-label, .mm-question .imported-answer-entry { display: grid; gap: 6px; color: var(--text); font-size: .86rem; }
+.mm-question .answer-input, .mm-question textarea { min-height: 48px; font-family: var(--font-mono); }
+.mm-question-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.mm-question-feedback, .imported-feedback { padding: 11px 13px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.mm-question-feedback.is-correct, .imported-feedback.is-correct { border-color: #4aa86a; color: #b8f3ca; background: rgba(39,133,73,.16); }
+.mm-question-feedback.is-wrong, .imported-feedback.is-wrong { border-color: #bd6262; color: #ffc0c0; background: rgba(155,49,49,.16); }
+.mm-question-final, .mm-question-steps { padding: 13px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.mm-question-final[hidden], .mm-question-feedback[hidden] { display: none; }
+.mm-question-steps > summary { color: var(--text); cursor: pointer; font-weight: 600; }
+.mm-revealed-note { margin-top: 6px; color: var(--muted); font-size: .8rem; }
+.mm-question .check-result:not(.is-correct):not(.is-wrong) { color: var(--muted); }
+.mm-practice-progress { display: block; width: 100%; height: 8px; accent-color: var(--green); }
+.learn-task-layout { display: grid; grid-template-columns: minmax(190px,230px) minmax(0,1fr); align-items: start; gap: 18px; }
+.learn-task-sidebar { position: sticky; top: 72px; display: grid; gap: 10px; max-height: calc(100vh - 88px); overflow: auto; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); }
+.learn-task-progress { display: grid; grid-template-columns: 1fr auto; gap: 7px; align-items: center; padding: 5px 4px 10px; border-bottom: 1px solid var(--border); }
+.learn-task-progress strong { font-size: .9rem; }
+.learn-task-progress span { color: var(--muted); font: 500 .7rem var(--font-mono); }
+.learn-task-progress progress { grid-column: 1 / -1; width: 100%; height: 7px; accent-color: var(--green); }
+.learn-task-sidebar nav { display: grid; gap: 4px; }
+.learn-task-link { display: grid; grid-template-columns: 28px minmax(0,1fr); align-items: center; gap: 8px; padding: 7px 6px; border-radius: var(--radius); color: var(--muted); font-size: .78rem; line-height: 1.3; text-decoration: none; }
+.learn-task-link:hover, .learn-task-link:focus-visible { color: var(--text); background: var(--surface-2); }
+.learn-task-number { display: grid; width: 26px; height: 26px; place-items: center; border: 1px solid var(--border); border-radius: 50%; color: var(--muted); background: var(--surface-2); font: 600 .72rem var(--font-mono); }
+.learn-task-link.is-done .learn-task-number, .learn-task-card.is-done .mm-task-header .room-kicker::before { border-color: var(--green); color: var(--green-text); background: var(--green); }
+.learn-task-list { display: grid; gap: 14px; min-width: 0; }
+.learn-task-card { scroll-margin-top: 74px; display: grid; gap: 13px; min-width: 0; padding: 18px; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); }
+.learn-task-card.is-done { border-color: color-mix(in srgb,var(--green) 50%,var(--border)); }
+.learn-task-card .mm-task-header { padding-bottom: 10px; }
+.learn-task-card .room-kicker { color: var(--muted); }
+.learn-task-card h3 { margin: 0; }
+.learn-task-body > :first-child { margin-top: 0; }
+.learn-task-body > :last-child { margin-bottom: 0; }
+.learn-task-body .room-goal { padding: 12px 14px; border-left: 3px solid var(--green); border-radius: 0 var(--radius) var(--radius) 0; color: var(--text); background: var(--surface-2); }
+.learn-task-example { display: grid; gap: 8px; }
+.learn-task-notes { justify-self: start; }
+.learn-ml-callout { margin-top: 4px; }
+.learn-ml-callout > strong { display: block; margin-bottom: 8px; color: var(--green); }
+.learn-ml-callout p:last-child { margin-bottom: 0; }
+.mm-question-tutor { margin: 10px 0 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.mm-question-tutor > summary { padding: 10px 13px; color: var(--muted); cursor: pointer; font-size: .84rem; }
+.mm-question-tutor[open] > summary { color: var(--green); border-bottom: 1px solid var(--border); }
+.mm-question-tutor-content { padding: 12px; }
+.mm-modal { width: min(680px,calc(100vw - 32px)); max-height: min(85vh,800px); padding: 24px; border: 1px solid var(--border); border-radius: var(--radius-card); color: var(--text); background: var(--surface); box-shadow: 0 24px 80px rgba(0,0,0,.55); }
+.mm-modal::backdrop { background: rgba(3,7,12,.76); backdrop-filter: blur(3px); }
+.mm-pdf-reader { width: min(1180px,96vw); height: min(94vh,1000px); max-width: none; max-height: none; padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-card); color: var(--text); background: var(--bg); box-shadow: 0 24px 80px rgba(0,0,0,.65); }
+.mm-pdf-reader::backdrop { background: rgba(2,5,9,.82); backdrop-filter: blur(4px); }
+.mm-pdf-shell { display: grid; height: 100%; grid-template-rows: auto auto auto minmax(0,1fr) auto auto; }
+.mm-pdf-header, .mm-pdf-toolbar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--border); background: var(--surface); }
+.mm-pdf-heading { display: flex; min-width: 0; flex: 1; align-items: baseline; gap: 12px; }
+.mm-pdf-heading strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mm-pdf-heading span, .mm-pdf-toolbar label { color: var(--muted); font-size: .82rem; white-space: nowrap; }
+.mm-pdf-close { width: 44px; min-width: 44px; min-height: 44px; padding: 0; border-radius: 50%; font-size: 1.4rem; }
+.mm-pdf-toolbar { flex-wrap: wrap; gap: 8px; }
+.mm-pdf-toolbar button { min-width: 44px; min-height: 44px; padding: 5px 9px; }
+.mm-pdf-toolbar input { width: 64px; min-height: 44px; padding: 4px 7px; font: 500 .82rem var(--font-mono); }
+.mm-pdf-spacer { flex: 1; }
+.mm-pdf-ai { max-height: 32vh; overflow: auto; border-bottom: 1px solid var(--border); background: var(--surface); }
+.mm-pdf-ai > summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 14px; color: var(--green); cursor: pointer; list-style: none; }
+.mm-pdf-ai > summary::-webkit-details-marker { display: none; }
+.mm-pdf-ai > summary::after { content: "+"; }
+.mm-pdf-ai[open] > summary::after { content: "−"; }
+.mm-pdf-ai > summary span { color: var(--muted); font-size: .8rem; }
+.mm-pdf-ai [data-pdf-ai] { padding: 0 12px 8px; }
+.mm-pdf-ai .ai-tutor { margin: 0; padding: 10px; }
+.mm-pdf-pages { min-height: 0; overflow: auto; padding: 18px 12px; background: #262b33; overscroll-behavior: contain; }
+.mm-pdf-page { display: grid; justify-items: center; gap: 8px; margin: 0 auto 18px; padding: 10px; border-radius: 4px; background: #fff; box-shadow: 0 3px 16px rgba(0,0,0,.35); }
+.mm-pdf-page > span { justify-self: start; color: #596273; font: 500 .72rem var(--font-mono); }
+.mm-pdf-page canvas { display: block; max-width: 100%; height: auto; }
+.mm-pdf-page iframe { width: min(1160px,94vw); height: min(80vh,820px); border: 0; }
+.mm-pdf-error { margin: 0; padding: 8px 14px; color: #ffd38a; background: var(--surface); font-size: .85rem; }
+.mm-pdf-reading-actions { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-top: 1px solid var(--border); background: var(--surface); }
+.mm-pdf-reading-actions p { min-width: 0; flex: 1; margin: 0; color: var(--muted); font-size: .85rem; }
+.mm-pdf-reading-actions button:disabled { opacity: .5; cursor: not-allowed; }
+body.mm-reader-open { overflow: hidden; }
+body.mm-reader-open .ai-tutor-dock { display: none !important; }
+.resource-count { display: inline-flex; min-width: 24px; min-height: 22px; align-items: center; justify-content: center; margin-left: auto; padding: 0 7px; border: 1px solid var(--border); border-radius: var(--pill); color: var(--text); background: var(--surface-2); font: 600 .72rem var(--font-mono); }
+.topic-flow-extra > summary { display: flex; align-items: center; gap: 10px; }
+.resource-group > summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.resource-group ul { grid-template-columns: 1fr; gap: 0; padding: 0 14px 12px; list-style: none; }
+.resource-group li.resource-row { display: flex; min-width: 0; align-items: center; gap: 12px; padding: 11px 4px; border: 0; border-bottom: 1px solid var(--border); border-radius: 0; background: transparent; }
+.resource-title { display: flex; min-width: 0; flex: 1 1 auto; align-items: center; gap: 10px; color: var(--text); text-decoration: none; }
+.resource-title strong { min-width: 0; overflow-wrap: break-word; word-break: normal; font-weight: 600; }
+.resource-icon { display: grid; width: 34px; height: 34px; flex: 0 0 34px; place-items: center; border: 1px solid var(--border); border-radius: var(--radius); color: var(--green); background: var(--surface-2); font: 600 .65rem var(--font-mono); }
+.resource-meta { flex: 0 0 auto; color: var(--muted); font-size: .78rem; white-space: nowrap; }
+.resource-description { min-width: 0; flex: 1 1 240px; white-space: normal; overflow-wrap: anywhere; }
+.resource-external { color: var(--muted); font-size: .75rem; white-space: nowrap; }
+.resource-read, .resource-web-action { margin-left: auto; flex: 0 0 auto; }
+.resource-action { min-height: 40px; flex: 0 0 auto; padding: 8px 16px; border-radius: 8px; font-weight: 600; white-space: nowrap; }
+.resource-action-primary { border-color: var(--green); color: #0b1220; background: var(--green); }
+.resource-action-primary:hover { border-color: var(--green-hover); color: #0b1220; background: var(--green-hover); }
+.resource-action-outline { border: 1px solid var(--green); color: #e6f6d7; background: transparent; }
+.resource-action-outline:hover { color: #fff; background: color-mix(in srgb,var(--green) 12%,transparent); }
+.resource-group li.resource-exam-row { display: grid; grid-template-columns: minmax(0,1fr); align-items: stretch; gap: 10px; margin: 12px 0; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.resource-exam-title { margin: 0; font-size: 1rem; }
+.resource-exam-actions { display: grid; grid-template-columns: minmax(0,1fr); gap: 8px; }
+.resource-exam-actions .resource-action { width: 100%; }
+.resource-exam-ai { min-width: 0; }
+.resource-exam-ai:empty { display: none; }
+.mm-toast { position: fixed; z-index: 200; right: 18px; bottom: 96px; max-width: min(360px,calc(100vw - 32px)); padding: 12px 16px; border: 1px solid var(--green); border-radius: var(--radius); color: var(--text); background: var(--surface); box-shadow: 0 12px 32px var(--shadow); }
+.nav-points.is-pulsing { animation: mm-points-pulse 650ms ease-out; }
+@keyframes mm-points-pulse { 50% { transform: scale(1.08); box-shadow: 0 0 0 5px rgba(136,204,20,.16); } }
+.mm-sound-toggle { width: 30px; min-width: 30px; min-height: 30px; padding: 0; border-radius: 50%; color: var(--muted); background: var(--surface); }
+.mm-toast { display: grid; gap: 2px; }
+.mm-toast[hidden] { display: none; }
+.mm-toast strong { color: #b9ee72; font: 600 .9rem var(--font-mono); }
+.mm-toast span { color: var(--text); font-size: .84rem; }
+.mm2-confetti { position: fixed; z-index: 210; top: 52px; right: 118px; width: 1px; height: 1px; pointer-events: none; }
+.mm2-confetti i { position: absolute; width: 7px; height: 11px; border-radius: 2px; background: var(--c); animation: mm2-confetti-burst 780ms var(--d) ease-out both; }
+@keyframes mm2-confetti-burst { to { opacity: 0; transform: translate(var(--x),120px) rotate(var(--r)); } }
+.mm2-complete-dialog { position: fixed; inset: 50% auto auto 50%; transform: translate(-50%,-50%); margin: 0; }
+.mm2-complete-dialog h2 { margin: 12px 0; }
+.mm-complete-close { position: absolute; top: 12px; right: 12px; width: 36px; min-width: 36px; min-height: 36px; padding: 0; border-radius: 50%; }
+.mm-complete-reward { padding: 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); font-family: var(--font-mono); }
+.mm-complete-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+h1, h2, h3, h4, p { overflow-wrap: anywhere; }
+h1, h2, h3, h4 { color: var(--text); line-height: 1.2; }
+h1 { margin: 0 0 12px; font-size: clamp(2rem, 4.2vw, 3.4rem); letter-spacing: -.025em; }
+h2 { margin: 0 0 14px; font-size: clamp(1.35rem, 2.3vw, 1.85rem); }
+h3 { margin: 0 0 10px; font-size: 1.12rem; }
+p { margin: 0 0 14px; }
+.mut, .meta, .muted { color: var(--muted); }
+.eyebrow, .room-kicker, .visual-kicker { display: inline-flex; align-items: center; gap: 8px; color: var(--green); font: 600 .72rem/1.3 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
+.eyebrow { padding: 5px 9px; border: 1px solid var(--border); border-radius: var(--pill); background: var(--surface); }
+main { width: min(1200px, 100%); margin: 0 auto; padding: 24px clamp(16px, 3vw, 32px) 56px; }
+section { margin: 26px 0; }
+footer { padding: 24px 16px; color: var(--muted); font-size: .88rem; text-align: center; }
+
+/* Sticky navigation */
+.site-menu { position: sticky; z-index: 50; top: 0; display: flex; min-height: 56px; align-items: center; gap: clamp(12px, 2vw, 24px); padding: 0 clamp(16px, 3vw, 36px); overflow: visible; border-bottom: 1px solid var(--border); background: #0a0e17; }
+.site-menu > a { position: relative; display: inline-flex; min-height: 56px; flex: 0 0 auto; align-items: center; padding: 0 2px; border: 0; color: var(--muted); background: transparent; font-size: .88rem; font-weight: 500; text-decoration: none; white-space: nowrap; }
+.site-menu > a::after { position: absolute; right: 0; bottom: 0; left: 0; height: 2px; transform: scaleX(0); transform-origin: left; background: var(--green); content: ''; transition: transform 150ms ease; }
+.site-menu > a:hover, .site-menu > a:focus-visible, .site-menu > a[aria-current=page] { color: var(--text); }
+.site-menu > a:hover::after, .site-menu > a:focus-visible::after, .site-menu > a[aria-current=page]::after { transform: scaleX(1); }
+.site-menu > a:first-child { gap: 9px; margin-right: auto; color: var(--text); font-size: 1rem; font-weight: 700; }
+.site-menu > a:first-child::before { display: grid; width: 28px; height: 28px; place-items: center; border-radius: 6px; color: var(--green-text); background: var(--green); content: 'M'; font: 700 1rem var(--font-mono); }
+.site-menu > a:first-child::after { display: none; }
+.site-menu > a.mm-brand { gap: 9px; margin-right: auto; }
+.site-menu > a.mm-brand::before { display: none; }
+.mm-brand > span { display: grid; width: 28px; height: 28px; flex: 0 0 28px; place-items: center; border-radius: 6px; color: var(--green-text); background: var(--green); font: 700 1rem var(--font-mono); }
+.site-menu-more { position: relative; flex: 0 0 auto; margin: 0; padding: 0; border: 0; background: transparent; }
+.site-menu-more > summary { display: flex; min-height: 56px; align-items: center; color: var(--muted); font-size: .86rem; cursor: pointer; list-style: none; white-space: nowrap; }
+.site-menu-more > summary::-webkit-details-marker { display: none; }
+.site-menu-more > summary::after { margin-left: 7px; color: var(--green); content: '⌄'; }
+.site-menu-more[open] > summary, .site-menu-more > summary:hover { color: var(--text); }
+.site-menu-submenu { position: absolute; z-index: 60; top: calc(100% - 1px); right: 0; display: grid; min-width: 220px; gap: 2px; padding: 8px; border: 1px solid var(--border); border-radius: 0 0 var(--radius) var(--radius); background: var(--surface); box-shadow: 0 16px 28px var(--shadow); }
+.site-menu-submenu a { padding: 9px 11px; border-radius: 5px; color: var(--muted); font-size: .86rem; text-decoration: none; }
+.site-menu-submenu a:hover, .site-menu-submenu a[aria-current=page] { color: var(--green); background: var(--surface-2); }
+.nav-streak { display: inline-flex; min-height: 32px; flex: 0 0 auto; align-items: center; gap: 6px; padding: 0 10px; border: 1px solid var(--border); border-radius: var(--pill); color: var(--text); background: var(--surface); font: 500 .78rem var(--font-mono); white-space: nowrap; }
+.nav-points { display: inline-flex; min-height: 32px; flex: 0 0 auto; align-items: center; gap: 6px; padding: 0 10px; border: 1px solid color-mix(in srgb,var(--green) 50%,var(--border)); border-radius: var(--pill); color: var(--text); background: var(--surface); font: 600 .78rem var(--font-mono); white-space: nowrap; }
+.nav-avatar { display: grid; width: 30px; height: 30px; flex: 0 0 auto; place-items: center; border: 1px solid var(--green); border-radius: 50%; color: var(--green); background: var(--surface-2); font: 600 .72rem var(--font-mono); }
+
+/* Hero and actions */
+.hero, .visual-hero { padding: clamp(28px, 5vw, 56px) clamp(16px, 3vw, 32px) 28px; border-bottom: 1px solid var(--border); background: var(--surface); }
+.hero-shell { width: min(1200px, 100%); margin: 0 auto; }
+.hero-copy { max-width: 800px; }
+.hero-copy h1 { margin-top: 12px; }
+.hero p, .visual-hero p { max-width: 760px; color: var(--muted); font-size: 1.02rem; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 18px 0; }
+.gcse-entry, .secondary-link, button, .room-primary, .room-secondary, .paper-primary, .paper-secondary, .papers-official-link { display: inline-flex; min-height: 40px; align-items: center; justify-content: center; gap: 7px; padding: 0 14px; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); background: transparent; font: 500 .92rem var(--font-ui); text-decoration: none; cursor: pointer; transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, transform 150ms ease; }
+.gcse-entry, .room-primary, .paper-primary, .papers-official-link, .visual-primary { border-color: var(--green); color: var(--green-text); background: var(--green); font-weight: 700; }
+.gcse-entry:hover, .room-primary:hover, .paper-primary:hover, .papers-official-link:hover, .visual-primary:hover { border-color: var(--green-hover); background: var(--green-hover); }
+.secondary-link, .room-secondary, .paper-secondary { border-color: var(--border); color: var(--text); background: transparent; }
+.secondary-link:hover, .room-secondary:hover, .paper-secondary:hover { border-color: var(--green); color: var(--green); background: var(--surface-2); }
+button:hover { border-color: var(--green); }
+button:disabled, [aria-disabled=true] { cursor: not-allowed !important; opacity: .55; }
+#today, #rnd, .rev, .check-answer, .gcse-actions button, #mock-start, .gcse-question button:not(.alt), #gcse-export, #gcse-reset, .qb-actions button, #qb-next, #qb-submit-exam, .qb-question button:not(.qb-secondary), .qb-marking button, .rooms-tools button, .room-task button, .exam-nav button, .exam-submit, .visual-page button { border-color: var(--green); color: var(--green-text); background: var(--green); font-weight: 700; }
+.rev.alt, .gcse-question button.alt, .qb-secondary, .qb-question button.qb-secondary, .rooms-tools button, .room-task button, .exam-nav button, .visual-page button:not(.visual-primary):not(#visual-start-exam) { border: 1px solid var(--border); color: var(--text); background: transparent; }
+.rev.alt:hover, .gcse-question button.alt:hover, .qb-secondary:hover, .visual-page button:not(.visual-primary):not(#visual-start-exam):hover { border-color: var(--green); color: var(--green); background: var(--surface-2); }
+
+/* Shared panels, grids and progress */
+.card, .feature-card, .roadmap-card, .note-card, .study-queue, .study-summary, .today-panel, .pathways, .gcse-topic, .gcse-panel, .gcse-question, .gcse-card, .qb-card, .qb-filter-card, .qb-chart-card, .qb-stats > div, .rooms-settings, .rooms-tools, .room-panel, .room-task, .room-exam, .room-result, .paper-builder, .paper-history, .paper-resources, .paper-cover, .paper-question, .paper-review, .paper-score, .visual-filter-card, .visual-question-card, .visual-panel, .visual-exam-panel { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); }
+.card, .feature-card, .roadmap-card, .note-card, .gcse-topic, .gcse-panel, .gcse-question, .gcse-card, .qb-card, .qb-filter-card, .qb-chart-card, .paper-question, .visual-question-card, .visual-panel { padding: 20px; }
+.card, .feature-card, .roadmap-card, .note-card, .pathway-card, .gcse-topic, .gcse-resource-card, .paper-resource-grid a, .visual-panel { transition: transform 150ms ease, border-color 150ms ease, background-color 150ms ease; }
+.card:hover, .feature-card:hover, .roadmap-card:hover, .note-card:hover, .pathway-card:hover, .gcse-topic:hover, .gcse-resource-card:hover, .paper-resource-grid a:hover, .visual-panel:hover { transform: translateY(-2px); border-color: var(--green); }
+.feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.roadmap-grid, .notes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.roadmap-card ul, .note-card ul { padding-left: 20px; color: var(--muted); }
+.roadmap-card.locked-course { border-color: color-mix(in srgb,var(--border) 78%,var(--muted)); background: linear-gradient(145deg,var(--surface),color-mix(in srgb,var(--surface-2) 55%,var(--surface))); }
+.roadmap-card.locked-course .step-tag { color: var(--muted); }
+.roadmap-card .course-actions > .secondary-link[aria-disabled=true] { display: inline-flex; min-height: 44px; align-items: center; padding: 10px 14px; border: 1px dashed var(--border); border-radius: var(--pill); color: var(--muted); background: var(--surface-2); font-weight: 700; text-decoration: none; cursor: not-allowed; }
+.roadmap-card.current { border-color: var(--green); box-shadow: 0 0 0 1px color-mix(in srgb,var(--green) 28%,transparent),0 10px 30px rgba(0,0,0,.14); }
+.step-tag, .course-badge, .note-kind, .card-status, .tag, .room-pill, .paper-code { display: inline-flex; align-items: center; padding: 4px 9px; border: 1px solid var(--border); border-radius: var(--pill); color: var(--muted); background: var(--surface-2); font: 600 .7rem var(--font-mono); letter-spacing: .03em; text-transform: uppercase; }
+.course-badge, .status-current, .tag.core { border-color: var(--green); color: var(--green); background: rgba(136, 204, 20, .15); }
+.status-next, .status-passed, .card-status { color: var(--green); }
+.study-flow { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(260px, .7fr); gap: 14px; }
+.study-queue, .study-summary, .today-panel, .pathways { padding: 20px; }
+.study-queue h2 { margin-top: 8px; }
+.study-summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.summary-item { display: flex; min-height: 76px; flex-direction: column; justify-content: center; gap: 4px; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.summary-item strong, .today-stats strong, .stats b, .qb-stats b, .visual-scoreboard strong { color: var(--green); font: 600 1.25rem var(--font-mono); }
+.summary-item small, .today-stats small, .mut { color: var(--muted); }
+.today-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.today-stats > div { display: grid; gap: 5px; padding: 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.quick-practice, .resource-group, .worked-example, .topic-detail, .university-course-links, .visual-explanation { margin: 10px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.quick-practice > summary, .resource-group > summary, .worked-example > summary, .topic-detail > summary, .university-course-links > summary, .visual-explanation > summary { padding: 12px 14px; color: var(--text); cursor: pointer; font-weight: 500; }
+.quick-practice > summary:hover, .resource-group > summary:hover, .worked-example > summary:hover { color: var(--green); background: var(--surface-2); }
+.quick-practice > summary::-webkit-details-marker, .resource-group > summary::-webkit-details-marker { color: var(--green); }
+.resource-group ul, .resource-groups { display: grid; gap: 10px; }
+.resource-group ul { grid-template-columns: 1fr; padding: 8px 14px 14px; list-style: none; }
+.resource-group li, .box, .topic-note, .gcse-resource-section, .paper-review-content, .paper-instructions { padding: 14px; border-left: 4px solid var(--green); border-radius: 0 var(--radius) var(--radius) 0; color: var(--text); background: var(--surface-2); }
+.resource-group li > a, .gcse-resources a, .gcse-resource-card, .qb-resources a, .room-links a, .paper-load-fallback a { color: var(--text); text-decoration: none; }
+.resource-group li > a:hover, .gcse-resources a:hover, .qb-resources a:hover, .room-links a:hover, .paper-load-fallback a:hover { color: var(--green); }
+.resource-group li > a.resource-action-primary, .resource-group li > a.resource-action-primary:hover { color: #0b1220 !important; }
+.resource-group li > a.resource-action-outline, .resource-group li > a.resource-action-outline:hover { color: #e6f6d7 !important; }
+.resource-group li > p, .resource-group li span, .gcse-topic small, .gcse-subtle, .paper-help { color: var(--muted); }
+.tools, .chip-group, .links, .syms { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.tools { align-items: flex-start; }
+input[type=search], input[type=text], input[type=number], input[type=date], input[type=file], select, textarea, .answer-input, .answer-input, .gcse-answer-input, .room-answer, .qb-mark-input, .paper-controls select, .paper-candidate input, .paper-response, .paper-mark-input, .visual-filters select, .visual-answer-area input[type=text] { max-width: 100%; min-height: 40px; padding: 9px 11px; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); background: var(--bg); font: 400 .92rem var(--font-ui); }
+input[type=search] { flex: 1 1 220px; }
+textarea, .answer-input, .paper-response { width: 100%; resize: vertical; }
+input:focus, select:focus, textarea:focus { border-color: var(--green); outline: none; box-shadow: var(--focus); }
+input[type=checkbox], input[type=radio], progress { accent-color: var(--green); }
+.chip { min-height: 36px; padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--pill); color: var(--muted); background: var(--surface); }
+.chip.on { border-color: var(--green); color: var(--green-text); background: var(--green); }
+
+/* Topic list cards */
+#grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.card { display: flex; min-width: 0; flex-direction: column; align-items: stretch; gap: 10px; padding: 20px; }
+.card h3 { margin: 0; font-size: 1.02rem; }
+.card-topline, .card-progress-copy, .card-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.em { display: grid; width: 40px; height: 40px; place-items: center; border-radius: var(--radius); background: var(--surface-2); font-size: 1.35rem; }
+.topic-badges { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 5px; }
+.level-badge, .key-badge { display: inline-flex; align-items: center; padding: 4px 7px; border: 1px solid rgba(136, 204, 20, .45); border-radius: var(--pill); color: var(--green); background: rgba(136, 204, 20, .15); font: 600 .66rem var(--font-mono); text-transform: uppercase; }
+.key-badge { border-color: var(--border); color: var(--muted); background: var(--surface-2); }
+.card-progress-copy, .card-meta { color: var(--muted); font: 400 .72rem var(--font-mono); }
+.card-progress { height: 5px; overflow: hidden; border-radius: var(--pill); background: var(--surface-2); }
+.card-progress span, .bar div, .gcse-bar div, .room-progress span, .exam-track span { display: block; height: 100%; border-radius: inherit; background: var(--green); }
+.topic-open { width: 100%; margin-top: auto; }
+.card.done, .topic-quiz-review.correct, .gcse-question-correct { border-color: var(--green); }
+.locked-card { opacity: .6; filter: grayscale(1); }
+.locked-card:hover { transform: none; border-color: var(--border); }
+.topic-lock-icon { color: var(--muted); }
+.locked-topic-placeholder { display: grid; gap: 7px; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); }
+.locked-topic-placeholder span{ height: 8px; border-radius: var(--pill); background: var(--border); filter:blur(3px); }
+.locked-topic-placeholder span:nth-child(2) { width: 78%; }.locked-topic-placeholder span:nth-child(3) { width: 56%; }
+.topic-lock-settings { margin: 12px 0; padding: 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.topic-lock-settings > label { display: flex; align-items: center; gap: 9px; font-weight: 700; }
+.topic-practice-banner { padding: 9px 12px; border: 1px solid var(--green); border-radius: var(--radius); color: var(--green); background: rgba(136, 204, 20, .12); }
+.completed-badge, .recommended-badge { align-self: flex-start; padding: 4px 8px; border: 1px solid var(--green); border-radius: var(--pill); color: var(--green); font: 600 .68rem var(--font-mono); }
+
+/* Topic room and task sidebar */
+.topic-page { overflow-x: clip; }
+.topic-page main { width: 100%; max-width: none; padding: 0; }
+.topic-page-shell { display: grid; width: 100%; grid-template-columns: 280px minmax(0, 1fr); grid-template-rows: auto auto; align-items: start; margin: 0 auto; }
+.topic-page-shell > .room-header { grid-column: 1 / -1; width: 100%; }
+.topic-breadcrumb { margin-bottom: 14px; color: var(--muted); font-size: .84rem; }
+.topic-breadcrumb a { color: var(--muted); }
+.topic-page-shell > .topic-sidebar { position: sticky; top: 68px; grid-column: 1; grid-row: 2; max-height: calc(100vh - 78px); overflow: auto; padding: 18px 12px; border-right: 1px solid var(--border); background: var(--bg); }
+.topic-sidebar > strong { display: block; margin: 10px 8px; color: var(--muted); font: 600 .7rem var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
+.topic-sidebar ol { display: grid; gap: 3px; margin: 0 0 18px; padding: 0; list-style: none; }
+.topic-sidebar li a { display: flex; align-items: flex-start; gap: 8px; padding: 8px; border-left: 2px solid transparent; border-radius: 0 var(--radius) var(--radius) 0; color: var(--muted); font-size: .82rem; line-height: 1.35; text-decoration: none; }
+.topic-sidebar li a:hover { color: var(--text); background: var(--surface); }
+.topic-sidebar li a[aria-current=step] { border-left-color: var(--green); color: var(--green); background: var(--surface-2); }
+.topic-goal-mark { display: inline-grid; width: 18px; flex: 0 0 18px; place-items: center; color: var(--green); font-weight: 700; }
+.topic-page-shell > .room-content { grid-column: 2; grid-row: 2; width: 100%; max-width: none; min-width: 0; padding: 24px clamp(16px, 3vw, 40px); }
+.topic-page-shell .room-tabs { position: sticky; z-index: 5; top: 56px; display: flex; gap: 22px; margin: -2px 0 18px; padding: 0 4px; overflow-x: auto; border-bottom: 1px solid var(--border); background: var(--bg); }
+.topic-mobile-section-label, .topic-mobile-section { display: none; }
+.room-tab { position: relative; min-height: 46px; flex: 0 0 auto; padding: 8px 2px; border: 0; border-radius: 0; color: var(--muted); background: transparent; font-weight: 500; white-space: nowrap; }
+.room-tab:hover, .room-tab.active { color: var(--green); }
+.room-tab.active::after { position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; background: var(--green); content: ''; }
+.room-panel { min-width: 0; margin: 0; padding: clamp(16px, 2vw, 24px); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.room-panel[hidden] { display: none; }
+.room-panel h3 { margin: 20px 0 9px; color: var(--text); }
+.topic-assessment-area { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--border); }
+.topic-assessment-area > h3 { margin-top: 0; }
+.room-panel h4, .room-task-content h4 { margin: 18px 0 7px; color: var(--green); }
+.room-header { padding: 26px clamp(16px, 4vw, 46px) 22px; border-bottom: 1px solid var(--border); background: var(--surface); }
+.room-header h1, .room-header h2 { max-width: 900px; margin: 4px 0 10px; font-size: clamp(1.6rem, 3.5vw, 2.6rem); }
+.room-header > p { max-width: 850px; color: var(--muted); }
+.room-kicker { margin-bottom: 8px; }
+.room-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+.room-meta span, .room-pill { padding: 5px 9px; border: 1px solid var(--border); border-radius: var(--pill); color: var(--muted); background: var(--surface-2); font: 600 .68rem var(--font-mono); text-transform: uppercase; }
+.room-meta span.room-completed { border-color: var(--green); color: var(--green); }
+.room-progress { width: min(500px, 100%); margin-top: 16px; }
+.room-progress-copy { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 6px; color: var(--muted); font: 400 .76rem var(--font-mono); }
+.room-progress-copy > span { color: var(--text); }
+.room-progress-copy strong { color: var(--text); }
+.room-progress-track, .exam-track, .gcse-bar, .bar { height: 6px; overflow: hidden; border-radius: var(--pill); background: var(--surface-2); }
+.room-progress-track span { width: 0; transition: width 150ms ease; }
+.topic-continue { margin-top: 12px; }
+.topic-section-nav { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--border); }
+.topic-page .topic-section-nav > *, .topic-page .topic-continue { min-height: 44px; }
+.room-completion-reward { margin: 0 0 18px; padding: clamp(18px, 4vw, 32px); border: 1px solid var(--green); border-radius: 16px; background: linear-gradient(135deg, rgba(136, 204, 20, .18), var(--surface)); text-align: center; }
+.room-completion-reward > span { color: var(--green); font: 700 .78rem var(--font-mono); letter-spacing: .12em; }
+.room-completion-reward h2 { margin: 8px 0; }
+.room-completion-reward-points { color: var(--green); font-size: 1.35rem; font-weight: 800; }
+.room-completion-reward-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 12px; }
+.topic-completion-reward { display: flex; align-items: center; gap: 12px; width: min(760px, 100%); margin-top: 16px; padding: 12px 16px; border: 1px solid var(--green); border-radius: 12px; background: rgba(136, 204, 20, .12); }
+.topic-completion-reward > span:first-child { font-size: 1.6rem; }
+.topic-completion-reward > div { flex: 1; }
+.topic-completion-reward p { margin: 2px 0 0; color: var(--muted); }
+.topic-goals { padding-left: 24px; }
+.topic-goals li { padding: 3px; scroll-margin-top: 100px; }
+.topic-learning-goals > summary { margin: 18px 0 8px; color: var(--text); font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+@media (min-width: 701px) { .topic-learning-goals > summary { list-style: none; cursor: default; } .topic-learning-goals > summary::-webkit-details-marker { display: none; } }
+.topic-locked-notice, .not-found-page { width: min(720px, calc(100% - 32px)); margin: 12vh auto; padding: clamp(20px, 5vw, 44px); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.room-close { float: right; width: 40px; height: 40px; padding: 0; }
+.room-briefing, .room-goal, .mastery-review, .paper-review-content { padding: 14px 16px; border-left: 4px solid var(--green); border-radius: 0 var(--radius) var(--radius) 0; color: var(--text); background: var(--surface-2); }
+.room-briefing h3 { margin-top: 12px; color: var(--green); }
+.mastery-routine { margin: 18px 0; padding: 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.mastery-routine-heading h3 { margin: 4px 0; }
+.mastery-routine-heading p, .mastery-steps li p { color: var(--muted); }
+.mastery-steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 14px 0 0; padding: 0; list-style: none; counter-reset: mastery; }
+.mastery-steps li { padding: 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); counter-increment: mastery; }
+.mastery-steps li::before { display: inline-grid; width: 24px; height: 24px; margin-right: 7px; place-items: center; border-radius: 50%; color: var(--green-text); background: var(--green); content: counter(mastery); font: 600 .75rem var(--font-mono); }
+.mastery-action { min-height: 36px; border: 1px solid var(--border); color: var(--green); background: transparent; }
+.finish-topic { display: inline-flex; gap: 8px; align-items: center; margin-top: 12px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.room-roadmap { display: grid; gap: 7px; margin: 10px 0; padding: 0 !important; list-style: none; }
+.room-roadmap li { display: grid; gap: 4px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.room-roadmap li.current { border-left: 3px solid var(--green); }
+
+/* Focused learning interface */
+body { letter-spacing: .005em; }
+main { width: min(1280px, 100%); }
+.site-menu { height: 56px; min-height: 56px; padding-inline: max(20px, calc((100vw - 1280px) / 2)); background: rgba(8, 13, 20, .94); backdrop-filter: blur(14px); }
+.site-menu > a, .site-menu-more > summary { min-height: 56px; }
+.site-menu > a:first-child { font-size: 1.02rem; }
+.site-menu > a:first-child::before { width: 32px; height: 32px; border-radius: 9px; content: '∑'; font: 700 1.05rem var(--font-ui); }
+.hero { position: relative; overflow: hidden; padding: clamp(44px, 7vw, 88px) 24px; border-bottom: 1px solid var(--border); background: radial-gradient(ellipse at 78% 45%, rgba(68, 112, 43, .18), transparent 38%), linear-gradient(145deg, #111c29 0%, #0d141e 58%, #101a22 100%); }
+.hero::after { position: absolute; right: -110px; bottom: -245px; width: 480px; height: 480px; border: 1px solid rgba(155, 225, 93, .1); border-radius: 50%; box-shadow: 0 0 0 42px rgba(155, 225, 93, .025), 0 0 0 88px rgba(155, 225, 93, .018); content: ''; pointer-events: none; }
+.hero-shell { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .75fr); align-items: center; gap: clamp(32px, 7vw, 100px); }
+.hero-copy { max-width: 720px; }
+.hero-copy .eyebrow { border-color: rgba(155, 225, 93, .28); color: var(--green); background: rgba(155, 225, 93, .08); }
+.hero-copy h1 { max-width: 700px; margin: 18px 0; font-size: clamp(2.5rem, 5.8vw, 4.6rem); letter-spacing: -.055em; line-height: 1.04; }
+.hero-copy > p { max-width: 650px; color: #bdc8d4; font-size: clamp(1.03rem, 1.5vw, 1.2rem); line-height: 1.65; }
+.hero-actions { gap: 12px; margin-top: 26px; }
+.hero-actions > * { min-height: 48px; padding-inline: 18px; }
+.hero-trust-list { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 24px 0 0; padding: 0; color: var(--muted); font-size: .82rem; list-style: none; }
+.hero-trust-list li::before { margin-right: 7px; color: var(--green); content: '✓'; font-weight: 700; }
+.hero-learning-card { max-width: 430px; padding: clamp(20px, 3vw, 30px); border: 1px solid #304337; border-radius: 18px; background: linear-gradient(155deg, rgba(23, 35, 50, .96), rgba(14, 23, 32, .96)); box-shadow: 0 28px 90px rgba(0, 0, 0, .28); }
+.hero-card-kicker { color: var(--green); font: 600 .72rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+.hero-learning-card ol { display: grid; gap: 5px; margin: 16px 0; padding: 0; list-style: none; }
+.hero-learning-card li { display: flex; align-items: center; gap: 14px; padding: 13px 10px; border-bottom: 1px solid rgba(160, 173, 188, .13); }
+.hero-learning-card li:last-child { border-bottom: 0; }
+.hero-learning-card li > span { display: grid; width: 36px; height: 36px; flex: 0 0 36px; place-items: center; border: 1px solid rgba(155, 225, 93, .32); border-radius: 10px; color: var(--green); background: rgba(155, 225, 93, .08); font: 600 .72rem var(--font-mono); }
+.hero-learning-card li div { display: grid; gap: 3px; }
+.hero-learning-card li strong { font-size: .94rem; }
+.hero-learning-card li small { color: var(--muted); font-size: .8rem; }
+.hero-learning-card > p { margin: 0; padding-top: 14px; border-top: 1px solid rgba(160, 173, 188, .13); color: var(--muted); font-size: .78rem; }
+.hero-learning-card > p span { margin-right: 5px; color: var(--green); }
+.pathways { margin: 26px 0; padding: clamp(20px, 3vw, 32px); border-color: transparent; background: transparent; }
+.pathways-heading { max-width: 680px; margin-bottom: 20px; }
+.pathways-heading h2 { margin-top: 12px; font-size: clamp(1.6rem, 3vw, 2.1rem); letter-spacing: -.03em; }
+.pathways-heading > p { color: var(--muted); }
+.pathway-grid { gap: 16px; }
+.pathway-card { min-height: 190px; grid-template-columns: 48px minmax(0, 1fr); align-content: space-between; gap: 14px; padding: 22px; border-color: var(--border); border-radius: 14px; background: linear-gradient(145deg, var(--surface), #101923); }
+.pathway-card:hover { border-color: rgba(155, 225, 93, .62); background: linear-gradient(145deg, #152231, #111d28); }
+.pathway-icon { width: 44px; height: 44px; border: 1px solid rgba(155, 225, 93, .25); border-radius: 12px; color: var(--green); background: rgba(155, 225, 93, .08); font: 600 .78rem var(--font-mono); }
+.pathway-label { display: block; margin: 1px 0 7px; color: var(--muted); font: 600 .68rem var(--font-mono); letter-spacing: .07em; text-transform: uppercase; }
+.pathway-card h3 { font-size: 1.18rem; }
+.pathway-card p { max-width: 500px; line-height: 1.55; }
+.pathway-link { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 12px; border-radius: 8px; color: var(--green) !important; background: rgba(155, 225, 93, .08); }
+.pathway-link:hover { color: var(--green-hover) !important; background: rgba(155, 225, 93, .14); }
+.study-flow { margin: 18px 0 24px; }
+.study-queue, .study-summary, .today-panel { border-radius: 14px; }
+.study-queue { background: linear-gradient(130deg, #172532, #111a26); }
+.today-panel { padding: clamp(18px, 3vw, 28px); }
+.today-heading-row h2 { margin-top: 8px; font-size: 1.55rem; }
+.today-stats > div { min-height: 90px; align-content: center; border-radius: 10px; }
+#topics { scroll-margin-top: 82px; }
+#topics > h2 { font-size: clamp(1.8rem, 3vw, 2.3rem); letter-spacing: -.035em; }
+#grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.card { border-radius: 12px; }
+.room-header { background: radial-gradient(ellipse at 88% 0%, rgba(68, 112, 43, .12), transparent 32%), var(--surface); }
+.topic-page-shell > .topic-sidebar { border-color: var(--border); background: #0d141d; }
+.topic-page-shell > .room-content { max-width: 1060px; margin-inline: auto; }
+.room-panel { border-radius: 14px; line-height: 1.7; }
+.room-briefing { padding: 20px 22px; border-left-width: 3px; border-radius: 0 12px 12px 0; }
+.room-briefing > p:first-child { font-size: 1.08rem; line-height: 1.7; }
+.mastery-routine, .worked-example, .practice-question-review { border-radius: 12px; }
+.topic-section-nav { margin-top: 34px; }
+body a:not(.gcse-entry):not(.secondary-link):not(.room-primary):not(.room-secondary):not(.paper-primary):not(.paper-secondary):not(.papers-official-link):not(.visual-primary):not(.gcse-practice-link):not(.re

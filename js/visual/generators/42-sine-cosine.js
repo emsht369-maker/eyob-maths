@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "sine-cosine", title: "Sine and cosine graphs", area: "Graphs", skill: "Amplitude and period", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("sine-cosine", rng) });

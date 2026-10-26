@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "midpoint-distance", title: "Midpoint and distance", area: "Geometry", skill: "Midpoint and distance on a grid", tier: "FH", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("midpoint-distance", rng) });

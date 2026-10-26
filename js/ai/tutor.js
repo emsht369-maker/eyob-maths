@@ -544,6 +544,7 @@
 
     async function submitMessage() {
       if (send.disabled) return;
+      const studyScroll = { left: window.scrollX, top: window.scrollY };
       const question = input.value.trim();
       if (!question) {
         sendStatus.textContent = "Type a maths question first.";
@@ -603,6 +604,8 @@
       } finally {
         send.disabled = false;
         send.textContent = "Send";
+        window.scrollTo({ ...studyScroll, behavior: "instant" });
+        requestAnimationFrame(() => window.scrollTo({ ...studyScroll, behavior: "instant" }));
       }
     }
     input.addEventListener("input", updateCounter);

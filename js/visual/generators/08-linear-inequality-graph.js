@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "linear-inequality-graph", title: "Graph a linear inequality", area: "Graphs", skill: "Linear inequality regions", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("linear-inequality-graph", rng) });

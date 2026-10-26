@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width,initial-scale=1,interactive-widget=resizes-content">
+  <meta name="description" content="Practise original visual maths questions with diagrams, graphs and models.">
+  <title>Visual Lab | Math Master</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/visual.css">
+  <link rel="stylesheet" href="css/ai.css">
+</head>
+<body class="visual-page">
+  <a class="skip-link" href="#visual-main">Skip to Visual Lab</a>
+  <nav class="site-menu" aria-label="Main menu">
+    <a href="index.html">Math Master</a>
+    <a href="courses.html">Courses</a>
+    <a href="gcse.html">GCSE Topics</a>
+    <a href="rooms.html">Rooms</a>
+    <a href="visual.html" aria-current="page">Visual Lab</a>
+    <a href="questions.html">Question Bank</a>
+    <details class="site-menu-more">
+      <summary>More study tools</summary>
+      <div class="site-menu-submenu">
+    <a href="gcse-formulas.html">Formulas</a>
+    <a href="gcse-exam-words.html">Exam Words</a>
+    <a href="gcse-mock.html">Mock Paper</a>
+    <a href="papers.html">Practice Papers</a>
+    <a href="reference.html">Reference</a>
+      </div>
+    </details>
+  </nav>
+
+  <header class="visual-hero">
+    <div class="visual-wrap">
+      <span class="eyebrow">See it · solve it · understand it</span>
+      <h1>Visual Lab</h1>
+      <p>Explore original questions with graphs, angle diagrams, fraction models and more.</p>
+      <div class="visual-scoreboard" aria-label="Your Visual Lab progress">
+        <div><strong id="visual-points">0</strong><span>points</span></div>
+        <div><strong id="visual-streak">0</strong><span>correct streak</span></div>
+        <div><strong id="visual-accuracy">—</strong><span>accuracy</span></div>
+        <label class="visual-theme-toggle"><input id="visual-theme" type="checkbox" aria-label="Use light mode"> Light mode</label>
+      </div>
+    </div>
+  </header>
+
+  <main id="visual-main" class="visual-wrap">
+    <section class="visual-filter-card" aria-labelledby="filter-title">
+      <h2 id="filter-title">Choose what to practise</h2>
+      <div class="visual-filters">
+        <label>Area
+          <select id="visual-area" aria-label="Filter questions by area">
+            <option value="All">All areas</option>
+            <option>Number</option><option>Algebra</option><option>Geometry</option><option>Graphs</option><option>Fractions</option>
+          </select>
+        </label>
+        <label>Skill
+          <select id="visual-skill" aria-label="Filter questions by skill"><option value="All">All skills</option></select>
+        </label>
+        <label>Difficulty
+          <select id="visual-tier" aria-label="Filter questions by difficulty">
+            <option value="All">All levels</option><option value="F">Foundation</option><option value="H">Higher</option>
+          </select>
+        </label>
+        <button id="visual-start-exam" type="button" aria-label="Start a 10-question timed test">Start timed test</button>
+      </div>
+      <p class="visual-muted">Every question is made from a repeatable seed. Your progress stays in this browser.</p>
+    </section>
+
+    <section id="visual-exam-panel" class="visual-exam-panel" aria-label="Timed test" hidden>
+      <div class="visual-exam-top"><strong id="visual-question-count">Question 1 of 10</strong><span>Time: <b id="visual-exam-time">0:00</b></span></div>
+      <progress id="visual-progress" max="10" value="1" aria-label="Timed test progress"></progress>
+      <div class="visual-exam-controls">
+        <button id="visual-prev-exam" type="button" aria-label="Previous test question">Previous</button>
+        <button id="visual-next-exam" type="button" aria-label="Next test question">Next</button>
+        <button id="visual-finish-exam" type="button" aria-label="Finish timed test">Finish test</button>
+      </div>
+      <div id="visual-exam-review" class="visual-review" hidden>
+        <h2>Test review</h2>
+        <p id="visual-exam-score" aria-live="polite"></p>
+        <div id="visual-exam-review-list"></div>
+        <button id="visual-new-practice" type="button" aria-label="Return to practice mode">Return to practice</button>
+      </div>
+    </section>
+
+    <section class="visual-question-card" aria-labelledby="visual-question-heading">
+      <div class="visual-question-top">
+        <div><span class="visual-kicker">Your question</span><h2 id="visual-question-heading">Look closely at the diagram</h2></div>
+        <code id="visual-seed" aria-label="Question generator and seed"></code>
+      </div>
+      <div id="visual-prompt" class="visual-prompt" aria-live="polite"></div>
+      <div id="visual-diagram" class="visual-diagram"></div>
+      <div id="visual-answer-area" class="visual-answer-area"></div>
+      <p id="visual-feedback" class="visual-feedback" role="status" aria-live="polite"></p>
+      <div class="visual-actions">
+        <button id="visual-hint" type="button" aria-label="Show a hint">Hint</button>
+        <button id="visual-submit" class="visual-primary" type="button" aria-label="Submit your answer">Submit</button>
+        <button id="visual-explain" type="button" aria-label="Show the worked explanation" disabled>Show explanation</button>
+        <button id="visual-next" type="button" aria-label="Get a new question" disabled>Next question</button>
+      </div>
+      <p id="visual-hint-text" class="visual-hint" hidden></p>
+      <div class="visual-actions visual-secondary-actions">
+        <button id="visual-same" type="button" aria-label="Repeat this exact question">Same question again</button>
+        <button id="visual-same-type" type="button" aria-label="Try another question of this type">Try the same type again</button>
+        <button id="visual-report" type="button" aria-label="Copy this question code to report a problem">Report a problem</button>
+      </div>
+      <details id="visual-explanation" class="visual-explanation" hidden>
+        <summary>Worked explanation</summary>
+        <ol id="visual-steps"></ol>
+        <h3>Solution diagram</h3>
+        <div id="visual-solution" class="visual-diagram"></div>
+      </details>
+      <nav id="visual-support" class="visual-support" aria-label="More help"></nav>
+      <span id="visual-wolfram" hidden></span>
+      <p id="visual-status" class="visual-muted" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="visual-dashboard">
+      <article class="visual-panel">
+        <h2>Skill progress</h2>
+        <ul id="visual-skill-stats"><li>Answer a few questions to see skill stats.</li></ul>
+      </article>
+      <article class="visual-panel">
+        <h2>Mistakes to revisit</h2>
+        <ul id="visual-mistakes"><li>No saved mistakes yet.</li></ul>
+        <button id="visual-practise-mistakes" type="button" aria-label="Practise saved mistakes">Practise my mistakes</button>
+      </article>
+    </section>
+  </main>
+  <footer class="visual-footer">Original visual practice made for Math Master.</footer>
+  <script defer src="js/visual/svg.js"></script>
+  <script defer src="js/visual/rng.js"></script>
+  <script defer src="js/visual/checker.js"></script>
+  <script defer src="js/visual/click.js"></script>
+  <script defer src="js/visual/index.js"></script>
+  <script defer src="js/ai/config.js"></script>
+  <script defer src="js/ai/tutor.js"></script>
+  <script defer src="js/visual/engine.js"></script>
+<script defer src="js/mm2-rewards.js"></script>
+<script defer src="/js/shared-header.js"></script>
+</body>
+</html>

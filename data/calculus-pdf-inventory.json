@@ -1,0 +1,383 @@
+{
+  "course": "MIT OpenCourseWare 18.01SC Single Variable Calculus, Fall 2010",
+  "source": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/",
+  "license": "CC BY-NC-SA 4.0",
+  "uniqueFiles": 36,
+  "sourceCopies": 49,
+  "duplicatesCollapsed": 13,
+  "resources": [
+    {
+      "file": "MIT18_01SCF10_exam1.pdf",
+      "title": "Exam 1 — question paper",
+      "category": "Exams",
+      "bytes": 107390,
+      "sha256": "ac04ce60dde0fca934baa137567f47958cb4a81a6655889a2ef8aef43219f2d8",
+      "originalFiles": [
+        "887263248c3f66128de1205f06993524_MIT18_01SCF10_exam1.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_exam1sol.pdf",
+      "title": "Exam 1 — solutions",
+      "category": "Exams",
+      "bytes": 146175,
+      "sha256": "042beb6ccf29d0510974e82761e7dd6d30ebd3072d5c3c1c4ab196e4b9a09e0e",
+      "originalFiles": [
+        "0817fc547c8edd2c29172f670a4d1d66_MIT18_01SCF10_exam1sol (1).pdf",
+        "0817fc547c8edd2c29172f670a4d1d66_MIT18_01SCF10_exam1sol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_exam2.pdf",
+      "title": "Exam 2 — question paper",
+      "category": "Exams",
+      "bytes": 83163,
+      "sha256": "da63cf736812d633cb3cbb31d0c7b67a2694205c6f8ce2b1af9338a677920cdb",
+      "originalFiles": [
+        "31f017f339405b5c2d7b273462522c23_MIT18_01SCF10_exam2.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_exam2sol.pdf",
+      "title": "Exam 2 — solutions",
+      "category": "Exams",
+      "bytes": 148482,
+      "sha256": "e25fe32f822eae68740c883fc1558a6f2cccb45413e0f74bba59a9ae03e1e6c0",
+      "originalFiles": [
+        "8bc1745cc348551cb9b30fb6cc7f9ecf_MIT18_01SCF10_exam2sol (1).pdf",
+        "8bc1745cc348551cb9b30fb6cc7f9ecf_MIT18_01SCF10_exam2sol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_exam3.pdf",
+      "title": "Exam 3 — question paper",
+      "category": "Exams",
+      "bytes": 127011,
+      "sha256": "67f960edb5f14ade489173a7ca85f526ad6d68a13a146f3c8588f1678854be56",
+      "originalFiles": [
+        "a24ae17a1585cc320e5502b586fdc08d_MIT18_01SCF10_exam3.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_exam3sol.pdf",
+      "title": "Exam 3 — solutions",
+      "category": "Exams",
+      "bytes": 182269,
+      "sha256": "7e146431d6cd18b4cdf6334319e7af205531190d8928bfcb1b3f27c679e6a3a4",
+      "originalFiles": [
+        "2045fef2f2fa83e391fd95b39b083173_MIT18_01SCF10_exam3sol (1).pdf",
+        "2045fef2f2fa83e391fd95b39b083173_MIT18_01SCF10_exam3sol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_exam4.pdf",
+      "title": "Exam 4 — question paper",
+      "category": "Exams",
+      "bytes": 100300,
+      "sha256": "be150937161ebe93ebb5ab5bb0d359a0e0f73fbab81c04f6f89c9a9b027e1ebf",
+      "originalFiles": [
+        "b8d6291f6109adf0a4b4cc623ef5f213_MIT18_01SCF10_exam4.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_exam4sol.pdf",
+      "title": "Exam 4 — solutions",
+      "category": "Exams",
+      "bytes": 160420,
+      "sha256": "a9a6adb07263e0e13efdb8f0272b143cf5a00e0078d76a0d23bc32f2f50412bb",
+      "originalFiles": [
+        "f1c8096b6d2d8021709b313e87991bd0_MIT18_01SCF10_exam4sol (1).pdf",
+        "f1c8096b6d2d8021709b313e87991bd0_MIT18_01SCF10_exam4sol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_final.pdf",
+      "title": "Final exam — question paper",
+      "category": "Exams",
+      "bytes": 132474,
+      "sha256": "fd00aef0d125acd569a673659f44b59635c200b1f309371534231afc6e0b7cb2",
+      "originalFiles": [
+        "93c7107d33490a892fdf426e5033062e_MIT18_01SCF10_final.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_finalsol.pdf",
+      "title": "Final exam — solutions",
+      "category": "Exams",
+      "bytes": 212279,
+      "sha256": "2cf0ce89b64b853c7ee279232b81dcc2279ea290d63502ce80f53cc08dcec1d7",
+      "originalFiles": [
+        "bbbf05286af4bd705af325080bea0e23_MIT18_01SCF10_finalsol (1).pdf",
+        "bbbf05286af4bd705af325080bea0e23_MIT18_01SCF10_finalsol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_ex01sol.pdf",
+      "title": "Exercise set 01 — solutions",
+      "category": "Exercise sheets",
+      "bytes": 125405,
+      "sha256": "28cfb6429ac6e3b706916f276bfa626140c465b3cc92ae4eeecad494f718150c",
+      "originalFiles": [
+        "4c79fff7e6ea9fb28d9c6002995757c6_MIT18_01SCF10_ex01sol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_ex02sol.pdf",
+      "title": "Exercise set 02 — solutions",
+      "category": "Exercise sheets",
+      "bytes": 136697,
+      "sha256": "822162239576aae52e17e241dc3100aaec5f5f0e3db8f6f3fdc190cc9b90bac5",
+      "originalFiles": [
+        "bde06f55dbe791c648649b4b942df999_MIT18_01SCF10_ex02sol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_ex03sol.pdf",
+      "title": "Exercise set 03 — solutions",
+      "category": "Exercise sheets",
+      "bytes": 76645,
+      "sha256": "70772d20fc9f902e4f8dd1c004e125380ed6412c7cd5c40c8f06da1c981bf7ce",
+      "originalFiles": [
+        "bc7b17413d57bcd7da90592fbba2bdf7_MIT18_01SCF10_ex03sol (1).pdf",
+        "bc7b17413d57bcd7da90592fbba2bdf7_MIT18_01SCF10_ex03sol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_ex04sol.pdf",
+      "title": "Exercise set 04 — solutions",
+      "category": "Exercise sheets",
+      "bytes": 154159,
+      "sha256": "888b6e9f9bf39fd351f44e30f94ead28027d3cfe7e7523628041e92fb25146f3",
+      "originalFiles": [
+        "992aa5605f07998477a1f9e2cba0737d_MIT18_01SCF10_ex04sol (1).pdf",
+        "992aa5605f07998477a1f9e2cba0737d_MIT18_01SCF10_ex04sol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_ex05sol.pdf",
+      "title": "Exercise set 05 — solutions",
+      "category": "Exercise sheets",
+      "bytes": 130738,
+      "sha256": "cd49facd688460b095037782177bba97f4128c7ef403c26771c352d23ba6af4e",
+      "originalFiles": [
+        "5014374a5054c09b52041b1fe02774ba_MIT18_01SCF10_ex05sol.pdf"
+      ]
+    },
+    {
+      "file": "lec9ses2ex1-linearprod.pdf",
+      "title": "Worksheet · Products of linear approximations",
+      "category": "Exercise sheets",
+      "bytes": 82264,
+      "sha256": "ee85e29ec985aec11d8c631670e1d2c51782863be6a6cc07dedc73b09fcd4b9f",
+      "originalFiles": [
+        "f9559e0393ec511dd94023a5ea8b3aad_lec9ses2ex1-linearprod.pdf"
+      ]
+    },
+    {
+      "file": "lec1ses1ex1-secants.pdf",
+      "title": "Worksheet · Secant and tangent lines",
+      "category": "Exercise sheets",
+      "bytes": 85255,
+      "sha256": "e2aeabcd126e8ff9ae99f5556e1ef5867d47f38904e0917d3e018da90a4a6d5c",
+      "originalFiles": [
+        "68a59e6c2e777ee29a9236d54f779a64_lec1ses1ex1-secants.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_Ses101a.pdf",
+      "title": "Course finale · Next steps after single variable calculus",
+      "category": "Lecture notes and worked examples",
+      "bytes": 47246,
+      "sha256": "1ba4e6935a2a541a90f58166961d4a8099d0dec379d35abae49a7bbf5f054f0e",
+      "originalFiles": [
+        "b36b8b8d0d0011be962513baabe7c760_MIT18_01SCF10_Ses101a.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_Ses10a.pdf",
+      "title": "Differentiation · Quotient rule",
+      "category": "Lecture notes and worked examples",
+      "bytes": 112175,
+      "sha256": "2dcfcc85bd92dca8e090a36c782892df3c55524b1a52ba614a76df36e09ddded",
+      "originalFiles": [
+        "709f6672888f18e22656ca8700218cb6_MIT18_01SCF10_Ses10a.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_Ses21g.pdf",
+      "title": "Exam 1 review · Definition of the derivative",
+      "category": "Lecture notes and worked examples",
+      "bytes": 132756,
+      "sha256": "f305e5dea1a1b3c4bf43d86a4d840596b12d8f13cd6c9ab1ad687005101f66f3",
+      "originalFiles": [
+        "b3146a0288a1571b1f35b92c20449237_MIT18_01SCF10_Ses21g.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_Ses34b.pdf",
+      "title": "Mean Value Theorem · Consequences",
+      "category": "Lecture notes and worked examples",
+      "bytes": 92149,
+      "sha256": "5dd6422d5b70463dc82e98e61f75de330f5421f3081be8f1e49d31513e1f12aa",
+      "originalFiles": [
+        "70b03126d02cdf5b87bc59e6e515bc73_MIT18_01SCF10_Ses34b.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_Ses100b.pdf",
+      "title": "Power series · Differentiation",
+      "category": "Lecture notes and worked examples",
+      "bytes": 85372,
+      "sha256": "0799a1abbf9bcd4e0cd82adf3189a8fdcd504b65a6716e7be6a384b0057bb801",
+      "originalFiles": [
+        "94c689d7f7dc061c175e5781df84a26b_MIT18_01SCF10_Ses100b.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_Ses100c.pdf",
+      "title": "Power series · Integration and ln(1 + x)",
+      "category": "Lecture notes and worked examples",
+      "bytes": 111762,
+      "sha256": "fd94e67358a2ebeb181a3f6049be6cb0db86b34b160d1ef25fc933a28c3536d6",
+      "originalFiles": [
+        "91ad40497f984b811ea463edd4d5e755_MIT18_01SCF10_Ses100c.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_Ses100a.pdf",
+      "title": "Power series · Multiplication",
+      "category": "Lecture notes and worked examples",
+      "bytes": 95448,
+      "sha256": "96e5ea5cecf19903a65fbbfa1d68a5c4aa2ddc88547cd529838b264f4cb14a87",
+      "originalFiles": [
+        "da3fe4bceb5535ea0a47b6ed2427c388_MIT18_01SCF10_Ses100a (1).pdf",
+        "da3fe4bceb5535ea0a47b6ed2427c388_MIT18_01SCF10_Ses100a.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_Ses100d.pdf",
+      "title": "Power series · Substitution and e^(−x²)",
+      "category": "Lecture notes and worked examples",
+      "bytes": 99896,
+      "sha256": "7601583702422cc53675291124c07b8154fb4b64977712b40b63757e24a7acf4",
+      "originalFiles": [
+        "33f76c6f2abf4190beb0a0cf29065926_MIT18_01SCF10_Ses100d.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SCF10_Ses100e.pdf",
+      "title": "Power series · The error function",
+      "category": "Lecture notes and worked examples",
+      "bytes": 121606,
+      "sha256": "1e3e4780bf5d4f80955434a1d3c7aeebc671b65c29341b11829f52d7347aa3b4",
+      "originalFiles": [
+        "4f477c5893e496cd5bf18e777e95414c_MIT18_01SCF10_Ses100e.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SC_pset1prb.pdf",
+      "title": "Problem set 1 — questions",
+      "category": "Problem sets",
+      "bytes": 308580,
+      "sha256": "e95d9b5f6ae501fb003e17ee9b79c13825aa0b721477e6faa1ac995497a1e34c",
+      "originalFiles": [
+        "87d9380ba7de44cbeaca3b655844a1d4_MIT18_01SC_pset1prb.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SC_pset1sol.pdf",
+      "title": "Problem set 1 — solutions",
+      "category": "Problem sets",
+      "bytes": 418596,
+      "sha256": "650fab8bc701471bd871bc2d5e249a13972b9ed0527d75ba7685a9468649a566",
+      "originalFiles": [
+        "bc48678ef179556cc639b6b28e42d81c_MIT18_01SC_pset1sol (1).pdf",
+        "bc48678ef179556cc639b6b28e42d81c_MIT18_01SC_pset1sol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SC_pset2prb.pdf",
+      "title": "Problem set 2 — questions",
+      "category": "Problem sets",
+      "bytes": 206762,
+      "sha256": "6158ef89878910322ed1079314aa2cb42a55a9ce8e8279cc9af85972c260add5",
+      "originalFiles": [
+        "9ed0d442d25990a98c1c770ad331a17a_MIT18_01SC_pset2prb.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SC_pset2sol.pdf",
+      "title": "Problem set 2 — solutions",
+      "category": "Problem sets",
+      "bytes": 491993,
+      "sha256": "c5d324c7fb6561af1944eae327ef45c9b86b821adbfacd91c862a1b8aa6b0af0",
+      "originalFiles": [
+        "f556ad6eaeb6efeeda61161d7a63c6d7_MIT18_01SC_pset2sol (1).pdf",
+        "f556ad6eaeb6efeeda61161d7a63c6d7_MIT18_01SC_pset2sol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SC_pset3prb.pdf",
+      "title": "Problem set 3 — questions",
+      "category": "Problem sets",
+      "bytes": 253005,
+      "sha256": "edbac2381a7a049e31f18b8a55c4c77ee7d41c35c47f35a0e8893ae8eadcda26",
+      "originalFiles": [
+        "eaabc6c74a11402341dbc120fffa5ea5_MIT18_01SC_pset3prb.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SC_pset3sol.pdf",
+      "title": "Problem set 3 — solutions",
+      "category": "Problem sets",
+      "bytes": 376976,
+      "sha256": "d18ba6f6d905c00d2611a8474a67fbdde680dd746b4e3cc47b0eceba19ff7f5e",
+      "originalFiles": [
+        "a48839fb6b53e634f6d063fd99340380_MIT18_01SC_pset3sol (1).pdf",
+        "a48839fb6b53e634f6d063fd99340380_MIT18_01SC_pset3sol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SC_pset4prb.pdf",
+      "title": "Problem set 4 — questions",
+      "category": "Problem sets",
+      "bytes": 254928,
+      "sha256": "300ae1ec2ddaf275e84d7dfe22ddd24a03c605b7fe4749794a2a71d5528d6236",
+      "originalFiles": [
+        "92e9fe301b92d11995b3775aedb4bd6a_MIT18_01SC_pset4prb.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SC_pset4sol.pdf",
+      "title": "Problem set 4 — solutions",
+      "category": "Problem sets",
+      "bytes": 513062,
+      "sha256": "11ebf0824779c75e3f55f946d173698c5a5185c22607684b867f10b65a8ea259",
+      "originalFiles": [
+        "4a247b0655701dfebcbd4e235c16c726_MIT18_01SC_pset4sol (1).pdf",
+        "4a247b0655701dfebcbd4e235c16c726_MIT18_01SC_pset4sol.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SC_pset5prb.pdf",
+      "title": "Problem set 5 — questions",
+      "category": "Problem sets",
+      "bytes": 204860,
+      "sha256": "5015876951651a4f4695ccbbb74e22fdf1a43b1798d4859ed3324cdc9e90d23d",
+      "originalFiles": [
+        "50d9ff5b7a30fe96bd69017ca5104d6e_MIT18_01SC_pset5prb.pdf"
+      ]
+    },
+    {
+      "file": "MIT18_01SC_pset5sol.pdf",
+      "title": "Problem set 5 — solutions",
+      "category": "Problem sets",
+      "bytes": 414077,
+      "sha256": "bd91eb3edcebe44790ac3dc355356d422ee1f90cd6deffc089d48fbf3a9c75fd",
+      "originalFiles": [
+        "06979381db650b91c0de9d6755f03154_MIT18_01SC_pset5sol (1).pdf",
+        "06979381db650b91c0de9d6755f03154_MIT18_01SC_pset5sol.pdf"
+      ]
+    }
+  ]
+}

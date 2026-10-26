@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "triangle-angles", title: "Angles in a triangle", area: "Geometry", skill: "Triangle angle facts", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("triangle-angles", rng) });

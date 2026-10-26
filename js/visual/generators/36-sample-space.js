@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "sample-space", title: "Sample-space grids", area: "Number", skill: "Sample spaces and probability", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("sample-space", rng) });

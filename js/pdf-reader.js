@@ -9,10 +9,14 @@
   let opener = null, savedScrollX = 0, savedScrollY = 0, observer = null, resizeObserver = null, resizeFrame = 0, answerDebounce = 0, timerInterval = 0;
   let readingContext = { files: [], index: 0 }, questionBank = [], activeQuestionId = "", readerKind = "notes", isQuestionReader = false, activeTab = "answers", sheetMode = "half", photoDbPromise, photoUrls = [], markingCancelled = false;
   const parsedFiles = new Map(), photoCounts = new Map(), photoStatuses = new Map();
+  let activePdfId = "", pushedPdfHistory = false, hashNavigation = false;
 
   const escapeHtml = value => String(value == null ? "" : value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   const canonicalUrl = file => { const url = new URL(file, location.href); return url.origin === location.origin ? `${url.pathname}${url.search}` : url.href; };
   const fallbackTitle = url => decodeURIComponent(new URL(url, location.href).pathname.split("/").pop() || "").replace(/^[\da-f]{32}_/i, "").replace(/\.pdf$/i, "").replace(/[_-]+/g, " ") || "PDF resource";
+  const pdfIdFor = (url, link) => link?.dataset.pdfId || decodeURIComponent(new URL(url, location.href).pathname.split("/").pop() || "")
+    .replace(/\.pdf$/i, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const pdfHashId = () => { const match = location.hash.match(/^#pdf=([^&]+)/); if (!match) return ""; try { return decodeURIComponent(match[1]); } catch (_) { return match[1]; } };
   const activeFile = () => readingContext.files[readingContext.index] || { url: activeUrl, title: fallbackTitle(activeUrl) };
   const activeResourceTitle = () => { const file = activeFile(); return activeUrl === file.solutionUrl ? file.solutionTitle || `${file.title} · Solutions` : file.title || fallbackTitle(activeUrl); };
   const activeTopicName = () => opener?.closest(".topic-page-shell")?.querySelector(".room-header h1")?.textContent?.trim() || document.querySelector(".topic-page-shell .room-header h1, .room-header h1")?.textContent?.trim() || "Mathematics";
@@ -36,7 +40,14 @@
 
   function defaultProgress() { return { marks: {}, awarded: {}, submitted: false, timer: { minutes: 0, endsAt: 0, alerted: false }, solutionsOpened: false }; }
   function readProgress() {
-    try { const saved = JSON.parse(localStorage.getItem(readerKey()) || "{}"); return { ...defaultProgress(), ...saved, marks: saved.marks || {}, awarded: saved.awarded || {}, timer: { ...defaultProgress().timer, ...(saved.timer || {}) } }; }
+    try {
+      const saved = JSON.parse(localStorage.getItem(readerKey()) || "{}"), marks = { ...(saved.marks || {}) };
+      let removedSelfMarks = false;
+      Object.entries(marks).forEach(([id, mark]) => { if (mark?.feedback === "Self-marked.") { delete marks[id]; removedSelfMarks = true; } });
+      const progress = { ...defaultProgress(), ...saved, marks, awarded: saved.awarded || {}, timer: { ...defaultProgress().timer, ...(saved.timer || {}) } };
+      if (removedSelfMarks) saveProgress(progress);
+      return progress;
+    }
     catch (_) { return defaultProgress(); }
   }
   function saveProgress(progress) { try { localStorage.setItem(readerKey(), JSON.stringify(progress)); } catch (_) {} }
@@ -84,13 +95,13 @@
   }
 
   function getReadingContext(link, url) {
-    const group = link.closest(".resource-group"), examRow = link.closest(".resource-exam-row"), topicExamList = link.closest(".topic-exam-paper-list");
+    const group = link.closest(".resource-group, .material-group"), examRow = link.closest(".resource-exam-row"), topicExamList = link.closest(".topic-exam-paper-list");
     const pairs = topicExamList ? [...topicExamList.querySelectorAll(".topic-exam-paper")].map(row => ({ question: row.querySelector('a[href][aria-label*="question"],a[href]:first-of-type'), solution: row.querySelector('a[href][aria-label*="solution"],a[href]:nth-of-type(2)'), title: row.querySelector("strong")?.textContent?.trim() || "Exam" })).filter(pair => pair.question) : examRow && group ? [...group.querySelectorAll(".resource-exam-row")].map(row => ({ question: row.querySelector('.resource-exam-actions a[aria-label*="questions"]'), solution: row.querySelector('.resource-exam-actions a[aria-label*="solutions"]'), title: row.querySelector(".resource-exam-title")?.textContent?.trim() || "Exam" })).filter(pair => pair.question) : [];
     const anchors = pairs.length ? pairs.map(pair => pair.question) : group ? [...group.querySelectorAll("a[href]")].filter(anchor => /\.pdf(?:$|[?#])/i.test(anchor.href)) : [link];
     const files = [], seen = new Set();
     anchors.forEach(anchor => {
       const questionUrl = canonicalUrl(anchor.href); if (seen.has(questionUrl)) return; seen.add(questionUrl);
-      const pair = pairs.find(item => canonicalUrl(item.question.href) === questionUrl), base = pair?.title || anchor.querySelector("strong")?.textContent?.trim() || anchor.textContent.trim() || fallbackTitle(questionUrl);
+      const pair = pairs.find(item => canonicalUrl(item.question.href) === questionUrl), base = pair?.title || anchor.closest(".material-card")?.querySelector("h3")?.textContent?.trim() || anchor.querySelector("strong")?.textContent?.trim() || anchor.closest(".resource-row")?.querySelector("strong")?.textContent?.trim() || anchor.textContent.trim() || fallbackTitle(questionUrl);
       files.push({ url: questionUrl, questionUrl, solutionUrl: pair?.solution ? canonicalUrl(pair.solution.href) : "", title: pair ? `${base} · Questions` : base, solutionTitle: pair ? `${base} · Solutions` : "", kind: anchor.dataset.kind || link.dataset.kind || "" });
     });
     const active = canonicalUrl(url.href); let index = files.findIndex(file => file.url === active || file.solutionUrl === active);
@@ -100,10 +111,13 @@
 
   function ensureDialog() {
     let dialog = document.getElementById("mm-pdf-reader"); if (dialog) return dialog;
-    dialog = document.createElement("dialog"); dialog.id = "mm-pdf-reader"; dialog.className = "mm-pdf-reader"; dialog.setAttribute("aria-labelledby", "mm-pdf-title");
-    dialog.innerHTML = `<div class="mm-exam-shell"><header class="mm-exam-header"><div class="mm-pdf-heading"><strong id="mm-pdf-title">PDF reader</strong><span id="mm-pdf-count" aria-live="polite">Loading…</span></div><label class="mm-exam-timer-label"><span>Timer</span><select data-reader-timer aria-label="Exam timer"><option value="0">Off</option><option value="30">30 min</option><option value="45">45 min</option><option value="60">60 min</option><option value="90">90 min</option></select></label><output data-reader-clock aria-live="polite"></output><details class="mm-exam-more"><summary aria-label="More reader options">•••</summary><label>Timer <select data-reader-timer-menu aria-label="Exam timer"><option value="0">Off</option><option value="30">30 min</option><option value="45">45 min</option><option value="60">60 min</option><option value="90">90 min</option></select></label><button type="button" data-reader-open-solutions>Solutions</button><button type="button" data-reader-export>Export my answers</button><button type="button" data-reader-reset>Clear my answers for this file</button></details><a class="mm-pdf-download" data-pdf-download download aria-label="Download PDF" title="Download PDF">↓</a><button type="button" class="mm-pdf-close" aria-label="Close reader">×</button></header><div class="mm-pdf-toolbar" role="toolbar" aria-label="PDF controls"><button type="button" data-pdf-prev aria-label="Previous page">‹</button><label><span>Page</span><input type="number" min="1" value="1" data-pdf-page aria-label="Page number"> <span data-pdf-total>/ …</span></label><button type="button" data-pdf-next aria-label="Next page">›</button><button type="button" data-pdf-zoom-out aria-label="Zoom out">−</button><button type="button" data-pdf-zoom-in aria-label="Zoom in">+</button><button type="button" data-pdf-fit aria-label="Fit text" title="Fit text">⤢</button></div><main class="mm-exam-workspace"><div class="mm-pdf-pages" tabindex="0" aria-label="PDF pages"></div><aside class="mm-exam-panel" data-exam-panel aria-label="Exam tools"><button type="button" class="mm-exam-handle" data-sheet-handle aria-label="Expand answer sheet"><i></i></button><nav class="mm-exam-tabs" aria-label="Exam tools"><button type="button" data-reader-tab="answers">Answers</button><button type="button" data-reader-tab="tutor">Tutor</button><button type="button" data-reader-tab="solutions">Solutions</button></nav><nav class="mm-exam-mobile-chips" data-reader-mobile-chips aria-label="Exam questions"></nav><div class="mm-exam-panel-content" data-reader-panel-content></div><footer class="mm-exam-phone-footer"><button type="button" class="mm-button mm-button-primary" data-reader-submit>Submit exam</button></footer></aside></main><footer class="mm-exam-bottom"><nav data-reader-chips class="mm-exam-chips" aria-label="Exam questions"></nav><button type="button" class="mm-button mm-button-primary" data-reader-submit>Submit exam</button></footer><nav class="mm-exam-dock" aria-label="Reader tools"><button type="button" data-reader-dock="question">Question</button><button type="button" data-reader-dock="answers">Answer</button><button type="button" data-reader-dock="tutor">Tutor</button></nav><p class="mm-pdf-error" role="status" hidden></p></div>`;
+    dialog = document.createElement("dialog"); dialog.id = "mm-pdf-reader"; dialog.className = "mm-pdf-reader"; dialog.setAttribute("aria-labelledby", "mm-pdf-title"); dialog.setAttribute("aria-modal", "true");
+    dialog.innerHTML = `<div class="mm-exam-shell"><header class="mm-exam-header"><div class="mm-pdf-heading"><strong id="mm-pdf-title">PDF reader</strong><span data-pdf-kind class="mm-pdf-kind">PDF</span><span id="mm-pdf-count" aria-live="polite">Loading…</span></div><nav class="mm-pdf-file-nav" aria-label="PDFs in this group"><button type="button" data-pdf-file-prev aria-label="Previous PDF">Previous</button><button type="button" data-pdf-file-next aria-label="Next PDF">Next</button></nav><label class="mm-exam-timer-label"><span>Timer</span><select data-reader-timer aria-label="Exam timer"><option value="0">Off</option><option value="30">30 min</option><option value="45">45 min</option><option value="60">60 min</option><option value="90">90 min</option></select></label><output data-reader-clock aria-live="polite"></output><details class="mm-exam-more"><summary aria-label="More reader options">•••</summary><label>Timer <select data-reader-timer-menu aria-label="Exam timer"><option value="0">Off</option><option value="30">30 min</option><option value="45">45 min</option><option value="60">60 min</option><option value="90">90 min</option></select></label><button type="button" data-reader-open-solutions>Solutions</button><button type="button" data-reader-export>Export my answers</button><button type="button" data-reader-reset>Clear my answers for this file</button></details><a class="mm-pdf-download" data-pdf-download download aria-label="Download PDF" title="Download PDF">↓</a><button type="button" class="mm-pdf-close" aria-label="Close reader">×</button></header><div class="mm-pdf-toolbar" role="toolbar" aria-label="PDF controls"><button type="button" data-pdf-prev aria-label="Previous page">‹</button><label><span>Page</span><input type="number" min="1" value="1" data-pdf-page aria-label="Page number"> <span data-pdf-total>/ …</span></label><button type="button" data-pdf-next aria-label="Next page">›</button><button type="button" data-pdf-zoom-out aria-label="Zoom out">−</button><button type="button" data-pdf-zoom-in aria-label="Zoom in">+</button><button type="button" data-pdf-fit aria-label="Fit text" title="Fit text">⤢</button></div><main class="mm-exam-workspace"><div class="mm-pdf-pages" tabindex="0" aria-label="PDF pages"></div><aside class="mm-exam-panel" data-exam-panel aria-label="Exam tools"><button type="button" class="mm-exam-handle" data-sheet-handle aria-label="Expand answer sheet"><i></i></button><nav class="mm-exam-tabs" aria-label="Exam tools"><button type="button" data-reader-tab="answers">Answers</button><button type="button" data-reader-tab="tutor">Tutor</button><button type="button" data-reader-tab="solutions">Solutions</button></nav><nav class="mm-exam-mobile-chips" data-reader-mobile-chips aria-label="Exam questions"></nav><div class="mm-exam-panel-content" data-reader-panel-content></div><footer class="mm-exam-phone-footer"><button type="button" class="mm-button mm-button-primary" data-reader-submit>Submit exam</button></footer></aside></main><footer class="mm-exam-bottom"><nav data-reader-chips class="mm-exam-chips" aria-label="Exam questions"></nav><button type="button" class="mm-button mm-button-primary" data-reader-submit>Submit exam</button></footer><nav class="mm-exam-dock" aria-label="Reader tools"><button type="button" data-reader-dock="question">Question</button><button type="button" data-reader-dock="answers">Answer</button><button type="button" data-reader-dock="tutor">Tutor</button></nav><div class="mm-pdf-error" role="alert" hidden><span data-pdf-error-message></span><button type="button" data-pdf-retry>Retry</button></div></div>`;
     document.body.append(dialog);
     dialog.querySelector(".mm-pdf-close").onclick = closeReader;
+    dialog.querySelector("[data-pdf-file-prev]").onclick = () => navigateGroupPdf(readingContext.index - 1);
+    dialog.querySelector("[data-pdf-file-next]").onclick = () => navigateGroupPdf(readingContext.index + 1);
+    dialog.querySelector("[data-pdf-retry]")?.addEventListener("click", () => openReader(activeUrl, currentPage, readingContext, null, { replace: true }));
     dialog.addEventListener("cancel", event => { event.preventDefault(); closeReader(); }); dialog.addEventListener("click", event => { if (event.target === dialog) closeReader(); }); dialog.addEventListener("keydown", event => { if (event.key === "Escape") { event.preventDefault(); closeReader(); } });
     dialog.querySelector("[data-pdf-prev]").onclick = () => goToPage(currentPage - 1); dialog.querySelector("[data-pdf-next]").onclick = () => goToPage(currentPage + 1); dialog.querySelector("[data-pdf-page]").onchange = event => goToPage(Number(event.target.value)); dialog.querySelector("[data-pdf-zoom-out]").onclick = () => setZoom(Math.max(.5, zoom - .2)); dialog.querySelector("[data-pdf-zoom-in]").onclick = () => setZoom(Math.min(3, zoom + .2)); dialog.querySelector("[data-pdf-fit]").onclick = cycleFitMode;
     dialog.querySelectorAll("[data-reader-tab]").forEach(button => button.onclick = () => setTab(button.dataset.readerTab)); dialog.querySelectorAll("[data-reader-dock]").forEach(button => button.onclick = () => { if (button.dataset.readerDock === "question") setSheetMode("collapsed"); else { setTab(button.dataset.readerDock); setSheetMode("half"); } }); dialog.querySelector("[data-sheet-handle]").onclick = () => setSheetMode(sheetMode === "full" ? "half" : "full"); dialog.querySelectorAll("[data-reader-submit]").forEach(button => button.onclick = submitExam); dialog.querySelector("[data-reader-open-solutions]").onclick = () => { setTab("solutions"); setSheetMode("half"); };
@@ -173,9 +187,17 @@
   function renderAnswerCard(mount) {
     const question = activeQuestion(); if (!question) { mount.innerHTML = ""; return; } const progress = readProgress(), mark = progress.marks[question.id], fields = question.parts.length ? question.parts.map(part => answerField(question, part)).join("") : answerField(question, "");
     mount.innerHTML = `<article class="mm-reader-answer-card"><header><div><strong>Question ${escapeHtml(question.number)}</strong><span>page ${question.page}${question.maxMarks ? ` · ${question.maxMarks} points` : ""}</span></div><output data-answer-saved aria-live="polite">✓ Saved</output></header><details class="mm-reader-question-text"><summary>Question text</summary><p>${escapeHtml(question.text || "Text could not be extracted from this PDF page.")}</p></details>${fields}<div class="mm-reader-symbols" aria-label="Maths symbols">${SYMBOLS.map(symbol => `<button type="button" data-reader-symbol="${escapeHtml(symbol)}">${escapeHtml(symbol)}</button>`).join("")}</div><div class="mm-reader-photo-row"><label class="mm-button mm-button-secondary">Add photo of working<input type="file" data-reader-photo accept="image/*" aria-label="Add photo of working" hidden></label><span data-photo-status aria-live="polite">${escapeHtml(photoStatuses.get(photoStatusKey(question.id)) || "")}</span></div><div class="mm-reader-photos" data-reader-photos></div><a class="mm-reader-wolfram" target="_blank" rel="noopener" data-reader-wolfram>Wolfram|Alpha ↗</a>${mark ? markSummary(mark) : ""}</article>`;
-    mount.querySelectorAll("textarea[data-answer-id]").forEach(area => { const save = () => { saveAnswer(area.dataset.answerId, area.value); updateAnswerState(question); const saved = mount.querySelector("[data-answer-saved]"); if (saved) saved.textContent = "✓ Saved"; }; autoGrow(area); area.oninput = () => { autoGrow(area); clearTimeout(answerDebounce); mount.querySelector("[data-answer-saved]").textContent = "Saving…"; answerDebounce = setTimeout(save, 300); updateWolfram(question, mount); }; area.onblur = save; area.onfocus = () => focusAnswer(area); });
+    mount.querySelectorAll("textarea[data-answer-id]").forEach(area => { const save = () => { saveAnswer(area.dataset.answerId, area.value); updateAnswerState(question); const saved = mount.querySelector("[data-answer-saved]"); if (saved) saved.textContent = "✓ Saved"; }; autoGrow(area); area.oninput = () => { autoGrow(area); clearTimeout(answerDebounce); mount.querySelector("[data-answer-saved]").textContent = "Saving…"; if (getAnswer(area.dataset.answerId) !== area.value) invalidateQuestionMark(question, mount); answerDebounce = setTimeout(save, 300); updateWolfram(question, mount); }; area.onblur = save; area.onfocus = () => focusAnswer(area); });
     mount.querySelectorAll("[data-reader-symbol]").forEach(button => button.onpointerdown = event => { event.preventDefault(); const area = mount.querySelector("textarea:focus") || mount.querySelector("textarea"); if (!area) return; area.setRangeText(button.dataset.readerSymbol, area.selectionStart, area.selectionEnd, "end"); area.dispatchEvent(new Event("input", { bubbles: true })); area.focus({ preventScroll: true }); });
     mount.querySelector("[data-reader-photo]").onchange = event => addPhoto(question, event.target.files?.[0], mount); updateWolfram(question, mount); renderPhotos(question, mount);
+  }
+  function invalidateQuestionMark(question, mount) {
+    const progress = readProgress();
+    if (!progress.marks[question.id]) return;
+    delete progress.marks[question.id];
+    saveProgress(progress);
+    mount.querySelector(".mm-reader-mark")?.remove();
+    renderChips();
   }
   function updateAnswerState(question) { awardAnswerPoints(question); renderChips(); }
   function renderTutorPanel(mount) { const question = activeQuestion(); mount.innerHTML = `<section class="mm-reader-tutor"><p class="mm-reader-context">Using Question ${escapeHtml(question?.number || currentPage)}</p><div data-reader-tutor></div></section>`; attachTutor(mount.querySelector("[data-reader-tutor]")); }
@@ -198,30 +220,80 @@
   }
   function markSummary(mark) { return `<section class="mm-reader-mark mm-reader-mark-${escapeHtml(mark.verdict)}"><strong>${mark.verdict === "correct" ? "✓ Correct" : mark.verdict === "partial" ? "◐ Partly correct" : `✗ ${escapeHtml(mark.verdict)}`} · ${mark.score}/${mark.max}</strong>${mark.feedback ? `<p>${escapeHtml(mark.feedback)}</p>` : ""}</section>`; }
 
+  function resultTitle(progress) {
+    const marks = Object.values(progress.marks || {}).filter(mark => mark && !mark.raw);
+    if (!marks.length) return "Not marked yet";
+    const total = marks.reduce((sum, mark) => sum + Number(mark.score || 0), 0);
+    const maximum = questionBank.reduce((sum, question) => sum + Number(question.maxMarks || 10), 0);
+    return `Results · ${total} of ${maximum}`;
+  }
   function renderSolutions(mount) {
     const progress = readProgress(), answered = questionBank.filter(questionHasAnswer).length;
-    if (!progress.submitted && !progress.solutionsOpened) { mount.innerHTML = `<section class="mm-reader-solutions-gate"><h3>Solutions</h3><p>Solutions open after you submit.</p><button type="button" class="mm-button mm-button-secondary" data-open-anyway>Open anyway</button></section>`; mount.querySelector("[data-open-anyway]").onclick = () => { if (!confirm(`Try first? You answered ${answered} of ${questionBank.length}.`)) return; progress.solutionsOpened = true; saveProgress(progress); renderSolutions(mount); }; return; }
-    const marks = Object.values(progress.marks), total = marks.reduce((sum, mark) => sum + Number(mark.score || 0), 0), max = marks.reduce((sum, mark) => sum + Number(mark.max || 0), 0);
-    mount.innerHTML = `<section class="mm-reader-results"><h3>${progress.submitted ? `Results · ${total}/${max || "–"}` : "Solutions"}</h3>${progress.submitted ? `<div class="mm-reader-mark-actions"><button type="button" class="mm-button mm-button-primary" data-mark-ai>Mark with AI</button><button type="button" class="mm-button mm-button-secondary" data-cancel-mark hidden>Cancel</button><p data-mark-status aria-live="polite"></p><small>Your answer is sent to the AI to be marked.</small></div>` : ""}<p>AI marking can be wrong. Compare with the official solution.</p><div class="mm-reader-result-list">${questionBank.map(question => solutionCard(question, progress)).join("")}</div>${progress.submitted ? `<footer><button type="button" class="mm-button mm-button-secondary" data-try-again>Try again</button><button type="button" class="mm-button mm-button-secondary" data-copy-all>Copy all</button><button type="button" class="mm-button mm-button-secondary" data-download-answers>Download answers (.txt)</button></footer>` : ""}</section>`;
-    mount.querySelector("[data-mark-ai]")?.addEventListener("click", () => runMarking()); mount.querySelector("[data-cancel-mark]")?.addEventListener("click", () => { markingCancelled = true; }); mount.querySelector("[data-try-again]")?.addEventListener("click", () => { progress.marks = {}; progress.submitted = false; saveProgress(progress); renderSolutions(mount); renderChips(); }); mount.querySelector("[data-copy-all]")?.addEventListener("click", copyAllAnswers); mount.querySelector("[data-download-answers]")?.addEventListener("click", downloadAnswers); mount.querySelectorAll("[data-self-mark]").forEach(button => button.onclick = () => selfMark(button.dataset.questionId, button.dataset.selfMark)); mount.querySelectorAll("[data-open-solution]").forEach(button => button.onclick = () => openOfficialSolution(button.dataset.questionId)); mount.querySelectorAll("[data-retry-mark]").forEach(button => button.onclick = () => runMarking(Number(button.dataset.retryMark)));
+    if (!progress.submitted && !progress.solutionsOpened) {
+      mount.innerHTML = `<section class="mm-reader-solutions-gate"><h3>Solutions</h3><p>Solutions open after you submit.</p><button type="button" class="mm-button mm-button-secondary" data-open-anyway>Open anyway</button></section>`;
+      mount.querySelector("[data-open-anyway]").onclick = () => { if (!confirm(`Try first? You answered ${answered} of ${questionBank.length}.`)) return; progress.solutionsOpened = true; saveProgress(progress); renderSolutions(mount); };
+      return;
+    }
+    const canMark = progress.submitted && answered > 0;
+    mount.innerHTML = `<section class="mm-reader-results"><h3>${progress.submitted ? resultTitle(progress) : "Solutions"}</h3>${progress.submitted ? `<div class="mm-reader-mark-actions">${canMark ? `<button type="button" class="mm-button mm-button-primary" data-mark-ai>Mark with AI</button><button type="button" class="mm-button mm-button-secondary" data-cancel-mark hidden>Cancel</button><p data-mark-status aria-live="polite"></p><small>Your answer is sent to the AI to be marked.</small>` : "<p>No answers to mark yet.</p>"}</div>` : ""}<p>AI marking can be wrong. Compare with the official solution.</p><div class="mm-reader-result-list">${questionBank.map(question => solutionCard(question, progress)).join("")}</div>${progress.submitted ? `<footer><button type="button" class="mm-button mm-button-primary" data-edit-all-answers>Edit answers</button><button type="button" class="mm-button mm-button-secondary" data-try-again>Try again</button><button type="button" class="mm-button mm-button-secondary" data-copy-all>Copy all</button><button type="button" class="mm-button mm-button-secondary" data-download-answers>Download answers (.txt)</button></footer>` : ""}</section>`;
+    mount.querySelector("[data-mark-ai]")?.addEventListener("click", () => runMarking());
+    mount.querySelector("[data-cancel-mark]")?.addEventListener("click", () => { markingCancelled = true; });
+    mount.querySelector("[data-try-again]")?.addEventListener("click", () => { progress.marks = {}; progress.submitted = false; saveProgress(progress); renderSolutions(mount); renderChips(); });
+    mount.querySelector("[data-copy-all]")?.addEventListener("click", copyAllAnswers);
+    mount.querySelector("[data-download-answers]")?.addEventListener("click", downloadAnswers);
+    mount.querySelector("[data-edit-all-answers]")?.addEventListener("click", () => editAnswer(questionBank.find(questionHasAnswer)?.id || questionBank[0]?.id));
+    mount.querySelectorAll("[data-edit-answer]").forEach(button => button.onclick = () => editAnswer(button.dataset.editAnswer));
+    mount.querySelectorAll("[data-mark-question]").forEach(button => button.onclick = () => runMarking(Number(button.dataset.markQuestion)));
+    mount.querySelectorAll("[data-open-solution]").forEach(button => button.onclick = () => openOfficialSolution(button.dataset.questionId));
+    mount.querySelectorAll("[data-retry-mark]").forEach(button => button.onclick = () => runMarking(Number(button.dataset.retryMark)));
   }
-  function solutionCard(question, progress) { const mark = progress.marks[question.id]; return `<article class="mm-reader-result-card ${mark ? `is-${escapeHtml(mark.verdict)}` : ""}"><h4>Question ${escapeHtml(question.number)} ${mark ? `· ${escapeHtml(mark.score)}/${escapeHtml(mark.max)} ${mark.verdict === "correct" ? "✓" : mark.verdict === "partial" ? "◐" : "✗"}` : ""}</h4>${mark?.feedback ? `<p>${escapeHtml(mark.feedback)}</p>` : ""}${mark?.first_mistake ? `<p><b>First issue:</b> ${escapeHtml(mark.first_mistake)}</p>` : ""}${mark?.next_step ? `<p><b>Next step:</b> ${escapeHtml(mark.next_step)}</p>` : ""}${mark?.raw ? `<pre>${escapeHtml(mark.raw)}</pre><button type="button" data-retry-mark="${question.number}">Retry</button>` : ""}<div class="mm-reader-self-mark"><button type="button" data-question-id="${escapeHtml(question.id)}" data-self-mark="correct">✓ Got it</button><button type="button" data-question-id="${escapeHtml(question.id)}" data-self-mark="partial">◐ Partly</button><button type="button" data-question-id="${escapeHtml(question.id)}" data-self-mark="incorrect">✗ Not yet</button></div><button type="button" class="mm-reader-open-solution" data-open-solution="${escapeHtml(question.id)}">Open official solution</button></article>`; }
+  function solutionCard(question, progress) {
+    const mark = progress.marks[question.id], answered = questionHasAnswer(question);
+    return `<article class="mm-reader-result-card ${mark && !mark.raw ? `is-${escapeHtml(mark.verdict)}` : ""}"><h4>Question ${escapeHtml(question.number)} ${mark && !mark.raw ? `· ${escapeHtml(mark.score)}/${escapeHtml(mark.max)} ${mark.verdict === "correct" ? "✓" : mark.verdict === "partial" ? "◐" : "✗"}` : ""}</h4>${!answered ? "<p>No answer</p>" : ""}${mark?.feedback ? `<p>${escapeHtml(mark.feedback)}</p>` : ""}${mark?.first_mistake ? `<p><b>First issue:</b> ${escapeHtml(mark.first_mistake)}</p>` : ""}${mark?.next_step ? `<p><b>Next step:</b> ${escapeHtml(mark.next_step)}</p>` : ""}${mark?.raw ? `<pre>${escapeHtml(mark.raw)}</pre><button type="button" data-retry-mark="${question.number}">Retry</button>` : ""}<div class="mm-reader-result-actions">${progress.submitted && answered ? `<button type="button" class="mm-button mm-button-primary" data-mark-question="${question.number}">Check answer with AI</button>` : ""}<button type="button" class="mm-reader-open-solution" data-open-solution="${escapeHtml(question.id)}">Open official solution</button><button type="button" class="mm-button mm-button-secondary" data-edit-answer="${escapeHtml(question.id)}">Edit answer</button></div></article>`;
+  }
   function selectQuestion(id, focus, switchToAnswer = true) { const question = questionBank.find(item => item.id === id); if (!question) return; activeQuestionId = id; if (focus && switchToAnswer) activeTab = "answers"; goToPage(question.page, "instant"); renderChips(); setTab(activeTab); if (focus && activeTab === "answers") requestAnimationFrame(() => document.querySelector("[data-reader-panel-content] textarea")?.focus({ preventScroll: true })); }
-  function selfMark(questionId, verdict) { const question = questionBank.find(item => item.id === questionId), progress = readProgress(), max = question.maxMarks || 10; progress.marks[questionId] = { score: verdict === "correct" ? max : verdict === "partial" ? Math.max(1, Math.round(max / 2)) : 0, max, verdict, feedback: "Self-marked.", first_mistake: "", next_step: "" }; saveProgress(progress); awardMarkPoints(question, verdict); renderChips(); renderPanel(); }
-
+  function editAnswer(questionId) { if (!questionId) return; setSheetMode("half"); selectQuestion(questionId, true); }
   function awardPoints(amount, flag) { const progress = readProgress(); if (!window.MathMasterExamProgress?.awardOnce(progress, flag)) return false; saveProgress(progress); try { const activity = JSON.parse(localStorage.getItem("mathmaster_activity") || "{}"); activity.points = Math.max(0, Number(activity.points) || 0) + amount; localStorage.setItem("mathmaster_activity", JSON.stringify(activity)); const pill = document.querySelector("[data-nav-points] span"); if (pill) pill.textContent = activity.points; } catch (_) {} window.dispatchEvent(new CustomEvent("mm2:points", { detail: { pointsEarned: amount, source: "exam-reader" } })); return true; }
   function awardAnswerPoints(question) { if (questionHasAnswer(question)) awardPoints(5, `${question.id}:answer`); }
   function awardMarkPoints(question, verdict) { if (!questionHasAnswer(question)) return; if (verdict === "correct") awardPoints(10, `${question.id}:correct`); if (verdict === "partial") awardPoints(5, `${question.id}:partial`); }
   async function runMarking(retryNumber) {
-    const dialog = document.getElementById("mm-pdf-reader"), status = dialog?.querySelector("[data-mark-status]"), cancel = dialog?.querySelector("[data-cancel-mark]"); if (!window.AITutor?.request) { if (status) status.textContent = "The AI Tutor is not connected on this browser yet."; return; }
-    markingCancelled = false; if (cancel) cancel.hidden = false; const material = await getSolutionMaterial(), queue = retryNumber ? questionBank.filter(question => question.number === retryNumber) : questionBank;
+    const dialog = document.getElementById("mm-pdf-reader"), status = dialog?.querySelector("[data-mark-status]"), cancel = dialog?.querySelector("[data-cancel-mark]");
+    const queue = (retryNumber ? questionBank.filter(question => question.number === retryNumber) : questionBank).filter(questionHasAnswer);
+    if (!queue.length) { if (status) status.textContent = "No answers to mark yet."; return; }
+    markingCancelled = false;
+    if (status) status.textContent = "Preparing the official solution for marking…";
+    if (cancel) cancel.hidden = false;
+    let material = { questionMap: new Map(), fallback: "" };
+    try { material = await getSolutionMaterial(); } catch (_) {}
     for (let index = 0; index < queue.length && !markingCancelled; index += 1) {
-      const question = queue[index]; if (status) status.textContent = `Marking Q${question.number} of ${questionBank.length}…`; const official = material.questionMap.get(question.number)?.text || material.fallback; let response;
-      for (let attempt = 0; attempt < 2; attempt += 1) { try { response = await window.AITutor.request({ mode: "mark", question: question.text, officialSolution: official.slice(0, 12000), studentAnswer: answerForQuestion(question), maxMarks: question.maxMarks || 10, topic: activeTopicName(), resourceTitle: activeResourceTitle(), pdfStudy: false }); if (response.status === 429 && attempt === 0) { await wait(1000); continue; } break; } catch (error) { response = { status: 0, result: { error: error.message } }; break; } }
-      const parsed = window.MathMasterExamMarking.parseMarking(response?.result?.text || "", question.maxMarks || 10), progress = readProgress(); if (parsed.ok) { progress.marks[question.id] = parsed.value; saveProgress(progress); awardMarkPoints(question, parsed.value.verdict); } else { progress.marks[question.id] = { score: 0, max: question.maxMarks || 10, verdict: "unreadable", feedback: "Marking could not be read.", raw: response?.result?.text || response?.result?.error || "No response", first_mistake: "", next_step: "" }; saveProgress(progress); }
-      renderChips(); if (index < queue.length - 1 && !markingCancelled) await wait(1000);
+      const question = queue[index];
+      if (status) status.textContent = `Marking Q${question.number} of ${questionBank.length}…`;
+      const official = material.questionMap.get(question.number)?.text || material.fallback;
+      let response;
+      for (let attempt = 0; attempt < 2; attempt += 1) {
+        try {
+          if (!window.AITutor?.request) throw new Error("AI Tutor is unavailable.");
+          response = await window.AITutor.request({ mode: "mark", question: question.text, officialSolution: official.slice(0, 12000), studentAnswer: answerForQuestion(question), maxMarks: question.maxMarks || 10, topic: activeTopicName(), resourceTitle: activeResourceTitle(), pdfStudy: false });
+          if (response.status === 429 && attempt === 0) { await wait(1000); continue; }
+          break;
+        } catch (error) { response = { status: 0, result: { error: error.message } }; break; }
+      }
+      const raw = response?.result?.text || response?.result?.error || "No response from the AI.";
+      const parsed = window.MathMasterExamMarking.parseMarking(raw, question.maxMarks || 10), progress = readProgress();
+      if (parsed.ok) {
+        progress.marks[question.id] = parsed.value;
+        saveProgress(progress);
+        awardMarkPoints(question, parsed.value.verdict);
+      } else {
+        progress.marks[question.id] = { score: 0, max: question.maxMarks || 10, verdict: "unreadable", feedback: "The AI could not mark this. Use the buttons to mark yourself.", raw, first_mistake: "", next_step: "" };
+        saveProgress(progress);
+      }
+      renderChips();
+      if (index < queue.length - 1 && !markingCancelled) await wait(1000);
     }
-    if (cancel) cancel.hidden = true; if (status) status.textContent = markingCancelled ? "Marking cancelled." : "Marking complete."; renderPanel();
+    if (cancel) cancel.hidden = true;
+    if (status) status.textContent = markingCancelled ? "Marking cancelled." : "Marking complete.";
+    renderPanel();
   }
   function submitExam() { const progress = readProgress(), answered = questionBank.filter(questionHasAnswer).length; if (!confirm(`You answered ${answered} of ${questionBank.length}. Submit?`)) return; progress.submitted = true; saveProgress(progress); setTab("solutions"); }
   async function openOfficialSolution(questionId) { const question = questionBank.find(item => item.id === questionId), url = activeFile().solutionUrl; if (!url || !question) return; let solution = parsedFiles.get(url)?.questions?.find(item => item.number === question.number); if (!solution) { try { const pdfjs = await loadPdfJs(), doc = await pdfjs.getDocument({ url }).promise; const parsed = await parsedQuestionsFor(url, doc); solution = parsed.questions.find(item => item.number === question.number); doc.destroy?.(); } catch (_) {} } const file = activeFile(); openReader(url, solution?.page || 1, { files: [{ ...file, url }], index: 0 }); }
@@ -237,7 +309,14 @@
   function scheduleRefit() { if (!pdfDocument || resizeFrame) return; resizeFrame = requestAnimationFrame(() => { resizeFrame = 0; redrawVisiblePages(); }); }
   function setZoom(value) { zoom = value; redrawVisiblePages(); }
   async function redrawVisiblePages() { const scroller = document.querySelector("#mm-pdf-reader .mm-pdf-pages"); if (!pdfDocument || !scroller) return; const activeNumber = currentPage, active = scroller.querySelector(`[data-pdf-page-container="${activeNumber}"]`), oldHeight = active?.offsetHeight || 1, pageProgress = active ? Math.max(0, Math.min(1, (scroller.scrollTop - active.offsetTop) / oldHeight)) : 0; for (const section of scroller.querySelectorAll("[data-pdf-page-container]")) { const number = Number(section.dataset.pdfPageContainer), page = await pdfDocument.getPage(number), viewport = page.getViewport({ scale: 1 }), width = Math.max(120, scroller.clientWidth - 24), height = viewport.height * baseFitScale(page, section) * zoom + 16; section.style.aspectRatio = `${width} / ${height}`; delete section.dataset.rendered; } observePages(); if (active) await renderPage(activeNumber, active); if (active) scroller.scrollTop = active.offsetTop + pageProgress * active.offsetHeight; updateCurrentPage(); }
-  function showFallback(error) { const dialog = ensureDialog(), message = dialog.querySelector(".mm-pdf-error"); message.hidden = false; message.textContent = "This PDF could not be rendered here. "; const link = document.createElement("a"); link.href = activeUrl; link.target = "_blank"; link.rel = "noopener"; link.textContent = "Open the PDF in a new tab"; message.append(link); console.warn("PDF reader fallback", error); }
+  function showFallback(error) {
+    const dialog = ensureDialog(), message = dialog.querySelector(".mm-pdf-error");
+    message.querySelector("[data-pdf-error-message]").textContent = "This PDF could not be rendered here. Check your connection and retry.";
+    message.hidden = false;
+    dialog.querySelector(".mm-pdf-pages").classList.add("has-error");
+    dialog.querySelector("#mm-pdf-count").textContent = "Unable to load";
+    console.warn("PDF reader fallback", error);
+  }
 
   function openPhotoDb() { if (photoDbPromise) return photoDbPromise; photoDbPromise = new Promise((resolve, reject) => { if (!window.indexedDB) return reject(new Error("IndexedDB is unavailable.")); const request = indexedDB.open(PHOTO_DB, 1); request.onupgradeneeded = () => { const store = request.result.createObjectStore("photos", { keyPath: "id" }); store.createIndex("questionKey", "questionKey", { unique: false }); }; request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error || new Error("IndexedDB is unavailable.")); }); return photoDbPromise; }
   function dbRequest(request) { return new Promise((resolve, reject) => { request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error); }); }
@@ -259,13 +338,55 @@
   function exportProgress() { const answers = {}, exams = {}; for (let index = 0; index < localStorage.length; index += 1) { const key = localStorage.key(index); if (key?.startsWith(ANSWER_PREFIX)) answers[key] = localStorage.getItem(key); if (key?.startsWith(EXAM_PREFIX)) exams[key] = localStorage.getItem(key); } return { answers, exams }; }
   function downloadProgress() { flushAnswers(); const blob = new Blob([JSON.stringify(exportProgress(), null, 2)], { type: "application/json" }), link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "math-master-exam-progress.json"; link.click(); setTimeout(() => URL.revokeObjectURL(link.href), 1000); }
 
-  async function openReader(file, page, context) {
+  function writePdfHash(id, replace) {
+    const params = new URLSearchParams(location.hash.slice(1));
+    params.set("pdf", id);
+    const next = location.pathname + location.search + "#" + params.toString();
+    hashNavigation = true;
+    history[replace ? "replaceState" : "pushState"](history.state, "", next);
+    setTimeout(() => { hashNavigation = false; }, 0);
+  }
+  function clearPdfHash() {
+    const params = new URLSearchParams(location.hash.slice(1));
+    params.delete("pdf");
+    const nextHash = params.toString();
+    hashNavigation = true;
+    history.replaceState(history.state, "", location.pathname + location.search + (nextHash ? "#" + nextHash : ""));
+    setTimeout(() => { hashNavigation = false; }, 0);
+  }
+  function navigateGroupPdf(index) {
+    if (index < 0 || index >= readingContext.files.length || index === readingContext.index) return;
+    const file = readingContext.files[index], links = [...document.querySelectorAll("a[href]")].filter(link => /\.pdf(?:$|[?#])/i.test(link.href));
+    const link = links.find(candidate => canonicalUrl(candidate.href) === file.url);
+    const context = { ...readingContext, index };
+    openReader(file.url, null, context, link, { replace: true });
+  }
+  function routePdfHash() {
+    const id = pdfHashId();
+    if (!id) {
+      if (document.getElementById("mm-pdf-reader")?.open) closeReader(true);
+      return;
+    }
+    if (document.getElementById("mm-pdf-reader")?.open && activePdfId === id) return;
+    const link = [...document.querySelectorAll("a[href]")].find(candidate =>
+      /\.pdf(?:$|[?#])/i.test(candidate.href) && pdfIdFor(candidate.href, candidate) === id
+    );
+    if (!link) return;
+    const url = new URL(link.href, location.href);
+    openReader(url.href, getPageFromUrl(url), getReadingContext(link, url), link, { replace: true, fromHash: true });
+  }
+
+  async function openReader(file, page, context, sourceLink, options = {}) {
     const url = new URL(file, location.href); if (!/^https?:$/.test(url.protocol) || !/\.pdf$/i.test(url.pathname)) return;
     await loadReaderStyles();
     const existingDialog = document.getElementById("mm-pdf-reader");
     if (!existingDialog?.open) { opener = document.activeElement; savedScrollX = window.scrollX; savedScrollY = window.scrollY; }
-    activeUrl = canonicalUrl(url.href); readingContext = context || { files: [{ url: activeUrl, questionUrl: activeUrl, title: fallbackTitle(activeUrl), solutionUrl: "" }], index: 0 }; currentPage = Math.max(1, Number(page) || getPageFromUrl(url) || Number(localStorage.getItem(`mm2-reader-pos:${activeUrl}`)) || 1); questionBank = []; activeQuestionId = ""; pageCount = 0; zoom = 1; fitMode = "text"; textBounds = []; readerKind = normalizeReaderKind(); isQuestionReader = readerKind === "questions"; activeTab = isQuestionReader ? "answers" : "tutor";
-    const dialog = ensureDialog(); applyReaderKind(dialog); updateFitControl(); dialog.querySelector("#mm-pdf-title").textContent = activeResourceTitle(); dialog.querySelector("#mm-pdf-count").textContent = "Loading…"; dialog.querySelector("[data-pdf-download]").href = activeUrl; dialog.querySelector(".mm-pdf-error").hidden = true; dialog.querySelector(".mm-pdf-pages").replaceChildren(); document.body.classList.add("mm-reader-open"); if (!dialog.open) dialog.showModal(); setSheetMode("half"); syncTimer();
+    activeUrl = canonicalUrl(url.href); readingContext = context || { files: [{ url: activeUrl, questionUrl: activeUrl, title: fallbackTitle(activeUrl), solutionUrl: "", kind: sourceLink?.dataset.kind || "" }], index: 0 };
+    readingContext.index = Math.max(0, readingContext.files.findIndex(item => item.url === activeUrl || item.solutionUrl === activeUrl));
+    activePdfId = pdfIdFor(activeUrl, sourceLink);
+    if (!options.fromHash && pdfHashId() !== activePdfId) { pushedPdfHistory = !options.replace; writePdfHash(activePdfId, Boolean(options.replace)); }
+    currentPage = Math.max(1, Number(page) || getPageFromUrl(url) || Number(localStorage.getItem(`mm2-reader-pos:${activeUrl}`)) || 1); questionBank = []; activeQuestionId = ""; pageCount = 0; zoom = 1; fitMode = "text"; textBounds = []; readerKind = normalizeReaderKind(); isQuestionReader = readerKind === "questions"; activeTab = isQuestionReader ? "answers" : "tutor";
+    const dialog = ensureDialog(); applyReaderKind(dialog); updateFitControl(); dialog.querySelector("#mm-pdf-title").textContent = activeResourceTitle(); dialog.querySelector("[data-pdf-kind]").textContent = activeFile().kind || readerKind; dialog.querySelector("#mm-pdf-count").textContent = "Loading…"; dialog.querySelector("[data-pdf-download]").href = activeUrl; dialog.querySelector(".mm-pdf-error").hidden = true; dialog.querySelector(".mm-pdf-pages").classList.add("is-loading"); dialog.querySelector(".mm-pdf-pages").classList.remove("has-error"); dialog.querySelector(".mm-pdf-pages").replaceChildren(); dialog.querySelector("[data-pdf-file-prev]").disabled = readingContext.index <= 0; dialog.querySelector("[data-pdf-file-next]").disabled = readingContext.index >= readingContext.files.length - 1; document.body.classList.add("mm-reader-open"); if (!dialog.open) { dialog.showModal(); dialog.querySelector(".mm-pdf-close").focus(); } setSheetMode("half"); syncTimer();
     try {
       await loadDependencies();
       const pdfjs = await loadPdfJs();
@@ -294,7 +415,8 @@
         const sectionWidth = Math.max(120, pages.clientWidth - 24), scale = baseFitScale(pageRef, section);
         section.style.aspectRatio = `${sectionWidth} / ${viewport.height * scale + 16}`;
       }
-      dialog.querySelector("#mm-pdf-count").textContent = `${pageCount} pages`;
+      pages.classList.remove("is-loading");
+      dialog.querySelector("#mm-pdf-count").textContent = `${pageCount} page${pageCount === 1 ? "" : "s"}`;
       dialog.querySelector("[data-pdf-total]").textContent = `/ ${pageCount}`;
       dialog.querySelector("[data-pdf-page]").max = String(pageCount);
       observePages();
@@ -304,9 +426,21 @@
       setTab(activeTab);
     } catch (error) { showFallback(error); }
   }
-  function closeReader() { flushAnswers(); clearInterval(timerInterval); observer?.disconnect(); if (resizeFrame) cancelAnimationFrame(resizeFrame); resizeFrame = 0; const dialog = document.getElementById("mm-pdf-reader"), focusTarget = opener; if (dialog?.open) dialog.close(); pdfDocument?.destroy?.(); pdfDocument = null; photoUrls.forEach(URL.revokeObjectURL); photoUrls = []; document.body.classList.remove("mm-reader-open"); window.scrollTo(savedScrollX, savedScrollY); focusTarget?.focus?.({ preventScroll: true }); requestAnimationFrame(() => window.scrollTo(savedScrollX, savedScrollY)); opener = null; }
+  function closeReader(preserveHash = false) {
+    flushAnswers(); clearInterval(timerInterval); observer?.disconnect(); if (resizeFrame) cancelAnimationFrame(resizeFrame); resizeFrame = 0;
+    const dialog = document.getElementById("mm-pdf-reader"), focusTarget = opener, shouldGoBack = pushedPdfHistory && pdfHashId() === activePdfId;
+    if (dialog?.open) dialog.close(); pdfDocument?.destroy?.(); pdfDocument = null; photoUrls.forEach(URL.revokeObjectURL); photoUrls = [];
+    document.body.classList.remove("mm-reader-open"); window.scrollTo(savedScrollX, savedScrollY); focusTarget?.focus?.({ preventScroll: true });
+    requestAnimationFrame(() => window.scrollTo(savedScrollX, savedScrollY)); opener = null; pushedPdfHistory = false;
+    if (!preserveHash && !shouldGoBack && pdfHashId()) clearPdfHash();
+    if (shouldGoBack) history.back();
+  }
 
   window.addEventListener("resize", scheduleRefit, { passive: true }); window.addEventListener("orientationchange", scheduleRefit, { passive: true }); window.visualViewport?.addEventListener("resize", () => { const dialog = document.getElementById("mm-pdf-reader"); dialog?.classList.toggle("mm-reader-keyboard-open", window.visualViewport.height < window.innerHeight * .6); }, { passive: true }); document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flushAnswers(); }); window.addEventListener("pagehide", flushAnswers);
-  document.addEventListener("click", event => { const link = event.target.closest("a[href]"); if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; let url; try { url = new URL(link.href, location.href); } catch (_) { return; } if (!/^https?:$/.test(url.protocol) || !/\.pdf$/i.test(url.pathname)) return; event.preventDefault(); openReader(url.href, getPageFromUrl(url), getReadingContext(link, url)); });
+  window.addEventListener("popstate", () => { if (hashNavigation) return; if (pdfHashId()) routePdfHash(); else if (document.getElementById("mm-pdf-reader")?.open) closeReader(true); });
+  window.addEventListener("hashchange", () => { if (!hashNavigation) routePdfHash(); });
+  document.addEventListener("materials:rendered", routePdfHash);
+  document.addEventListener("click", event => { const link = event.target.closest("a[href]"); if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; let url; try { url = new URL(link.href, location.href); } catch (_) { return; } if (!/^https?:$/.test(url.protocol) || !/\.pdf$/i.test(url.pathname)) return; event.preventDefault(); openReader(url.href, getPageFromUrl(url), getReadingContext(link, url), link); });
   window.MathMasterExamReader = Object.freeze({ openReader, closeReader, exportProgress, clearAllProgress, parseMarking: value => window.MathMasterExamMarking?.parseMarking(value) }); window.openReader = openReader; window.closeReader = closeReader;
+  if (pdfHashId()) document.addEventListener("DOMContentLoaded", routePdfHash, { once: true });
 })();

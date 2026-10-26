@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "similar-shapes", title: "Similar shapes", area: "Geometry", skill: "Length, area and volume scale factors", tier: "H", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("similar-shapes", rng) });

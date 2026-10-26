@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "bearings", title: "Bearings", area: "Geometry", skill: "Three-figure bearings", tier: "F", level: "Medium", make: rng => window.VisualFactory.makeVisualQuestion("bearings", rng) });

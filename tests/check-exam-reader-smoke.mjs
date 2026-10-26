@@ -62,11 +62,25 @@ try {
     const photoStatus = await page.locator('[data-photo-status]').textContent();
     const photoDebug = await page.evaluate(() => ({ inputCount: document.querySelectorAll('[data-reader-photo]').length, fileCount: document.querySelector('[data-reader-photo]')?.files?.length, cardQuestion: document.querySelector('.mm-reader-answer-card strong')?.textContent, statusCount: document.querySelectorAll('[data-photo-status]').length, active: document.activeElement?.outerHTML?.slice(0, 160) }));
     assert.equal(photoStatus, 'Photo saved', `photo upload failed at ${viewport.width}: ${JSON.stringify({ photoStatus, photoDebug })}`);
-    await page.evaluate(() => { window.confirm = () => true; });
+    const legacyQuestionId = await page.locator('[data-reader-question="5"]').first().getAttribute('data-reader-question');
+    await page.evaluate(questionId => {
+      window.confirm = () => true;
+      const key = 'mm2-reader-exam:/assets/mit-calculus/MIT18_01SCF10_exam1.pdf';
+      localStorage.setItem(key, JSON.stringify({ marks: { [questionId]: { score: 10, max: 10, verdict: 'correct', feedback: 'Self-marked.' } } }));
+    }, legacyQuestionId);
     await page.locator('#mm-pdf-reader [data-reader-submit]:visible').first().click();
     await page.locator('.mm-reader-results').waitFor();
-    await page.locator('[data-question-id="1"][data-self-mark="correct"]').click();
-    assert.equal(await page.locator('.mm-reader-result-card.is-correct').count(), 1, `results mark persists at ${viewport.width}`);
+    assert.equal(await page.locator('[data-self-mark]').count(), 0, `answers cannot be marked correct by self-report at ${viewport.width}`);
+    assert.equal(await page.locator('.mm-reader-result-card.is-correct').count(), 0, `legacy self-mark is not presented as correct at ${viewport.width}`);
+    assert.equal(await page.evaluate(questionId => JSON.parse(localStorage.getItem('mm2-reader-exam:/assets/mit-calculus/MIT18_01SCF10_exam1.pdf')).marks[questionId], legacyQuestionId), undefined, `legacy self-mark is removed from saved exam results at ${viewport.width}`);
+    assert.equal(await page.locator('[data-mark-question="5"]').count(), 1, `answer has a real AI-check action at ${viewport.width}`);
+    await page.locator('[data-edit-answer="5"]').first().click();
+    const editedAnswer = page.locator('#mm-pdf-reader textarea[data-answer-id]').first();
+    await editedAnswer.fill('1234567890 revised response');
+    await editedAnswer.evaluate(el => el.blur());
+    await page.locator('#mm-pdf-reader [data-reader-submit]:visible').first().click();
+    await page.locator('.mm-reader-results').waitFor();
+    assert.equal(await page.locator('.mm-reader-result-card.is-correct,.mm-reader-result-card.is-incorrect').count(), 0, `edited answer has no stale mark at ${viewport.width}`);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `no horizontal overflow at ${viewport.width}`);
     if (viewport.width < 900) {
       await page.locator('[data-reader-dock="answers"]').click();
@@ -77,7 +91,7 @@ try {
     await page.locator('#mm-pdf-reader[open]').waitFor();
     await page.locator('[data-reader-question="5"]:visible').first().waitFor();
     await page.locator('[data-reader-question="5"]:visible').first().click();
-    assert.match(await page.locator('#mm-pdf-reader textarea[data-answer-id]').first().inputValue(), /1234567890/, `answer persists at ${viewport.width}`);
+    assert.match(await page.locator('#mm-pdf-reader textarea[data-answer-id]').first().inputValue(), /1234567890 revised response/, `edited answer persists at ${viewport.width}`);
     await page.locator('.mm-reader-photos img').first().waitFor();
     if (viewport.width < 900) {
       await page.locator('[data-reader-dock="answers"]').click();

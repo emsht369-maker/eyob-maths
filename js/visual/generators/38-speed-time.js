@@ -1,0 +1,1 @@
+(window.VISUAL_GENERATORS = window.VISUAL_GENERATORS || []).push({ id: "speed-time", title: "Speed-time graphs", area: "Graphs", skill: "Acceleration and distance from speed-time graphs", tier: "FH", level: "Hard", make: rng => window.VisualFactory.makeVisualQuestion("speed-time", rng) });
